@@ -3,6 +3,8 @@ using BetTrack.Views;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui;
 using Prism;
+using Syncfusion.Maui.Core.Hosting;
+using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace BetTrack
 {
@@ -18,24 +20,31 @@ namespace BetTrack
                     prism.RegisterTypes(RegisterTypes)
                     .CreateWindow(async navigationService =>
                     {
-                        if (VersionTracking.Default.IsFirstLaunchEver)
-                        {
-                            await navigationService.NavigateAsync("NavigationPage/BienvenidaPage");
-                        }
-                        else
-                        {
-                            await navigationService.NavigateAsync("LoginPage");
-                        }
+
+                        INavigationResult result = await navigationService.NavigateAsync("//WelcomePage");
+                        //if (VersionTracking.Default.IsFirstLaunchEver)
+                        //{
+                        //    await navigationService.NavigateAsync("NavigationPage/WelcomePage");
+                        //}
+                        //else
+                        //{
+                        //    await navigationService.NavigateAsync("LoginPage");
+                        //}
                     });
-                })  
+                })
+                .ConfigureSyncfusionCore()
+                .ConfigureSyncfusionToolkit()
                 .ConfigureEssentials(essentials =>
                 {
                     essentials.UseVersionTracking();
                 })
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Kabisat Demo-ItalicTall.ttf", "Logo");
+                    fonts.AddFont("Lato-Bold.ttf", "Bold");
+                    fonts.AddFont("Lato-Italic.ttf", "Italic");
+                    fonts.AddFont("Lato-Regular.ttf", "Lato");
+                    fonts.AddFont("fontawesome.ttf", "fa");
                 });
 
 #if DEBUG
@@ -51,9 +60,10 @@ namespace BetTrack
             // Registrar páginas y ViewModels para la navegación
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<DashboardPage, DashboardPageViewModel>();
-            containerRegistry.RegisterForNavigation<BienvenidaPage, BienvenidaPageViewModel>();
+            containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
-            containerRegistry.RegisterForNavigation<RegistroPage, RegistroPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
+            containerRegistry.RegisterForNavigation<ForgotPasswordPage, ForgotPasswordPageViewModel>();
         }
     }
 }

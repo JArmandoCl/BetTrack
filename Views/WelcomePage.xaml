@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BetTrack.Views.WelcomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:lan="clr-namespace:BetTrack.Resources.Languages">
+    <AbsoluteLayout>
+        <CarouselView
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            ItemsSource="{Binding WelcomeImages}"
+            Loop="False"
+            PositionChanged="CarouselView_PositionChanged"
+            PositionChangedCommand="{Binding PositionChangedCommand}"
+            PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Image Aspect="AspectFill" Source="{Binding Image}" />
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <buttons:SfButton
+            x:Name="BtnGoToLogin"
+            AbsoluteLayout.LayoutBounds=".5,.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            Command="{Binding ShowLoginCommand}"
+            IsVisible="False"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Text="{x:Static lan:AppResource.BtnGoToLogin}"
+            WidthRequest="150" />
+        <Label
+            x:Name="SkipWelcome"
+            AbsoluteLayout.LayoutBounds="0.07,0.97"
+            AbsoluteLayout.LayoutFlags="PositionProportional">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        FontFamily="Italic"
+                        Text="{x:Static lan:AppResource.LblSkipWelcome}"
+                        TextColor="{StaticResource Green}" />
+                    <Span
+                        FontFamily="fa"
+                        Text="{x:Static common:DtoIconFont.ChevronRight}"
+                        TextColor="{StaticResource Green}" />
+                </FormattedString>
+            </Label.FormattedText>
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ShowLoginCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+    </AbsoluteLayout>
+</ContentPage>

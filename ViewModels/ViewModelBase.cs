@@ -8,7 +8,7 @@ namespace BetTrack.ViewModels
 {
     public abstract class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible,IPageLifecycleAware
     {
-        #region Declaraciones
+        #region Object declarations
         protected readonly INavigationService NavigationService;
         protected readonly IPageDialogService PageDialogService;
         private string title = "";

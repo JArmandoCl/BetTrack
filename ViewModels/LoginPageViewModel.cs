@@ -8,14 +8,24 @@ namespace BetTrack.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        public DelegateCommand ShowDashboardCommand { get; set; }
+        #region Object declarations
+        public DelegateCommand LoginCommand { get; set; }
+        public DelegateCommand ShowForgotPassword { get; set; }
+        public DelegateCommand ShowSignUpCommand { get; set; }
+        #endregion
         public LoginPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             Title = "Login";
-            ShowDashboardCommand = new DelegateCommand(ShowDashboard);
+            LoginCommand = new DelegateCommand(Login);
+            ShowForgotPassword = new DelegateCommand(async () => await NavigationService.NavigateAsync("ForgotPasswordPage"));
+            ShowSignUpCommand = new DelegateCommand(ShowSignUp);
+        }
+        private async void ShowSignUp()
+        {
+            await NavigationService.NavigateAsync("SignUpPage");
         }
 
-        private async void ShowDashboard()
+        private async void Login()
         {
             await NavigationService.NavigateAsync("//NavigationPage/DashboardPage");
         }

@@ -3,12 +3,82 @@
     x:Class="BetTrack.Views.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
-    <VerticalStackLayout Margin="20">
-        <Label
-            HorizontalOptions="Center"
-            Text="Inicia sesión"
-            VerticalOptions="Center" />
-        <Button Command="{Binding ShowDashboardCommand}" Text="Dashboard" />
-    </VerticalStackLayout>
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:lan="clr-namespace:BetTrack.Resources.Languages">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                RowDefinitions="90*,10*">
+                <Image
+                    Grid.RowSpan="2"
+                    Aspect="AspectFill"
+                    Opacity="0.125"
+                    Source="sports_pattern.png" />
+                <VerticalStackLayout Margin="10">
+                    <Label
+                        Padding="0,50,0,30"
+                        FontFamily="Logo"
+                        FontSize="Title"
+                        Text="BetTrack" />
+                    <inputLayout:SfTextInputLayout Hint="{x:Static lan:AppResource.TxtEmail}">
+                        <Entry Keyboard="Email" TextColor="White" />
+                    </inputLayout:SfTextInputLayout>
+                    <inputLayout:SfTextInputLayout EnablePasswordVisibilityToggle="True" Hint="{x:Static lan:AppResource.TxtPassword}">
+                        <Entry TextColor="White" />
+                    </inputLayout:SfTextInputLayout>
+                    <Grid Margin="0,0,0,15" ColumnDefinitions="*,*">
+                        <buttons:SfCheckBox
+                            Grid.Column="0"
+                            CheckedColor="{StaticResource Green}"
+                            HorizontalOptions="Start"
+                            Text="{x:Static lan:AppResource.ChkRememberMe}"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            Text="{x:Static lan:AppResource.LblForgotPassword}"
+                            TextColor="{StaticResource Green}"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowForgotPassword}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    <buttons:SfButton
+                        Command="{Binding LoginCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="{x:Static lan:AppResource.BtnLogin}"
+                        WidthRequest="150" />
+                </VerticalStackLayout>
+                <HorizontalStackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Spacing="10">
+                    <Label Text="{x:Static lan:AppResource.LblNewAccount}" TextColor="White" />
+                    <Label
+                        Text="{x:Static lan:AppResource.LblCreateNewAccount}"
+                        TextColor="{StaticResource Green}"
+                        TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowSignUpCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <inputLayout:SfBusyIndicator
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                AnimationType="LinearMaterial"
+                HeightRequest="10"
+                IndicatorColor="White"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Start" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
 </ContentPage>

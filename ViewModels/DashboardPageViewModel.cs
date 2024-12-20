@@ -10,16 +10,15 @@ namespace BetTrack.ViewModels
 {
     public class DashboardPageViewModel : ViewModelBase
     {
-        public DelegateCommand ShowRegistroCommand { get; set; }
+        #region Object declarations
+        
+        #endregion
         public DashboardPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             Title = "Mi Dashboard";
-            ShowRegistroCommand = new DelegateCommand(ShowRegistro);
+            
         }
 
-        private async void ShowRegistro()
-        {
-            await NavigationService.NavigateAsync("RegistroPage");
-        }
+        
     }
 }

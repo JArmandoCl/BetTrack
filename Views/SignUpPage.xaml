@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BetTrack.Views.SignUpPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:lan="clr-namespace:BetTrack.Resources.Languages">
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            RowDefinitions="auto,auto,auto,auto,*"
+            RowSpacing="20">
+            <Image
+                Grid.RowSpan="5"
+                Aspect="AspectFill"
+                Opacity="0.125"
+                Source="sports_pattern_2.png" />
+            <Label
+                Grid.Row="0"
+                Padding="0,50,0,0"
+                FontAttributes="Bold"
+                FontSize="Title"
+                Text="{x:Static lan:AppResource.LblCreateNewAccount}" />
+            <inputLayout:SfTextInputLayout
+                Grid.Row="1"
+                HelperText="{x:Static lan:AppResource.LblRequired}"
+                Hint="{x:Static lan:AppResource.TxtUser}">
+                <Entry Keyboard="Text" TextColor="White" />
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout
+                Grid.Row="2"
+                HelperText="{x:Static lan:AppResource.LblRequired}"
+                Hint="{x:Static lan:AppResource.TxtEmail}">
+                <Entry Keyboard="Email" TextColor="White" />
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout
+                Grid.Row="3"
+                EnablePasswordVisibilityToggle="True"
+                HelperText="{x:Static lan:AppResource.LblRequired}"
+                Hint="{x:Static lan:AppResource.TxtPassword}">
+                <Entry TextColor="White" />
+            </inputLayout:SfTextInputLayout>
+            <VerticalStackLayout Grid.Row="4" VerticalOptions="End">
+                <buttons:SfButton
+                    Command="{Binding SignUpCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Text="{x:Static lan:AppResource.BtnContinue}"
+                    WidthRequest="150" />
+                <Label
+                    Margin="25"
+                    FontSize="Subtitle"
+                    HorizontalOptions="Center"
+                    Text="{x:Static lan:AppResource.BtnCancel}"
+                    TextColor="{StaticResource White}"
+                    TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CancelCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </VerticalStackLayout>
+        </Grid>
+
+        <inputLayout:SfBusyIndicator
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            AnimationType="LinearMaterial"
+            HeightRequest="10"
+            IndicatorColor="White"
+            IsRunning="{Binding IsBusy}"
+            VerticalOptions="Start" />
+    </AbsoluteLayout>
+</ContentPage>
