@@ -10,14 +10,14 @@ namespace BetTrack.ViewModels
 {
     public class WelcomePageViewModel : ViewModelBase
     {
-        #region Object declarations
+        #region Object declarations       
         public DelegateCommand ShowLoginCommand { get; set; }
         private ObservableCollection<DtoImage> welcomeImages = new ObservableCollection<DtoImage>();
         public ObservableCollection<DtoImage> WelcomeImages
         {
             get { return welcomeImages; }
             set { SetProperty(ref welcomeImages, value); }
-        } 
+        }
         #endregion
         public WelcomePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {

@@ -8,13 +8,13 @@
     xmlns:lan="clr-namespace:BetTrack.Resources.Languages">
     <AbsoluteLayout>
         <CarouselView
+            x:Name="Welcome"
             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             AbsoluteLayout.LayoutFlags="All"
             ItemsSource="{Binding WelcomeImages}"
             Loop="False"
-            PositionChanged="CarouselView_PositionChanged"
-            PositionChangedCommand="{Binding PositionChangedCommand}"
-            PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
+            Position="{Binding CurrentPosition}"
+            PositionChanged="CarouselView_PositionChanged">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <Image Aspect="AspectFill" Source="{Binding Image}" />
@@ -30,6 +30,7 @@
             Style="{StaticResource PrimaryButtonStyle}"
             Text="{x:Static lan:AppResource.BtnGoToLogin}"
             WidthRequest="150" />
+        <!--  Skip welcome  -->
         <Label
             x:Name="SkipWelcome"
             AbsoluteLayout.LayoutBounds="0.07,0.97"
@@ -48,6 +49,63 @@
             </Label.FormattedText>
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding ShowLoginCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+        <!--  Navigation arrows  -->
+        <Frame
+            x:Name="FramePreviousPage"
+            AbsoluteLayout.LayoutBounds="0,0.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            BackgroundColor="LightGray"
+            CornerRadius="0"
+            HeightRequest="50"
+            IsVisible="False"
+            Opacity="0.5"
+            WidthRequest="30">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PreviousPage_Tapped" />
+            </Frame.GestureRecognizers>
+        </Frame>
+        <Label
+            x:Name="LabelPreviousPage"
+            AbsoluteLayout.LayoutBounds="0.020,0.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            FontFamily="fa"
+            FontSize="Title"
+            HorizontalTextAlignment="Center"
+            IsVisible="False"
+            Text="{x:Static common:DtoIconFont.ChevronLeft}"
+            TextColor="Black"
+            VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PreviousPage_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
+        <Frame
+            x:Name="FrameNextPage"
+            AbsoluteLayout.LayoutBounds="1,0.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            BackgroundColor="LightGray"
+            CornerRadius="0"
+            HeightRequest="50"
+            Opacity="0.5"
+            WidthRequest="30">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NextPage_Tapped" />
+            </Frame.GestureRecognizers>
+        </Frame>
+        <Label
+            x:Name="LabelNextPage"
+            AbsoluteLayout.LayoutBounds="0.98,0.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            FontFamily="fa"
+            FontSize="Title"
+            HorizontalTextAlignment="Center"
+            Text="{x:Static common:DtoIconFont.ChevronRight}"
+            TextColor="Black"
+            VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NextPage_Tapped" />
             </Label.GestureRecognizers>
         </Label>
     </AbsoluteLayout>
