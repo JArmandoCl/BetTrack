@@ -1,0 +1,6 @@
+@BetTrackApi_HostAddress = http://localhost:5149
+
+GET {{BetTrackApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

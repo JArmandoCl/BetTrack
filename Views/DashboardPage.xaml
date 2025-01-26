@@ -11,7 +11,5 @@
             Text="{Binding Title}"
             TextColor="#F9B949"
             VerticalOptions="Center" />
-        <Button Command="{Binding ShowRegistroCommand}" Text="Dashboard" />
-
     </VerticalStackLayout>
 </ContentPage>

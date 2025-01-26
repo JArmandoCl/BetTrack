@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BetTrack.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    Title="BetTrack">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid
+                Margin="10,0"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                RowDefinitions="auto,auto,*"
+                RowSpacing="10">
+                <Grid
+                    Padding="10"
+                    ColumnDefinitions="auto,auto"
+                    ColumnSpacing="10"
+                    RowDefinitions="auto,auto,auto">
+                    <inputLayout:SfAvatarView
+                        Grid.RowSpan="3"
+                        Background="{x:StaticResource Green}"
+                        ContentType="AvatarCharacter"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Stroke="Black"
+                        StrokeThickness="1"
+                        VerticalOptions="Center"
+                        WidthRequest="50" />
+                    <Label
+                        Grid.Column="1"
+                        Text="Luis Roberto Camargo"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="3,500 apuestas jugadas"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="ROI general 58%"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="50*,50*"
+                    ColumnSpacing="10"
+                    RowDefinitions="auto,auto"
+                    RowSpacing="10">
+                    <buttons:SfButton
+                        Background="Transparent"
+                        CornerRadius="10"
+                        EnableRippleEffect="True"
+                        HorizontalOptions="FillAndExpand"
+                        ImageAlignment="Left"
+                        ShowIcon="True"
+                        Stroke="{x:StaticResource Green}"
+                        StrokeThickness="3"
+                        Text="Tipsters"
+                        TextColor="White">
+                        <buttons:SfButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="fa"
+                                Glyph="{x:Static common:DtoIconFont.UserGroup}"
+                                Size="Default"
+                                Color="White" />
+                        </buttons:SfButton.ImageSource>
+                    </buttons:SfButton>
+                    <buttons:SfButton
+                        Grid.Column="1"
+                        Background="Transparent"
+                        CornerRadius="10"
+                        EnableRippleEffect="True"
+                        HorizontalOptions="FillAndExpand"
+                        ImageAlignment="Left"
+                        ShowIcon="True"
+                        Stroke="{x:StaticResource Green}"
+                        StrokeThickness="3"
+                        Text="Casinos"
+                        TextColor="White">
+                        <buttons:SfButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="fa"
+                                Glyph="{x:Static common:DtoIconFont.HouseUser}"
+                                Size="Default"
+                                Color="White" />
+                        </buttons:SfButton.ImageSource>
+                    </buttons:SfButton>
+                    <buttons:SfButton
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Background="Transparent"
+                        CornerRadius="10"
+                        EnableRippleEffect="True"
+                        ImageAlignment="Left"
+                        ShowIcon="True"
+                        Stroke="{x:StaticResource Green}"
+                        StrokeThickness="3"
+                        Text="Nuevo bankroll"
+                        TextColor="White">
+                        <buttons:SfButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="fa"
+                                Glyph="{x:Static common:DtoIconFont.Bank}"
+                                Size="Default"
+                                Color="White" />
+                        </buttons:SfButton.ImageSource>
+                    </buttons:SfButton>
+                </Grid>
+                <Frame
+                    Grid.Row="2"
+                    Margin="0,0,0,-10"
+                    BackgroundColor="Transparent"
+                    BorderColor="{x:StaticResource Green}"
+                    CornerRadius="8">
+                    <syncfusion:SfListView ItemSpacing="5" ItemsSource="{Binding BankrollsUser}">
+                        <syncfusion:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Title"
+                                        HorizontalOptions="Center"
+                                        LineBreakMode="NoWrap"
+                                        Text="My bankrolls"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </DataTemplate>
+                        </syncfusion:SfListView.HeaderTemplate>
+                        <syncfusion:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="5" HasShadow="True">
+                                    <VerticalStackLayout>
+                                        <Label
+                                            FontSize="Subtitle"
+                                            Text="{Binding BankrollName}"
+                                            TextColor="{x:StaticResource DarkBlue}" />
+                                        <BoxView BackgroundColor="LightGray" HeightRequest="1" />
+                                        <Label Text="{Binding Capital, StringFormat='{0:C2}'}" TextColor="{x:StaticResource DarkBlue}" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </syncfusion:SfListView.ItemTemplate>
+                    </syncfusion:SfListView>
+                </Frame>
+            </Grid>
+            <inputLayout:SfBusyIndicator
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                AnimationType="LinearMaterial"
+                HeightRequest="10"
+                IndicatorColor="White"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Start" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

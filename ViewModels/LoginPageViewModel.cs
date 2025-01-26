@@ -27,7 +27,7 @@ namespace BetTrack.ViewModels
 
         private async void Login()
         {
-            await NavigationService.NavigateAsync("//NavigationPage/DashboardPage");
+            INavigationResult result = await NavigationService.NavigateAsync("//NavigationPage/HomePage");
         }
     }
 }

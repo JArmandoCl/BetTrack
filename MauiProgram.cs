@@ -20,16 +20,14 @@ namespace BetTrack
                     prism.RegisterTypes(RegisterTypes)
                     .CreateWindow(async navigationService =>
                     {
-
-                        INavigationResult result = await navigationService.NavigateAsync("//WelcomePage");
-                        //if (VersionTracking.Default.IsFirstLaunchEver)
-                        //{
-                        //    await navigationService.NavigateAsync("NavigationPage/WelcomePage");
-                        //}
-                        //else
-                        //{
-                        //    await navigationService.NavigateAsync("LoginPage");
-                        //}
+                        if (VersionTracking.Default.IsFirstLaunchEver)
+                        {
+                            await navigationService.NavigateAsync("NavigationPage/WelcomePage");
+                        }
+                        else
+                        {
+                            await navigationService.NavigateAsync("LoginPage");
+                        }
                     });
                 })
                 .ConfigureSyncfusionCore()
@@ -64,6 +62,7 @@ namespace BetTrack
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<ForgotPasswordPage, ForgotPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
         }
     }
 }

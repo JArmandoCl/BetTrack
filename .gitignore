@@ -2,3 +2,6 @@
 /.vs
 /bin
 /*.user
+/BetTrackApi/BetTrackApi.csproj.user
+/BetTrackApi/bin
+/BetTrackApi/obj
