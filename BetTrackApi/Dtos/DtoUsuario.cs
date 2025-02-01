@@ -12,4 +12,12 @@
         public string Pensamiento { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
     }
+
+  public  class DtoSeguidor
+    {
+        public long SeguidorId { get; set; }
+        public long UsuarioSeguidorId { get; set; }
+        public long UsuarioSeguidoId { get; set; }
+        public DateTime Fecha { get; set; }
+    }
 }

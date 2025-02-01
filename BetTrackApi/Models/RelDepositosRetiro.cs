@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BetTrackApi.Models;
 
-public partial class RelDepositoRetiro
+public partial class RelDepositosRetiro
 {
     [Key]
     public long DepositoRetiroId { get; set; }
@@ -23,7 +23,9 @@ public partial class RelDepositoRetiro
     [Column(TypeName = "decimal(19, 2)")]
     public decimal Monto { get; set; }
 
+    public bool? EsRetiro { get; set; }
+
     [ForeignKey("UsuarioBankrollId")]
-    [InverseProperty("RelDepositoRetiros")]
+    [InverseProperty("RelDepositosRetiros")]
     public virtual RelUsuarioBankroll UsuarioBankroll { get; set; } = null!;
 }

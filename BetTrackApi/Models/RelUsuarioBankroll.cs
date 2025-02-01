@@ -44,7 +44,7 @@ public partial class RelUsuarioBankroll
     public virtual ICollection<RelApuesta> RelApuesta { get; set; } = new List<RelApuesta>();
 
     [InverseProperty("UsuarioBankroll")]
-    public virtual ICollection<RelDepositoRetiro> RelDepositoRetiros { get; set; } = new List<RelDepositoRetiro>();
+    public virtual ICollection<RelDepositosRetiro> RelDepositosRetiros { get; set; } = new List<RelDepositosRetiro>();
 
     [ForeignKey("TipoBankrollId")]
     [InverseProperty("RelUsuarioBankrolls")]

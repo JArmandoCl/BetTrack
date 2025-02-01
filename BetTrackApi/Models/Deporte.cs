@@ -13,7 +13,11 @@ public partial class Deporte
 
     [StringLength(255)]
     [Unicode(false)]
-    public string Nombre { get; set; } = null!;
+    public string NombreEsp { get; set; } = null!;
+
+    [StringLength(255)]
+    [Unicode(false)]
+    public string NombreIng { get; set; } = null!;
 
     [InverseProperty("Deporte")]
     public virtual ICollection<RelDetallesApuesta> RelDetallesApuesta { get; set; } = new List<RelDetallesApuesta>();

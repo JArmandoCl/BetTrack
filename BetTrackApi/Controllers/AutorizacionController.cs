@@ -14,12 +14,12 @@ namespace BetTrackApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AutorizacionController : ControllerBase
     {
         private readonly string secretKey;
         private readonly BetTrackContext _context;
         private readonly IMapper _mapper;
-        public AuthController(IConfiguration configuration, BetTrackContext context, IMapper mapper)
+        public AutorizacionController(IConfiguration configuration, BetTrackContext context, IMapper mapper)
         {
             secretKey = configuration["JwtSettings:SecretKey"];
             _mapper = mapper;
