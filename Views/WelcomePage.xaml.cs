@@ -4,8 +4,7 @@ public partial class WelcomePage : ContentPage
 {
     public WelcomePage()
     {
-        InitializeComponent();
-        
+        InitializeComponent();        
     }
 
     private void CarouselView_PositionChanged(object sender, PositionChangedEventArgs e)

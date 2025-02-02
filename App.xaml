@@ -21,7 +21,6 @@
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Black}" />
                 <Setter Property="BarTextColor" Value="White" />
-                <Setter Property="" Value="White" />
             </Style>
 
             <!--  Label's style  -->

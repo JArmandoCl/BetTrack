@@ -33,7 +33,7 @@
                     <Grid Margin="0,0,0,15" ColumnDefinitions="*,*">
                         <buttons:SfCheckBox
                             Grid.Column="0"
-                            CheckedColor="{StaticResource Green}"
+                            CheckedColor="{StaticResource BetTrackGreen}"
                             HorizontalOptions="Start"
                             Text="{x:Static lan:AppResource.ChkRememberMe}"
                             TextColor="White"
@@ -42,7 +42,7 @@
                             Grid.Column="1"
                             HorizontalOptions="End"
                             Text="{x:Static lan:AppResource.LblForgotPassword}"
-                            TextColor="{StaticResource Green}"
+                            TextColor="{StaticResource BetTrackGreen}"
                             VerticalOptions="Center">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ShowForgotPassword}" />
