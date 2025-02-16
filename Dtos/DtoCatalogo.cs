@@ -1,81 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BetTrack.Dtos
 {
-    internal class DtoEstatusApuesta
+    public class DtoEstatusApuesta
     {
         public int EstatusApuestaId { get; set; }
         public string Descripcion { get; set; } = "";
     }
-    internal class DtoTipoApuesta
+    public class DtoTipoApuesta
     {
         public int TipoApuestaId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoDeporte
+    public class DtoDeporte
     {
         public long DeporteId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoTipoBankroll
+    public class DtoTipoBankroll
     {
         public int TipoBankrollId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoFormatoCuota
+    public class DtoFormatoCuota
     {
         public int FormatoCuotaId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoEstatusBankroll
+    public class DtoEstatusBankroll
     {
         public int EstatusBankrollId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoEstatusUsuario
+    public class DtoEstatusUsuario
     {
         public int EstatusUsuarioId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoEstatusUsuarioCasino {
+    public class DtoEstatusUsuarioCasino
+    {
         public long EstatusUsuarioCasinoId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoEstatusCategoria
+    public class DtoEstatusCategoria
     {
         public int EstatusCategoriaId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    internal class DtoUsuario
+    public class DtoUsuario : BindableBase
     {
         public long UsuarioId { get; set; }
-        public int EstatusUsuarioId { get; set; }
-        public string Email { get; set; } = "";
-        public string Contrasenia { get; set; } = "";
-        public string Nickname { get; set; } = "";
-        public string Nombre { get; set; } = "";
-        public string Alias { get; set; } = "";
-        public string Pensamiento { get; set; } = "";
-        public DateTime FechaRegistro { get; set; }
+        public int EstatusUsuarioId { get; set; } = 1;//Active
+        private string email="";
+        public string Email
+        {
+            get { return email; }
+            set { SetProperty(ref email, value); }
+        }
+        private string contrasenia = "";
+        public string Contrasenia
+        {
+            get { return contrasenia; }
+            set { SetProperty(ref contrasenia, value); }
+        }
+        private string nickname = "";
+        public string Nickname
+        {
+            get { return nickname; }
+            set { SetProperty(ref nickname, value); }
+        }
+        private string nombre = "";
+        public string Nombre
+        {
+            get { return nombre; }
+            set { SetProperty(ref nombre, value); }
+        }
+        private string alias = "";
+        public string Alias
+        {
+            get { return alias; }
+            set { SetProperty(ref alias, value); }
+        }
+        private string pensamiento = "";
+        public string Pensamiento
+        {
+            get { return pensamiento; }
+            set { SetProperty(ref pensamiento, value); }
+        }
+        private DateTime fechaRegistro;
+        public DateTime FechaRegistro
+        {
+            get { return fechaRegistro; }
+            set { SetProperty(ref fechaRegistro, value); }
+        }
     }
-    internal class DtoCasino
+    public class DtoCasino
     {
         public long CasinoId { get; set; }
         public string Nombre { get; set; } = "";
         public string Icono { get; set; } = "";
     }
-    internal class DtoUsuarioTipster
+    public class DtoUsuarioTipster
     {
         public long UsuarioTipsterId { get; set; }
         public long UsuarioId { get; set; }
         public string NombreTipster { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
     }
-    internal class DtoUsuarioCasino
+    public class DtoUsuarioCasino
     {
         public long UsuarioCasinoId { get; set; }
         public long UsuarioId { get; set; }
@@ -85,7 +122,7 @@ namespace BetTrack.Dtos
         public string Icono { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
     }
-    internal class DtoUsuarioBankroll
+    public class DtoUsuarioBankroll
     {
         public long UsuarioBankrollId { get; set; }
         public long UsuarioId { get; set; }
@@ -97,7 +134,7 @@ namespace BetTrack.Dtos
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
     }
-    internal class DtoCategoriaUsuario
+    public class DtoCategoriaUsuario
     {
         public long CategoriaUsuarioId { get; set; }
         public long UsuarioId { get; set; }
@@ -106,7 +143,7 @@ namespace BetTrack.Dtos
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
     }
-    internal class DtoApuestas
+    public class DtoApuestas
     {
         public long ApuestaId { get; set; }
         public long UsuarioBankrollId { get; set; }
@@ -123,7 +160,7 @@ namespace BetTrack.Dtos
         public bool EsApuestaPagada { get; set; }
         public decimal Cashout { get; set; }
     }
-    internal class DtoDetalleApuesta
+    public class DtoDetalleApuesta
     {
         public long DetalleApuestaId { get; set; }
         public long ApuestaId { get; set; }
@@ -132,18 +169,28 @@ namespace BetTrack.Dtos
         public string Nombre { get; set; } = "";
         public decimal Cuota { get; set; }
     }
-    internal class DtoDepositoRetiro {
+    public class DtoDepositoRetiro
+    {
         public long DepositoRetiroId { get; set; }
         public long UsuarioBankrollId { get; set; }
         public DateTime Fecha { get; set; }
         public string Descripcion { get; set; } = "";
         public decimal Monto { get; set; }
     }
-    internal class DtoSeguidor
+    public class DtoSeguidor
     {
         public long SeguidorId { get; set; }
         public long UsuarioSeguidorId { get; set; }
         public long UsuarioSeguidoId { get; set; }
         public DateTime Fecha { get; set; }
     }
+    #region Extras
+    public class DtoReestablecerContrasenia
+    {
+        public string Email { get; set; } = "";
+        public string Token { get; set; } = "";
+        public string NewPassword { get; set; } = "-";
+        public string NewConfirmedPassword { get; set; } = "-";
     }
+    #endregion
+}

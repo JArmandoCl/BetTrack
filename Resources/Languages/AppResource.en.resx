@@ -162,4 +162,22 @@
   <data name="LblRequired" xml:space="preserve">
     <value>Required</value>
   </data>
+  <data name="LblSignUpSuccessful" xml:space="preserve">
+    <value>SignUp successful</value>
+  </data>
+  <data name="LblSignUpSuccessfulMessage" xml:space="preserve">
+    <value>You have successfully registered, now you can log in to your account.</value>
+  </data>
+  <data name="BtnClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="LblSendForgotPasswordInstructions" xml:space="preserve">
+    <value>We have sent an email with instructions on how to reset your password.</value>
+  </data>
+  <data name="LblBadRequestServer" xml:space="preserve">
+    <value>Something went wrong while sending the information, we apologize for the inconvenience.</value>
+  </data>
+  <data name="LblDialogTitle" xml:space="preserve">
+    <value>Important notice</value>
+  </data>
 </root>

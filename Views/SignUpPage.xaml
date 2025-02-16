@@ -6,12 +6,21 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:common="clr-namespace:BetTrack.Dtos"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-    xmlns:lan="clr-namespace:BetTrack.Resources.Languages">
+    xmlns:lan="clr-namespace:BetTrack.Resources.Languages"
+    xmlns:toolkit1="clr-namespace:Syncfusion.Maui.Core.Converters;assembly=Syncfusion.Maui.Core">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit1:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <AbsoluteLayout>
         <Grid
             Margin="10,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
+            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
             RowDefinitions="auto,auto,auto,auto,*"
             RowSpacing="20">
             <Image
@@ -29,20 +38,26 @@
                 Grid.Row="1"
                 HelperText="{x:Static lan:AppResource.LblRequired}"
                 Hint="{x:Static lan:AppResource.TxtUser}">
-                <Entry Keyboard="Text" TextColor="White" />
+                <Entry
+                    Keyboard="Text"
+                    Text="{Binding Usuario.Nickname, Mode=TwoWay}"
+                    TextColor="White" />
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout
                 Grid.Row="2"
                 HelperText="{x:Static lan:AppResource.LblRequired}"
                 Hint="{x:Static lan:AppResource.TxtEmail}">
-                <Entry Keyboard="Email" TextColor="White" />
+                <Entry
+                    Keyboard="Email"
+                    Text="{Binding Usuario.Email, Mode=TwoWay}"
+                    TextColor="White" />
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout
                 Grid.Row="3"
                 EnablePasswordVisibilityToggle="True"
                 HelperText="{x:Static lan:AppResource.LblRequired}"
                 Hint="{x:Static lan:AppResource.TxtPassword}">
-                <Entry TextColor="White" />
+                <Entry Text="{Binding Usuario.Contrasenia, Mode=TwoWay}" TextColor="White" />
             </inputLayout:SfTextInputLayout>
             <VerticalStackLayout Grid.Row="4" VerticalOptions="End">
                 <buttons:SfButton

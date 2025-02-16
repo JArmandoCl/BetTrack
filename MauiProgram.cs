@@ -5,6 +5,7 @@ using Microsoft.Maui;
 using Prism;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
+using System.Diagnostics;
 
 namespace BetTrack
 {
@@ -22,11 +23,19 @@ namespace BetTrack
                     {
                         if (VersionTracking.Default.IsFirstLaunchEver)
                         {
-                            await navigationService.NavigateAsync("NavigationPage/WelcomePage");
+                            INavigationResult navigationResult = await navigationService.NavigateAsync("NavigationPage/WelcomePage");
+                            if (!navigationResult.Success)
+                            {
+                                Debug.WriteLine(navigationResult.Exception?.GetRootException());
+                            }
                         }
                         else
                         {
-                            await navigationService.NavigateAsync("LoginPage");
+                            INavigationResult navigationResult = await navigationService.NavigateAsync("LoginPage");
+                            if (!navigationResult.Success)
+                            {
+                                Debug.WriteLine(navigationResult.Exception?.GetRootException());
+                            }
                         }
                     });
                 })

@@ -162,4 +162,22 @@
   <data name="LblRequired" xml:space="preserve">
     <value>Obligatorio</value>
   </data>
+  <data name="LblSignUpSuccessful" xml:space="preserve">
+    <value>Registro con éxito</value>
+  </data>
+  <data name="LblSignUpSuccessfulMessage" xml:space="preserve">
+    <value>Te registraste con éxito, ahora puedes iniciar sesión en tu cuenta.</value>
+  </data>
+  <data name="BtnClose" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="LblSendForgotPasswordInstructions" xml:space="preserve">
+    <value>Hemos enviado un correo con instrucciones para poder restaurar tu contraseña.</value>
+  </data>
+  <data name="LblBadRequestServer" xml:space="preserve">
+    <value>Algo falló enviando la información, lamentamos las molestias.</value>
+  </data>
+  <data name="LblDialogTitle" xml:space="preserve">
+    <value>Aviso importante</value>
+  </data>
 </root>

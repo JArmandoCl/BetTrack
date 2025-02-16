@@ -70,6 +70,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cerrar.
+        /// </summary>
+        internal static string BtnClose {
+            get {
+                return ResourceManager.GetString("BtnClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continuar.
         /// </summary>
         internal static string BtnContinue {
@@ -115,11 +124,29 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Algo falló enviando la información, lamentamos las molestias..
+        /// </summary>
+        internal static string LblBadRequestServer {
+            get {
+                return ResourceManager.GetString("LblBadRequestServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¡Registrate!.
         /// </summary>
         internal static string LblCreateNewAccount {
             get {
                 return ResourceManager.GetString("LblCreateNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aviso importante.
+        /// </summary>
+        internal static string LblDialogTitle {
+            get {
+                return ResourceManager.GetString("LblDialogTitle", resourceCulture);
             }
         }
         
@@ -156,6 +183,33 @@ namespace BetTrack.Resources.Languages {
         internal static string LblRequired {
             get {
                 return ResourceManager.GetString("LblRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hemos enviado un correo con instrucciones para poder restaurar tu contraseña..
+        /// </summary>
+        internal static string LblSendForgotPasswordInstructions {
+            get {
+                return ResourceManager.GetString("LblSendForgotPasswordInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registro con éxito.
+        /// </summary>
+        internal static string LblSignUpSuccessful {
+            get {
+                return ResourceManager.GetString("LblSignUpSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Te registraste con éxito, ahora puedes iniciar sesión en tu cuenta..
+        /// </summary>
+        internal static string LblSignUpSuccessfulMessage {
+            get {
+                return ResourceManager.GetString("LblSignUpSuccessfulMessage", resourceCulture);
             }
         }
         

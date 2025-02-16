@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BetTrack.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace BetTrack.ViewModels
     public abstract class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible,IPageLifecycleAware
     {
         #region Object declarations
+        public ApiClient Client { get; set; }
         protected readonly INavigationService NavigationService;
         protected readonly IPageDialogService PageDialogService;
         private string title = "";
