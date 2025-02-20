@@ -6,12 +6,19 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:common="clr-namespace:BetTrack.Dtos"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-    xmlns:lan="clr-namespace:BetTrack.Resources.Languages">
+    xmlns:lan="clr-namespace:BetTrack.Resources.Languages"
+    xmlns:toolkit1="clr-namespace:Syncfusion.Maui.Core.Converters;assembly=Syncfusion.Maui.Core">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit1:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                 RowDefinitions="90*,10*">
                 <Image
                     Grid.RowSpan="2"
@@ -25,16 +32,23 @@
                         FontSize="Title"
                         Text="BetTrack" />
                     <inputLayout:SfTextInputLayout Hint="{x:Static lan:AppResource.TxtEmail}">
-                        <Entry Keyboard="Email" TextColor="White" />
+                        <Entry
+                            Keyboard="Email"
+                            Text="{Binding Usuario.Email}"
+                            TextColor="White" />
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout EnablePasswordVisibilityToggle="True" Hint="{x:Static lan:AppResource.TxtPassword}">
-                        <Entry TextColor="White" />
+                        <Entry
+                            Keyboard="Text"
+                            Text="{Binding Usuario.Contrasenia}"
+                            TextColor="White" />
                     </inputLayout:SfTextInputLayout>
                     <Grid Margin="0,0,0,15" ColumnDefinitions="*,*">
                         <buttons:SfCheckBox
                             Grid.Column="0"
                             CheckedColor="{StaticResource Green}"
                             HorizontalOptions="Start"
+                            IsChecked="{Binding RememberMe}"
                             Text="{x:Static lan:AppResource.ChkRememberMe}"
                             TextColor="White"
                             VerticalOptions="Center" />

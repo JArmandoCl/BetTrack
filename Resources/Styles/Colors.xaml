@@ -6,7 +6,8 @@
 
     <Color x:Key="Green">#21DDA2</Color>
     <Color x:Key="Blue">#25B4E0</Color>
-    <Color x:Key="DarkBlue">#0E1317</Color>
+    <Color x:Key="DarkBlue">#0D1318</Color>
+    <Color x:Key="SecondaryDarkBlue">#152128</Color>
     <Color x:Key="DarkRed">#c41212</Color>
     <Color x:Key="InfoColor">#87CEEB</Color>
     <Color x:Key="DarkGreen">#049838</Color>

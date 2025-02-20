@@ -11,15 +11,17 @@ namespace BetTrack.Api
     {
         private readonly HttpClient _httpClient;
         string baseUrl = "http://btws.somee.com/api/";
-        public ApiClient()
+        string bearerToken = "";
+        public ApiClient(string bearerToken)
         {
             _httpClient = new HttpClient { BaseAddress = new Uri(baseUrl) };
+            this.bearerToken = bearerToken;
         }
 
         public async Task<T> GetAsync<T>(string endpoint)
         {
-            var response = await _httpClient.GetAsync(endpoint);
-            response.EnsureSuccessStatusCode();
+            var request = CreateRequestAsync(HttpMethod.Get, endpoint);
+            var response = await _httpClient.SendAsync(request);
             var jsonResponse = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
@@ -29,24 +31,22 @@ namespace BetTrack.Api
             var jsonRequest = JsonSerializer.Serialize(data);
             var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync(endpoint, content);
-            response.EnsureSuccessStatusCode();
+            var request = CreateRequestAsync(HttpMethod.Post, endpoint, content);
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            // Si la respuesta esperada es string, la retornamos directamente
-            if (typeof(TResponse) == typeof(string))
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                return (TResponse)(object)jsonResponse;
+                throw new UnauthorizedAccessException($"401-Not Authorized.");
             }
 
-            // Intentamos deserializar solo si la respuesta parece un JSON
-            if (jsonResponse.Trim().StartsWith("{") || jsonResponse.Trim().StartsWith("["))
+            if (!response.IsSuccessStatusCode)
             {
-                return JsonSerializer.Deserialize<TResponse>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                throw new HttpRequestException($"Bad request: {response.StatusCode} - {response.ReasonPhrase}");
             }
 
-            throw new InvalidOperationException("La respuesta no es un JSON válido.");
+            return JsonSerializer.Deserialize<TResponse>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
 
@@ -54,17 +54,63 @@ namespace BetTrack.Api
         {
             var jsonRequest = JsonSerializer.Serialize(data);
             var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync(endpoint, content);
-            response.EnsureSuccessStatusCode();
+            var request = CreateRequestAsync(HttpMethod.Put, endpoint, content);
+            var response = await _httpClient.SendAsync(request);
             var jsonResponse = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<TResponse>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<bool> DeleteAsync(string endpoint)
         {
-            var response = await _httpClient.DeleteAsync(endpoint);
+            var request = CreateRequestAsync(HttpMethod.Delete, endpoint);
+            var response = await _httpClient.SendAsync(request);
             return response.IsSuccessStatusCode;
         }
+
+        private HttpRequestMessage CreateRequestAsync(HttpMethod method, string endpoint, HttpContent content = null)
+        {
+            var request = new HttpRequestMessage(method, endpoint)
+            {
+                Content = content
+            };
+
+            if (!string.IsNullOrEmpty(bearerToken))
+            {
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+            }
+
+            return request;
+        }
+        #region Extras
+        public static DateTime ObtenerFechaActual()
+        {
+            try
+            {
+                // Definir el ID de zona horaria de México
+                string zonaHorariaId = DeviceInfo.Platform == DevicePlatform.Android ? "America/Mexico_City" : "Central Standard Time"; // Android usa "America/Mexico_City", Windows usa "Central Standard Time"
+
+                // Obtener la zona horaria
+                TimeZoneInfo zonaHorariaMexico = TimeZoneInfo.FindSystemTimeZoneById(zonaHorariaId);
+
+                // Obtener la fecha y hora UTC actual
+                DateTime fechaUtc = DateTime.UtcNow;
+
+                // Convertir la fecha UTC a la zona horaria de México
+                return TimeZoneInfo.ConvertTimeFromUtc(fechaUtc, zonaHorariaMexico);
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                // Manejar el caso en el que la zona horaria no se encuentra
+                return DateTime.UtcNow;
+            }
+            catch (Exception)
+            {
+                // Devolver la fecha del sistema si hay otro error
+                return DateTime.Now;
+            }
+        }
+
+        #endregion
     }
 
 }

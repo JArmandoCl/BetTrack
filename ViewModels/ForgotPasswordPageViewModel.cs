@@ -1,5 +1,4 @@
-﻿using Android.App.AppSearch;
-using BetTrack.Api;
+﻿using BetTrack.Api;
 using BetTrack.Dtos;
 using BetTrack.Resources.Languages;
 using System;
@@ -36,7 +35,7 @@ namespace BetTrack.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    Client = new ApiClient();
+                    Client = new ApiClient(await SecureStorage.GetAsync("UserToken")??"");
                     string result = await Client.PostAsync<DtoReestablecerContrasenia, string>($"Usuario/solicitar-reestablecimiento", new DtoReestablecerContrasenia
                     {
                         Email = Email

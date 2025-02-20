@@ -160,6 +160,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Los datos no son válidos, revisa e intenta nuevamente..
+        /// </summary>
+        internal static string LblIncorrectData {
+            get {
+                return ResourceManager.GetString("LblIncorrectData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Captura el email asociado a tu cuenta y te enviaremos un email con las instrucciones para recuperar tu contraseña..
         /// </summary>
         internal static string LblInstructionsForgotPassword {
@@ -178,11 +187,29 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to $action$ tipster.
+        /// </summary>
+        internal static string LblNewTipster {
+            get {
+                return ResourceManager.GetString("LblNewTipster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obligatorio.
         /// </summary>
         internal static string LblRequired {
             get {
                 return ResourceManager.GetString("LblRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guardar.
+        /// </summary>
+        internal static string LblSave {
+            get {
+                return ResourceManager.GetString("LblSave", resourceCulture);
             }
         }
         
@@ -219,6 +246,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblSkipWelcome {
             get {
                 return ResourceManager.GetString("LblSkipWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre del tipster.
+        /// </summary>
+        internal static string LblTipsterName {
+            get {
+                return ResourceManager.GetString("LblTipsterName", resourceCulture);
             }
         }
         

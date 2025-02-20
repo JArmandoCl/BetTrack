@@ -98,6 +98,9 @@ namespace BetTrack.Dtos
             get { return fechaRegistro; }
             set { SetProperty(ref fechaRegistro, value); }
         }
+        #region Extras
+        public string CurrentToken { get; set; } = "";
+        #endregion
     }
     public class DtoCasino
     {

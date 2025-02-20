@@ -19,7 +19,7 @@
             </Style>
 
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource Black}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource DarkBlue}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BetTrack.Views.TipstersList"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    Title="Tipsters">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToNewTipster}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="fa"
+                    Glyph="{x:Static common:DtoIconFont.UserPlus}"
+                    Size="18"
+                    Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <AbsoluteLayout>
+        <VerticalStackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <Label
+                HorizontalOptions="Center"
+                Text="Welcome to .NET MAUI!"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+        <inputLayout:SfBusyIndicator
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            AnimationType="LinearMaterial"
+            HeightRequest="10"
+            IndicatorColor="White"
+            IsRunning="{Binding IsBusy}"
+            VerticalOptions="Start" />
+    </AbsoluteLayout>
+</ContentPage>

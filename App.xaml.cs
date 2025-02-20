@@ -1,4 +1,5 @@
-﻿using BetTrack.Views;
+﻿using BetTrack.ViewModels;
+using BetTrack.Views;
 
 namespace BetTrack
 {
@@ -9,5 +10,6 @@ namespace BetTrack
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzQzMDU5QDMxMzgyZTMzMmUzMEtJRVljWEJ1NWorWDdPMmxqUmE1RjdYd2hLcWx6Q1lVRGltakJYeWJqUEk9");
             InitializeComponent();
         }
+
     }
 }

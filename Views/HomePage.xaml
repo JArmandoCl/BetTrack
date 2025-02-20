@@ -8,6 +8,19 @@
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     Title="BetTrack">
+    <NavigationPage.TitleView>
+        <Label
+            FontFamily="Logo"
+            FontSize="{OnIdiom Phone=18,
+                               Tablet=24}"
+            HorizontalOptions="Start"
+            HorizontalTextAlignment="Start"
+            Text="BetTrack"
+            TextColor="White"
+            VerticalTextAlignment="Center"
+            WidthRequest="{OnIdiom Phone=150,
+                                   Tablet=250}" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid
@@ -34,7 +47,7 @@
                         WidthRequest="50" />
                     <Label
                         Grid.Column="1"
-                        Text="Luis Roberto Camargo"
+                        Text="{Binding CurrentUser.Email}"
                         VerticalOptions="Center" />
                     <Label
                         Grid.Row="1"
@@ -54,7 +67,8 @@
                     RowDefinitions="auto,auto"
                     RowSpacing="10">
                     <buttons:SfButton
-                        Background="Transparent"
+                        Background="{x:StaticResource SecondaryDarkBlue}"
+                        Command="{Binding GoToTipstersList}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         HorizontalOptions="FillAndExpand"
@@ -74,7 +88,7 @@
                     </buttons:SfButton>
                     <buttons:SfButton
                         Grid.Column="1"
-                        Background="Transparent"
+                        Background="{x:StaticResource SecondaryDarkBlue}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         HorizontalOptions="FillAndExpand"
@@ -95,7 +109,7 @@
                     <buttons:SfButton
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        Background="Transparent"
+                        Background="{x:StaticResource SecondaryDarkBlue}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         ImageAlignment="Left"

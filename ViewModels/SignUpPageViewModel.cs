@@ -30,7 +30,7 @@ namespace BetTrack.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    Client = new ApiClient();
+                    Client = new ApiClient(await SecureStorage.GetAsync("UserToken") ?? "");
                     Usuario = await Client.PostAsync<DtoUsuario, DtoUsuario>($"Usuario", Usuario);
                     await PageDialogService.DisplayAlertAsync(Resources.Languages.AppResource.LblSignUpSuccessful, AppResource.LblSignUpSuccessfulMessage, AppResource.BtnClose);
                     await NavigationService.GoBackAsync();

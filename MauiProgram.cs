@@ -13,50 +13,62 @@ namespace BetTrack
     {
         public static MauiApp CreateMauiApp()
         {
+            INavigationResult navigationResult = null;
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .UsePrism(prism =>
-                {
-                    prism.RegisterTypes(RegisterTypes)
-                    .CreateWindow(async navigationService =>
-                    {
-                        if (VersionTracking.Default.IsFirstLaunchEver)
-                        {
-                            INavigationResult navigationResult = await navigationService.NavigateAsync("NavigationPage/WelcomePage");
-                            if (!navigationResult.Success)
-                            {
-                                Debug.WriteLine(navigationResult.Exception?.GetRootException());
-                            }
-                        }
-                        else
-                        {
-                            INavigationResult navigationResult = await navigationService.NavigateAsync("LoginPage");
-                            if (!navigationResult.Success)
-                            {
-                                Debug.WriteLine(navigationResult.Exception?.GetRootException());
-                            }
-                        }
-                    });
-                })
-                .ConfigureSyncfusionCore()
-                .ConfigureSyncfusionToolkit()
-                .ConfigureEssentials(essentials =>
-                {
-                    essentials.UseVersionTracking();
-                })
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("Kabisat Demo-ItalicTall.ttf", "Logo");
-                    fonts.AddFont("Lato-Bold.ttf", "Bold");
-                    fonts.AddFont("Lato-Italic.ttf", "Italic");
-                    fonts.AddFont("Lato-Regular.ttf", "Lato");
-                    fonts.AddFont("fontawesome.ttf", "fa");
-                });
+            try
+            {
+                builder
+                       .UseMauiApp<App>()
+                       .UsePrism(prism =>
+                       {
+                           prism.RegisterTypes(RegisterTypes)
+                           .CreateWindow(async navigationService =>
+                           {
+                               bool rememberMeEnabled = false;
+                               rememberMeEnabled = Preferences.Default.Get("RememberMeEnabled", false);
+
+                               if (VersionTracking.Default.IsFirstLaunchEver)
+                               {
+                                   navigationResult = await navigationService.NavigateAsync("NavigationPage/WelcomePage");
+                               }
+                               else if (!rememberMeEnabled)
+                               {
+                                   navigationResult = await navigationService.NavigateAsync("LoginPage");
+                               }
+                               else
+                               {
+                                   navigationResult = await navigationService.NavigateAsync("//NavigationPage/HomePage");
+                               }
+                               if (navigationResult?.Success == false)
+                               {
+                                   Debug.WriteLine(navigationResult.Exception?.GetRootException());
+                               }
+                           });
+                       })
+                       .ConfigureSyncfusionCore()
+                       .ConfigureSyncfusionToolkit()
+                       .ConfigureEssentials(essentials =>
+                       {
+                           essentials.UseVersionTracking();
+                       })
+                       .ConfigureFonts(fonts =>
+                       {
+                           fonts.AddFont("Kabisat Demo-ItalicTall.ttf", "Logo");
+                           fonts.AddFont("Lato-Bold.ttf", "Bold");
+                           fonts.AddFont("Lato-Italic.ttf", "Italic");
+                           fonts.AddFont("Lato-Regular.ttf", "Lato");
+                           fonts.AddFont("fontawesome.ttf", "fa");
+                       });
 
 #if DEBUG
-            builder.Logging.AddDebug();
+                builder.Logging.AddDebug();
 #endif
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
 
             return builder.Build();
         }
@@ -72,6 +84,7 @@ namespace BetTrack
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<ForgotPasswordPage, ForgotPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
+            containerRegistry.RegisterForNavigation<TipstersList, TipstersListViewModel>();
         }
     }
 }

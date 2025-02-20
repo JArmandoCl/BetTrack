@@ -180,4 +180,16 @@
   <data name="LblDialogTitle" xml:space="preserve">
     <value>Important notice</value>
   </data>
+  <data name="LblIncorrectData" xml:space="preserve">
+    <value>The data is invalid, please check and try again.</value>
+  </data>
+  <data name="LblNewTipster" xml:space="preserve">
+    <value>$action$ tipster</value>
+  </data>
+  <data name="LblTipsterName" xml:space="preserve">
+    <value>Tipster's name</value>
+  </data>
+  <data name="LblSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>
