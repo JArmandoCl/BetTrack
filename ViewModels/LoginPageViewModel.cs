@@ -72,10 +72,6 @@ namespace BetTrack.ViewModels
                     }
                 }
             }
-            catch (UnauthorizedAccessException e)
-            {
-                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblIncorrectData, AppResource.BtnClose);
-            }
             catch (Exception e)
             {
                 await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblBadRequestServer, AppResource.BtnClose);

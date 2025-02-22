@@ -80,12 +80,6 @@ namespace BetTrack.Dtos
             get { return nombre; }
             set { SetProperty(ref nombre, value); }
         }
-        private string alias = "";
-        public string Alias
-        {
-            get { return alias; }
-            set { SetProperty(ref alias, value); }
-        }
         private string pensamiento = "";
         public string Pensamiento
         {

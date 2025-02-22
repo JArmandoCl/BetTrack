@@ -23,6 +23,15 @@ namespace BetTrack.Api
             var request = CreateRequestAsync(HttpMethod.Get, endpoint);
             var response = await _httpClient.SendAsync(request);
             var jsonResponse = await response.Content.ReadAsStringAsync();
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException($"401-Not Authorized.");
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Bad request: {response.StatusCode} - {response.ReasonPhrase}");
+            }
             return JsonSerializer.Deserialize<T>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
@@ -50,20 +59,38 @@ namespace BetTrack.Api
         }
 
 
-        public async Task<TResponse> PutAsync<TRequest, TResponse>(string endpoint, TRequest data)
+        public async Task PutAsync<TRequest>(string endpoint, TRequest data)
         {
             var jsonRequest = JsonSerializer.Serialize(data);
             var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
             var request = CreateRequestAsync(HttpMethod.Put, endpoint, content);
             var response = await _httpClient.SendAsync(request);
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<TResponse>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException($"401-Not Authorized.");
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Bad request: {response.StatusCode} - {response.ReasonPhrase}");
+            }            
         }
 
         public async Task<bool> DeleteAsync(string endpoint)
         {
             var request = CreateRequestAsync(HttpMethod.Delete, endpoint);
             var response = await _httpClient.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException($"401-Not Authorized.");
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Bad request: {response.StatusCode} - {response.ReasonPhrase}");
+            }
             return response.IsSuccessStatusCode;
         }
 

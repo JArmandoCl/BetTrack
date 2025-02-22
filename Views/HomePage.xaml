@@ -6,6 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:common="clr-namespace:BetTrack.Dtos"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:local="clr-namespace:BetTrack.Resources.Languages"
     xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     Title="BetTrack">
     <NavigationPage.TitleView>
@@ -68,7 +69,7 @@
                     RowSpacing="10">
                     <buttons:SfButton
                         Background="{x:StaticResource SecondaryDarkBlue}"
-                        Command="{Binding GoToTipstersList}"
+                        Command="{Binding GoToUserProfile}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         HorizontalOptions="FillAndExpand"
@@ -76,12 +77,12 @@
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
                         StrokeThickness="3"
-                        Text="Tipsters"
+                        Text="{x:Static local:AppResource.LblUserProfile}"
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
                                 FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.UserGroup}"
+                                Glyph="{x:Static common:DtoIconFont.User}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -108,7 +109,6 @@
                     </buttons:SfButton>
                     <buttons:SfButton
                         Grid.Row="1"
-                        Grid.ColumnSpan="2"
                         Background="{x:StaticResource SecondaryDarkBlue}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
@@ -122,6 +122,28 @@
                             <FontImageSource
                                 FontFamily="fa"
                                 Glyph="{x:Static common:DtoIconFont.Bank}"
+                                Size="Default"
+                                Color="White" />
+                        </buttons:SfButton.ImageSource>
+                    </buttons:SfButton>
+                    <buttons:SfButton
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Background="{x:StaticResource SecondaryDarkBlue}"
+                        Command="{Binding GoToTipstersList}"
+                        CornerRadius="10"
+                        EnableRippleEffect="True"
+                        HorizontalOptions="FillAndExpand"
+                        ImageAlignment="Left"
+                        ShowIcon="True"
+                        Stroke="{x:StaticResource Green}"
+                        StrokeThickness="3"
+                        Text="Tipsters"
+                        TextColor="White">
+                        <buttons:SfButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="fa"
+                                Glyph="{x:Static common:DtoIconFont.UserGroup}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>

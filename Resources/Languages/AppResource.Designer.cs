@@ -133,6 +133,24 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Que deseas realizar?.
+        /// </summary>
+        internal static string LblChooseAnAction {
+            get {
+                return ResourceManager.GetString("LblChooseAnAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿Deseas eliminar al tipster $tipster$?.
+        /// </summary>
+        internal static string LblConfirmTipsterDelete {
+            get {
+                return ResourceManager.GetString("LblConfirmTipsterDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¡Registrate!.
         /// </summary>
         internal static string LblCreateNewAccount {
@@ -142,11 +160,47 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Eliminar.
+        /// </summary>
+        internal static string LblDelete {
+            get {
+                return ResourceManager.GetString("LblDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aviso importante.
         /// </summary>
         internal static string LblDialogTitle {
             get {
                 return ResourceManager.GetString("LblDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Editar.
+        /// </summary>
+        internal static string LblEdit {
+            get {
+                return ResourceManager.GetString("LblEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aún no cuentas con tipsters registrados..
+        /// </summary>
+        internal static string LblEmptyTipsterList {
+            get {
+                return ResourceManager.GetString("LblEmptyTipsterList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No fue posible guardar los cambios, intente más tarde..
+        /// </summary>
+        internal static string LblFailed {
+            get {
+                return ResourceManager.GetString("LblFailed", resourceCulture);
             }
         }
         
@@ -214,11 +268,29 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Estás buscando algo?.
+        /// </summary>
+        internal static string LblSearchPlaceholder {
+            get {
+                return ResourceManager.GetString("LblSearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hemos enviado un correo con instrucciones para poder restaurar tu contraseña..
         /// </summary>
         internal static string LblSendForgotPasswordInstructions {
             get {
                 return ResourceManager.GetString("LblSendForgotPasswordInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La sesión caducó, inicia sesión nuevamente..
+        /// </summary>
+        internal static string LblSessionExpired {
+            get {
+                return ResourceManager.GetString("LblSessionExpired", resourceCulture);
             }
         }
         
@@ -250,11 +322,38 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se guardaron los cambios con éxito..
+        /// </summary>
+        internal static string LblSuccess {
+            get {
+                return ResourceManager.GetString("LblSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre del tipster.
         /// </summary>
         internal static string LblTipsterName {
             get {
                 return ResourceManager.GetString("LblTipsterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El nombre del tipster es obligatorio..
+        /// </summary>
+        internal static string LblTipsterNameRequired {
+            get {
+                return ResourceManager.GetString("LblTipsterNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tu perfil.
+        /// </summary>
+        internal static string LblUserProfile {
+            get {
+                return ResourceManager.GetString("LblUserProfile", resourceCulture);
             }
         }
         

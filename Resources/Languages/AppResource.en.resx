@@ -192,4 +192,37 @@
   <data name="LblSave" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="LblSessionExpired" xml:space="preserve">
+    <value>The session expired, please log in again.</value>
+  </data>
+  <data name="LblSuccess" xml:space="preserve">
+    <value>Changes were saved successfully.</value>
+  </data>
+  <data name="LblFailed" xml:space="preserve">
+    <value>Changes could not be saved, please try again later.</value>
+  </data>
+  <data name="LblEmptyTipsterList" xml:space="preserve">
+    <value>You don't have any registered tipsters yet.</value>
+  </data>
+  <data name="LblTipsterNameRequired" xml:space="preserve">
+    <value>Tipster's name is required.</value>
+  </data>
+  <data name="LblSearchPlaceholder" xml:space="preserve">
+    <value>Are you looking for something?</value>
+  </data>
+  <data name="LblUserProfile" xml:space="preserve">
+    <value>User profile</value>
+  </data>
+  <data name="LblConfirmTipsterDelete" xml:space="preserve">
+    <value>Are you sure to remove tipster $tipster$?</value>
+  </data>
+  <data name="LblChooseAnAction" xml:space="preserve">
+    <value>What do you want to do?</value>
+  </data>
+  <data name="LblEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="LblDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

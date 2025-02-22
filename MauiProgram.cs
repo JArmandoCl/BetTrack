@@ -1,5 +1,6 @@
 ﻿using BetTrack.ViewModels;
 using BetTrack.Views;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui;
 using Prism;
@@ -19,6 +20,7 @@ namespace BetTrack
             {
                 builder
                        .UseMauiApp<App>()
+                       .UseMauiCommunityToolkit()
                        .UsePrism(prism =>
                        {
                            prism.RegisterTypes(RegisterTypes)

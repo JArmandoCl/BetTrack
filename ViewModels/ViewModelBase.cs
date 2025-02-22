@@ -1,5 +1,7 @@
 ﻿using BetTrack.Api;
 using BetTrack.Dtos;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +51,13 @@ namespace BetTrack.ViewModels
             {
                 CurrentUser = JsonSerializer.Deserialize<DtoUsuario>(currentUserSaved) ?? new DtoUsuario();
             }
+        }
+
+        public virtual async Task ShowToast(string message,ToastDuration duration)
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            var toast = Toast.Make(message, duration);
+            await toast.Show(cancellationTokenSource.Token);
         }
 
         public virtual void Destroy()

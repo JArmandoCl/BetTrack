@@ -7,7 +7,7 @@ namespace BetTrack
     {
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzQzMDU5QDMxMzgyZTMzMmUzMEtJRVljWEJ1NWorWDdPMmxqUmE1RjdYd2hLcWx6Q1lVRGltakJYeWJqUEk9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF1cXmhLYVF+WmFZfVtgfV9FZlZTQWY/P1ZhSXxWdkdhWH1fc3JXQ2JeWE0=");
             InitializeComponent();
         }
 
