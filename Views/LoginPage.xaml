@@ -34,13 +34,13 @@
                     <inputLayout:SfTextInputLayout Hint="{x:Static lan:AppResource.TxtEmail}">
                         <Entry
                             Keyboard="Email"
-                            Text="{Binding Usuario.Email}"
+                            Text="{Binding User.Email}"
                             TextColor="White" />
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout EnablePasswordVisibilityToggle="True" Hint="{x:Static lan:AppResource.TxtPassword}">
                         <Entry
                             Keyboard="Text"
-                            Text="{Binding Usuario.Contrasenia}"
+                            Text="{Binding User.Contrasenia}"
                             TextColor="White" />
                     </inputLayout:SfTextInputLayout>
                     <Grid Margin="0,0,0,15" ColumnDefinitions="*,*">

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace BetTrack.ViewModels
 {
-    public class DashboardPageViewModel : ViewModelBase
+    public class BankrollDashboardPageViewModel : ViewModelBase
     {
         #region Object declarations
         
         #endregion
-        public DashboardPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public BankrollDashboardPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             Title = "Mi Dashboard";
             

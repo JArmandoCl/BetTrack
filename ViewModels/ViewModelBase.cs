@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -36,24 +37,35 @@ namespace BetTrack.ViewModels
             get { return currentUser; }
             set { SetProperty(ref currentUser, value); }
         }
+        private string profilePhoto;
+        public string ProfilePhoto
+        {
+            get { return profilePhoto; }
+            set { SetProperty(ref profilePhoto, value); }
+        }
         #endregion
         protected ViewModelBase(INavigationService navigationService, IPageDialogService pageDialogService)
         {
             NavigationService = navigationService;
             PageDialogService = pageDialogService;
+
             LoadBasicInfo();
         }
 
-        private async void LoadBasicInfo()
+        public async Task LoadBasicInfo()
         {
-            string currentUserSaved = await SecureStorage.GetAsync("CurrentUser") ?? JsonSerializer.Serialize(new DtoUsuario());
-            if (!string.IsNullOrWhiteSpace(currentUserSaved))
+            await Task.Run(async () =>
             {
-                CurrentUser = JsonSerializer.Deserialize<DtoUsuario>(currentUserSaved) ?? new DtoUsuario();
-            }
+                string currentUserSaved = await SecureStorage.GetAsync("CurrentUser") ?? JsonSerializer.Serialize(new DtoUsuario());
+                if (!string.IsNullOrWhiteSpace(currentUserSaved))
+                {
+                    CurrentUser = JsonSerializer.Deserialize<DtoUsuario>(currentUserSaved) ?? new DtoUsuario();
+                    ProfilePhoto = CurrentUser.FotoUsuario;
+                }
+            });        
         }
 
-        public virtual async Task ShowToast(string message,ToastDuration duration)
+        public virtual async Task ShowToast(string message, ToastDuration duration)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             var toast = Toast.Make(message, duration);
@@ -80,7 +92,7 @@ namespace BetTrack.ViewModels
         {
         }
 
-        public virtual void OnDisappearing()
+        public virtual async void OnDisappearing()
         {
         }
     }

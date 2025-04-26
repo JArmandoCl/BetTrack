@@ -178,7 +178,7 @@
     <value>Algo falló enviando la información, lamentamos las molestias.</value>
   </data>
   <data name="LblDialogTitle" xml:space="preserve">
-    <value>Aviso importante</value>
+    <value>Aviso</value>
   </data>
   <data name="LblIncorrectData" xml:space="preserve">
     <value>Los datos no son válidos, revisa e intenta nuevamente.</value>
@@ -211,7 +211,7 @@
     <value>¿Estás buscando algo?</value>
   </data>
   <data name="LblUserProfile" xml:space="preserve">
-    <value>Tu perfil</value>
+    <value>Perfil</value>
   </data>
   <data name="LblConfirmTipsterDelete" xml:space="preserve">
     <value>¿Deseas eliminar al tipster $tipster$?</value>
@@ -224,5 +224,65 @@
   </data>
   <data name="LblDelete" xml:space="preserve">
     <value>Eliminar</value>
+  </data>
+  <data name="LblImportCasino" xml:space="preserve">
+    <value>Importa tus casinos</value>
+  </data>
+  <data name="LblConfirmDeleteCasinos" xml:space="preserve">
+    <value>¿Estás seguro de continuar con la eliminación?</value>
+  </data>
+  <data name="BtnYes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="TxtNickname" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="TxtName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="TxtThought" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="LblChooseAnOption" xml:space="preserve">
+    <value>Elige una opción</value>
+  </data>
+  <data name="LblCamera" xml:space="preserve">
+    <value>Cámara</value>
+  </data>
+  <data name="LblGallery" xml:space="preserve">
+    <value>Galería</value>
+  </data>
+  <data name="LblNewEditBankroll" xml:space="preserve">
+    <value>Nuevo bankroll</value>
+  </data>
+  <data name="LblBankrollName" xml:space="preserve">
+    <value>Nombre del bankroll</value>
+  </data>
+  <data name="LblInitialCapital" xml:space="preserve">
+    <value>Capital inicial</value>
+  </data>
+  <data name="LblQuotaFormatBankroll" xml:space="preserve">
+    <value>Formato de cuota</value>
+  </data>
+  <data name="LblBankrollType" xml:space="preserve">
+    <value>Tipo de bankroll</value>
+  </data>
+  <data name="LblBankrollCapital" xml:space="preserve">
+    <value>$100.00</value>
+  </data>
+  <data name="LblSelectCurrencyPlaceholder" xml:space="preserve">
+    <value>Selecciona una moneda</value>
+  </data>
+  <data name="LblSelectBankrollTypePlaceholder" xml:space="preserve">
+    <value>Selecciona el tipo de bankroll</value>
+  </data>
+  <data name="LblSelectQuotaFormatPlaceholder" xml:space="preserve">
+    <value>Selecciona el formato de cuota</value>
+  </data>
+  <data name="LblNoResults" xml:space="preserve">
+    <value>No se encontraron coincidencias</value>
+  </data>
+  <data name="LblBankrollsList" xml:space="preserve">
+    <value>Mis bankrolls</value>
   </data>
 </root>

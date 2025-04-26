@@ -18,7 +18,7 @@ namespace BetTrack.ViewModels
         public DelegateCommand LoginCommand { get; set; }
         public DelegateCommand ShowForgotPassword { get; set; }
         public DelegateCommand ShowSignUpCommand { get; set; }
-        public DtoUsuario Usuario { get; set; } = new DtoUsuario();
+        public DtoUsuario User { get; set; } = new DtoUsuario();
         private bool rememberMe;
         public bool RememberMe
         {
@@ -61,7 +61,7 @@ namespace BetTrack.ViewModels
                 {
                     IsBusy = true;
                     Client = new ApiClient(await SecureStorage.GetAsync("UserToken") ?? "");
-                    DtoUsuario currentUser = await Client.PostAsync<DtoUsuario, DtoUsuario>($"Autorizacion", Usuario);
+                    DtoUsuario currentUser = await Client.PostAsync<DtoUsuario, DtoUsuario>($"Autorizacion", User);
                     if (!string.IsNullOrWhiteSpace(currentUser.CurrentToken))
                     {
                         CurrentUser = currentUser;

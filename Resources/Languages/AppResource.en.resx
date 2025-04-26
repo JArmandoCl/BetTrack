@@ -178,7 +178,7 @@
     <value>Something went wrong while sending the information, we apologize for the inconvenience.</value>
   </data>
   <data name="LblDialogTitle" xml:space="preserve">
-    <value>Important notice</value>
+    <value>Notice</value>
   </data>
   <data name="LblIncorrectData" xml:space="preserve">
     <value>The data is invalid, please check and try again.</value>
@@ -224,5 +224,65 @@
   </data>
   <data name="LblDelete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="LblImportCasino" xml:space="preserve">
+    <value>Import your casinos</value>
+  </data>
+  <data name="LblConfirmDeleteCasinos" xml:space="preserve">
+    <value>Are you sure you want to continue with the deletion?</value>
+  </data>
+  <data name="BtnYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="TxtNickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="TxtName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TxtThought" xml:space="preserve">
+    <value>Thought</value>
+  </data>
+  <data name="LblChooseAnOption" xml:space="preserve">
+    <value>Choose an option</value>
+  </data>
+  <data name="LblCamera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="LblGallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="LblNewEditBankroll" xml:space="preserve">
+    <value>New bankroll</value>
+  </data>
+  <data name="LblBankrollName" xml:space="preserve">
+    <value>Bankroll's name</value>
+  </data>
+  <data name="LblInitialCapital" xml:space="preserve">
+    <value>Initial capital</value>
+  </data>
+  <data name="LblQuotaFormatBankroll" xml:space="preserve">
+    <value>Quota format</value>
+  </data>
+  <data name="LblBankrollType" xml:space="preserve">
+    <value>Bankroll type</value>
+  </data>
+  <data name="LblBankrollCapital" xml:space="preserve">
+    <value>$100.00</value>
+  </data>
+  <data name="LblSelectCurrencyPlaceholder" xml:space="preserve">
+    <value>Select a currency</value>
+  </data>
+  <data name="LblSelectBankrollTypePlaceholder" xml:space="preserve">
+    <value>Select a bankroll type</value>
+  </data>
+  <data name="LblSelectQuotaFormatPlaceholder" xml:space="preserve">
+    <value>Select the quota format</value>
+  </data>
+  <data name="LblNoResults" xml:space="preserve">
+    <value>No matches found</value>
+  </data>
+  <data name="LblBankrollsList" xml:space="preserve">
+    <value>My bankrolls</value>
   </data>
 </root>

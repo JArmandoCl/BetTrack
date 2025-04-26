@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="BetTrack.Views.TipstersList"
+    x:Class="BetTrack.Views.TipstersListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:common="clr-namespace:BetTrack.Dtos"
@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding GoToNewTipster}">
+        <ToolbarItem Command="{Binding GoToNewTipsterCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="fa"
@@ -27,19 +27,25 @@
     </ContentPage.ToolbarItems>
     <AbsoluteLayout>
         <Grid
+            Margin="0,10,0,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
             RowDefinitions="auto,*">
-            <SearchBar
-                x:Name="searchBar"
-                BackgroundColor="{StaticResource SecondaryDarkBlue}"
-                Keyboard="Text"
-                Placeholder="{x:Static local:AppResource.LblSearchPlaceholder}"
-                SearchCommand="{Binding PerformSearchCommand}"
-                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-                Text="{Binding SearchText}"
-                TextColor="White" />
+            <Border Stroke="{x:StaticResource Green}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="40" />
+                </Border.StrokeShape>
+                <SearchBar
+                    x:Name="searchBar"
+                    BackgroundColor="{StaticResource SecondaryDarkBlue}"
+                    Keyboard="Text"
+                    Placeholder="{x:Static local:AppResource.LblSearchPlaceholder}"
+                    SearchCommand="{Binding PerformSearchCommand}"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                    Text="{Binding SearchText}"
+                    TextColor="White" />
+            </Border>
             <CollectionView
                 Grid.Row="1"
                 ItemsSource="{Binding Tipsters}"

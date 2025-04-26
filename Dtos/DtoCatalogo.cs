@@ -22,15 +22,30 @@ namespace BetTrack.Dtos
         public long DeporteId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    public class DtoTipoBankroll
+    public class DtoTipoBankroll:BindableBase
     {
-        public int TipoBankrollId { get; set; }
-        public string Nombre { get; set; } = "";
+        private int tipoBankrollId;
+        public int TipoBankrollId
+        {
+            get { return tipoBankrollId; }
+            set { SetProperty(ref tipoBankrollId, value); }
+        }
+        private string nombre="";
+        public string Nombre
+        {
+            get { return nombre; }
+            set { SetProperty(ref nombre, value); }
+        }
     }
     public class DtoFormatoCuota
     {
         public int FormatoCuotaId { get; set; }
         public string Nombre { get; set; } = "";
+    }
+    public class DtoMoneda
+    {
+        public int MonedaId { get; set; }
+        public string Descripcion { get; set; } = "";
     }
     public class DtoEstatusBankroll
     {
@@ -52,11 +67,11 @@ namespace BetTrack.Dtos
         public int EstatusCategoriaId { get; set; }
         public string Nombre { get; set; } = "";
     }
-    public class DtoUsuario : BindableBase
+    public class DtoUsuario : BindableBase, ICloneable
     {
         public long UsuarioId { get; set; }
         public int EstatusUsuarioId { get; set; } = 1;//Active
-        private string email="";
+        private string email = "";
         public string Email
         {
             get { return email; }
@@ -92,8 +107,19 @@ namespace BetTrack.Dtos
             get { return fechaRegistro; }
             set { SetProperty(ref fechaRegistro, value); }
         }
+        private string fotoUsuario = "default_user_profile.png";
+        public string FotoUsuario
+        {
+            get { return fotoUsuario; }
+            set { SetProperty(ref fotoUsuario, value); }
+        }
         #region Extras
         public string CurrentToken { get; set; } = "";
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
         #endregion
     }
     public class DtoCasino
@@ -114,22 +140,76 @@ namespace BetTrack.Dtos
         public long UsuarioCasinoId { get; set; }
         public long UsuarioId { get; set; }
         public long EstatusUsuarioCasinoId { get; set; }
-        public int CasinoId { get; set; }
+        public long CasinoId { get; set; }
         public string Nombre { get; set; } = "";
         public string Icono { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
     }
-    public class DtoUsuarioBankroll
+    public class DtoUsuarioBankroll : BindableBase
     {
         public long UsuarioBankrollId { get; set; }
         public long UsuarioId { get; set; }
         public string NombreBankroll { get; set; } = "";
-        public decimal CapitalInicial { get; set; }
-        public int EstatusBankrollId { get; set; }
-        public int FormatoCuotaId { get; set; }
-        public int TipoBankrollId { get; set; }
+        public decimal? CapitalInicial { get; set; } = null;
+        public int EstatusBankrollId { get; set; } = 1;
+        private int formatoCuotaId = 1;
+        public int FormatoCuotaId
+        {
+            get { return formatoCuotaId; }
+            set { SetProperty(ref formatoCuotaId, value); }
+        }
+        private int tipoBankrollId = 1;
+        public int TipoBankrollId
+        {
+            get { return tipoBankrollId; }
+            set { SetProperty(ref tipoBankrollId, value); }
+        }
+        private int monedaId = 1;
+        public int MonedaId
+        {
+            get { return monedaId; }
+            set { SetProperty(ref monedaId, value); }
+        }
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
+        #region Extras
+        private List<DtoFormatoCuota> formatoCuotas=new List<DtoFormatoCuota>();
+        public List<DtoFormatoCuota> FormatoCuotas
+        {
+            get { return formatoCuotas; }
+            set { SetProperty(ref formatoCuotas, value); }
+        }
+        private List<DtoTipoBankroll> tiposBankroll=new List<DtoTipoBankroll>();
+        public List<DtoTipoBankroll> TiposBankroll
+        {
+            get { return tiposBankroll; }
+            set { SetProperty(ref tiposBankroll, value); }
+        }
+        private List<DtoMoneda> monedas = new List<DtoMoneda>();
+        public List<DtoMoneda> Monedas
+        {
+            get { return monedas; }
+            set { SetProperty(ref monedas, value); }
+        }
+        private DtoMoneda moneda=new DtoMoneda();
+        public DtoMoneda Moneda
+        {
+            get { return moneda; }
+            set { SetProperty(ref moneda, value); }
+        }
+        private DtoFormatoCuota formatoCuota = new DtoFormatoCuota();
+        public DtoFormatoCuota FormatoCuota
+        {
+            get { return formatoCuota; }
+            set { SetProperty(ref formatoCuota, value); }
+        }
+        private DtoTipoBankroll tipoBankroll = new DtoTipoBankroll();
+        public DtoTipoBankroll  TipoBankroll
+        {
+            get { return tipoBankroll; }
+            set { SetProperty(ref tipoBankroll, value); }
+        }
+        #endregion
     }
     public class DtoCategoriaUsuario
     {

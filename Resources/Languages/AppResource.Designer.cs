@@ -106,6 +106,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sí.
+        /// </summary>
+        internal static string BtnYes {
+            get {
+                return ResourceManager.GetString("BtnYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recuérdame.
         /// </summary>
         internal static string ChkRememberMe {
@@ -133,11 +142,74 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to $100.00.
+        /// </summary>
+        internal static string LblBankrollCapital {
+            get {
+                return ResourceManager.GetString("LblBankrollCapital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre del bankroll.
+        /// </summary>
+        internal static string LblBankrollName {
+            get {
+                return ResourceManager.GetString("LblBankrollName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mis bankrolls.
+        /// </summary>
+        internal static string LblBankrollsList {
+            get {
+                return ResourceManager.GetString("LblBankrollsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo de bankroll.
+        /// </summary>
+        internal static string LblBankrollType {
+            get {
+                return ResourceManager.GetString("LblBankrollType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cámara.
+        /// </summary>
+        internal static string LblCamera {
+            get {
+                return ResourceManager.GetString("LblCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Que deseas realizar?.
         /// </summary>
         internal static string LblChooseAnAction {
             get {
                 return ResourceManager.GetString("LblChooseAnAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elige una opción.
+        /// </summary>
+        internal static string LblChooseAnOption {
+            get {
+                return ResourceManager.GetString("LblChooseAnOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿Estás seguro de continuar con la eliminación?.
+        /// </summary>
+        internal static string LblConfirmDeleteCasinos {
+            get {
+                return ResourceManager.GetString("LblConfirmDeleteCasinos", resourceCulture);
             }
         }
         
@@ -169,7 +241,7 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aviso importante.
+        ///   Looks up a localized string similar to Aviso.
         /// </summary>
         internal static string LblDialogTitle {
             get {
@@ -214,11 +286,38 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Galería.
+        /// </summary>
+        internal static string LblGallery {
+            get {
+                return ResourceManager.GetString("LblGallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importa tus casinos.
+        /// </summary>
+        internal static string LblImportCasino {
+            get {
+                return ResourceManager.GetString("LblImportCasino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Los datos no son válidos, revisa e intenta nuevamente..
         /// </summary>
         internal static string LblIncorrectData {
             get {
                 return ResourceManager.GetString("LblIncorrectData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capital inicial.
+        /// </summary>
+        internal static string LblInitialCapital {
+            get {
+                return ResourceManager.GetString("LblInitialCapital", resourceCulture);
             }
         }
         
@@ -241,11 +340,38 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nuevo bankroll.
+        /// </summary>
+        internal static string LblNewEditBankroll {
+            get {
+                return ResourceManager.GetString("LblNewEditBankroll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to $action$ tipster.
         /// </summary>
         internal static string LblNewTipster {
             get {
                 return ResourceManager.GetString("LblNewTipster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se encontraron coincidencias.
+        /// </summary>
+        internal static string LblNoResults {
+            get {
+                return ResourceManager.GetString("LblNoResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formato de cuota.
+        /// </summary>
+        internal static string LblQuotaFormatBankroll {
+            get {
+                return ResourceManager.GetString("LblQuotaFormatBankroll", resourceCulture);
             }
         }
         
@@ -273,6 +399,33 @@ namespace BetTrack.Resources.Languages {
         internal static string LblSearchPlaceholder {
             get {
                 return ResourceManager.GetString("LblSearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona el tipo de bankroll.
+        /// </summary>
+        internal static string LblSelectBankrollTypePlaceholder {
+            get {
+                return ResourceManager.GetString("LblSelectBankrollTypePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona una moneda.
+        /// </summary>
+        internal static string LblSelectCurrencyPlaceholder {
+            get {
+                return ResourceManager.GetString("LblSelectCurrencyPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona el formato de cuota.
+        /// </summary>
+        internal static string LblSelectQuotaFormatPlaceholder {
+            get {
+                return ResourceManager.GetString("LblSelectQuotaFormatPlaceholder", resourceCulture);
             }
         }
         
@@ -349,7 +502,7 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tu perfil.
+        ///   Looks up a localized string similar to Perfil.
         /// </summary>
         internal static string LblUserProfile {
             get {
@@ -367,11 +520,38 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nombre.
+        /// </summary>
+        internal static string TxtName {
+            get {
+                return ResourceManager.GetString("TxtName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alias.
+        /// </summary>
+        internal static string TxtNickname {
+            get {
+                return ResourceManager.GetString("TxtNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contraseña.
         /// </summary>
         internal static string TxtPassword {
             get {
                 return ResourceManager.GetString("TxtPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estado.
+        /// </summary>
+        internal static string TxtThought {
+            get {
+                return ResourceManager.GetString("TxtThought", resourceCulture);
             }
         }
         

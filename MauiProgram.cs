@@ -80,13 +80,17 @@ namespace BetTrack
         {
             // Registrar páginas y ViewModels para la navegación
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<DashboardPage, DashboardPageViewModel>();
+            containerRegistry.RegisterForNavigation<BankrollDashboardPage, BankrollDashboardPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<ForgotPasswordPage, ForgotPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
-            containerRegistry.RegisterForNavigation<TipstersList, TipstersListViewModel>();
+            containerRegistry.RegisterForNavigation<TipstersListPage, TipstersListPageViewModel>();
+            containerRegistry.RegisterForNavigation<UserCasinosPage, UserCasinosPageViewModel>();
+            containerRegistry.RegisterForNavigation<BetTrackCasinosPage, BetTrackCasinosPageViewModel>();
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
+            containerRegistry.RegisterForNavigation<NewEditBankrollPage, NewEditBankrollPageViewModel>();
         }
     }
 }

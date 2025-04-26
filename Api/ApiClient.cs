@@ -109,7 +109,7 @@ namespace BetTrack.Api
             return request;
         }
         #region Extras
-        public static DateTime ObtenerFechaActual()
+        public static DateTime GetCurrentDateTime()
         {
             try
             {

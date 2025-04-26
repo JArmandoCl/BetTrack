@@ -140,16 +140,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.50" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
 		<PackageReference Include="Prism.DryIoc.Maui" Version="9.0.537" />
 		<PackageReference Include="Prism.Maui" Version="9.0.537" />
-		<PackageReference Include="Syncfusion.Maui.Buttons" Version="28.1.33" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="28.1.33" />
-		<PackageReference Include="Syncfusion.Maui.ListView" Version="28.1.33" />
-		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.3" />
+		<PackageReference Include="Syncfusion.Maui.Buttons" Version="29.1.33" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="29.1.33" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" Version="29.1.33" />
+		<PackageReference Include="Syncfusion.Maui.ListView" Version="29.1.33" />
+		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -157,6 +158,15 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AppResource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\BankrollDashboardPage.xaml.cs">
+	    <DependentUpon>BankrollDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\NewEditBankrollPage.xaml.cs">
+	    <DependentUpon>NewEditBankrollPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\TipstersListPage.xaml.cs">
+	    <DependentUpon>TipstersListPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>WelcomePage.xaml</DependentUpon>
@@ -177,16 +187,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\BetTrackCasinosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ForgotPasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TipstersList.xaml">
+	  <MauiXaml Update="Views\NewEditBankrollPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TipstersListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\UserCasinosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DashboardPage.xaml">
+	  <MauiXaml Update="Views\BankrollDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">

@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace BetTrack.ViewModels
 {
-    public class TipstersListViewModel : ViewModelBase
+    public class TipstersListPageViewModel : ViewModelBase
     {
         #region Object declarations 
         private DtoUsuarioTipster selectedTipster;
@@ -33,7 +33,9 @@ namespace BetTrack.ViewModels
             set { SetProperty(ref tipsters, value); }
         }
         ObservableCollection<DtoUsuarioTipster> BackupTipsters;
-        public DelegateCommand GoToNewTipster { get; set; }
+        public DelegateCommand GoToNewTipsterCommand { get; set; }
+        public DelegateCommand PerformActionToTipsterCommand => new DelegateCommand(PerformActionToTipster);
+        #region Search
         public DelegateCommand<string> PerformSearchCommand { get; set; }
         private string searchText;
         public string SearchText
@@ -41,11 +43,11 @@ namespace BetTrack.ViewModels
             get { return searchText; }
             set { SetProperty(ref searchText, value); PerformSearch(searchText); }
         }
-        public DelegateCommand PerformActionToTipsterCommand => new DelegateCommand(PerformActionToTipster);
         #endregion
-        public TipstersListViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        #endregion
+        public TipstersListPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
-            GoToNewTipster = new DelegateCommand(NewTipster);
+            GoToNewTipsterCommand = new DelegateCommand(NewTipster);
             PerformSearchCommand = new DelegateCommand<string>(PerformSearch);
         }
 
@@ -59,8 +61,8 @@ namespace BetTrack.ViewModels
                     {
                         string deleteLabel = AppResource.LblConfirmTipsterDelete;
                         deleteLabel = deleteLabel.Trim().Replace("$tipster$", SelectedTipster.NombreTipster);
-                        string result = await PageDialogService.DisplayActionSheetAsync(deleteLabel, AppResource.BtnContinue, AppResource.BtnCancel);
-                        if (result.Equals(AppResource.BtnContinue))
+                        bool result = await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, deleteLabel, AppResource.BtnContinue, AppResource.BtnCancel);
+                        if (result)
                         {
                             IsBusy = true;
                             Client = new ApiClient(CurrentUser.CurrentToken);
@@ -127,11 +129,11 @@ namespace BetTrack.ViewModels
         {
             if (string.IsNullOrWhiteSpace(query))
             {
-                Tipsters= BackupTipsters;
+                Tipsters = BackupTipsters;
             }
             else
             {
-                Tipsters= new ObservableCollection<DtoUsuarioTipster>(BackupTipsters.Where(c => c.NombreTipster.Contains(query)));
+                Tipsters = new ObservableCollection<DtoUsuarioTipster>(BackupTipsters.Where(c => c.NombreTipster.Contains(query)));
             }
         }
 
@@ -206,7 +208,7 @@ namespace BetTrack.ViewModels
                         {
                             NombreTipster = newTipster.Trim(),
                             UsuarioId = CurrentUser.UsuarioId,
-                            FechaRegistro = ApiClient.ObtenerFechaActual()
+                            FechaRegistro = ApiClient.GetCurrentDateTime()
                         };
                         Client = new ApiClient(CurrentUser.CurrentToken);
                         tipster = await Client.PostAsync<DtoUsuarioTipster, DtoUsuarioTipster>("UsuarioTipster", tipster);

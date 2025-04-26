@@ -22,6 +22,17 @@
             WidthRequest="{OnIdiom Phone=150,
                                    Tablet=250}" />
     </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToSettingsCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="fa"
+                    Glyph="{x:Static common:DtoIconFont.Gear}"
+                    Size="18"
+                    Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
             <Grid
@@ -38,14 +49,15 @@
                     <inputLayout:SfAvatarView
                         Grid.RowSpan="3"
                         Background="{x:StaticResource Green}"
-                        ContentType="AvatarCharacter"
-                        CornerRadius="25"
-                        HeightRequest="50"
+                        ContentType="Custom"
+                        CornerRadius="50"
+                        HeightRequest="75"
                         HorizontalOptions="Center"
+                        ImageSource="{Binding ProfilePhoto, Mode=TwoWay}"
                         Stroke="Black"
                         StrokeThickness="1"
                         VerticalOptions="Center"
-                        WidthRequest="50" />
+                        WidthRequest="75" />
                     <Label
                         Grid.Column="1"
                         Text="{Binding CurrentUser.Email}"
@@ -90,6 +102,7 @@
                     <buttons:SfButton
                         Grid.Column="1"
                         Background="{x:StaticResource SecondaryDarkBlue}"
+                        Command="{Binding GoToUserCasinosList}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         HorizontalOptions="FillAndExpand"
@@ -110,13 +123,14 @@
                     <buttons:SfButton
                         Grid.Row="1"
                         Background="{x:StaticResource SecondaryDarkBlue}"
+                        Command="{Binding GoToNewEditBankroll}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
                         StrokeThickness="3"
-                        Text="Nuevo bankroll"
+                        Text="{x:Static local:AppResource.LblNewEditBankroll}"
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
@@ -149,13 +163,45 @@
                         </buttons:SfButton.ImageSource>
                     </buttons:SfButton>
                 </Grid>
-                <Frame
+                <Border
                     Grid.Row="2"
                     Margin="0,0,0,-10"
                     BackgroundColor="Transparent"
-                    BorderColor="{x:StaticResource Green}"
-                    CornerRadius="8">
-                    <syncfusion:SfListView ItemSpacing="5" ItemsSource="{Binding BankrollsUser}">
+                    Stroke="{x:StaticResource Green}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <syncfusion:SfListView
+                        x:Name="Casinos"
+                        AllowSwiping="True"
+                        ItemsSource="{Binding BankrollsUser}"
+                        SelectionChangedCommand="{Binding SelectedCasinoChangedCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference Casinos}}"
+                        SelectionGesture="Tap"
+                        SelectionMode="Single"
+                        SwipeEnded="Casinos_SwipeEnded">
+                        <syncfusion:SfListView.StartSwipeTemplate>
+                            <DataTemplate x:Name="StartSwipeTemplate">
+                                <Grid>
+                                    <Grid
+                                        Grid.Column="0"
+                                        BackgroundColor="{x:StaticResource Green}"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="Fill">
+                                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                BackgroundColor="Transparent"
+                                                FontFamily="fa"
+                                                FontSize="20"
+                                                Text="{x:Static common:DtoIconFont.Pencil}"
+                                                VerticalTextAlignment="Center" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </syncfusion:SfListView.StartSwipeTemplate>
                         <syncfusion:SfListView.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -164,7 +210,7 @@
                                         FontSize="Title"
                                         HorizontalOptions="Center"
                                         LineBreakMode="NoWrap"
-                                        Text="My bankrolls"
+                                        Text="{x:Static local:AppResource.LblBankrollsList}"
                                         TextColor="White"
                                         VerticalOptions="Start" />
                                 </Grid>
@@ -172,20 +218,27 @@
                         </syncfusion:SfListView.HeaderTemplate>
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Padding="5" HasShadow="True">
-                                    <VerticalStackLayout>
-                                        <Label
-                                            FontSize="Subtitle"
-                                            Text="{Binding BankrollName}"
-                                            TextColor="{x:StaticResource DarkBlue}" />
-                                        <BoxView BackgroundColor="LightGray" HeightRequest="1" />
-                                        <Label Text="{Binding Capital, StringFormat='{0:C2}'}" TextColor="{x:StaticResource DarkBlue}" />
-                                    </VerticalStackLayout>
-                                </Frame>
+                                <VerticalStackLayout>
+                                    <Label
+                                        Margin="10,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Subtitle"
+                                        Text="{Binding NombreBankroll}"
+                                        TextColor="{x:StaticResource White}" />
+                                    <Label
+                                        Margin="0,0,10,0"
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding CapitalInicial, StringFormat='Capital inicial {0:C2}'}"
+                                        TextColor="{x:StaticResource White}" />
+                                    <BoxView
+                                        BackgroundColor="White"
+                                        HeightRequest="1"
+                                        VerticalOptions="End" />
+                                </VerticalStackLayout>
                             </DataTemplate>
                         </syncfusion:SfListView.ItemTemplate>
                     </syncfusion:SfListView>
-                </Frame>
+                </Border>
             </Grid>
             <inputLayout:SfBusyIndicator
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
