@@ -11,12 +11,11 @@ namespace BetTrack.ViewModels
     public class BankrollDashboardPageViewModel : ViewModelBase
     {
         #region Object declarations
-        
+        public DelegateCommand NewBetCommand { get => new DelegateCommand(async () => await NavigationService.NavigateAsync("NewBetPage")); }
         #endregion
         public BankrollDashboardPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
-            Title = "Mi Dashboard";
-            
+            Title = "Mi Dashboard";            
         }
 
         

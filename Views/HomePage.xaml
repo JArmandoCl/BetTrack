@@ -84,7 +84,6 @@
                         Command="{Binding GoToUserProfile}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
-                        HorizontalOptions="FillAndExpand"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -105,7 +104,6 @@
                         Command="{Binding GoToUserCasinosList}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
-                        HorizontalOptions="FillAndExpand"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -115,7 +113,7 @@
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
                                 FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.HouseUser}"
+                                Glyph="{x:Static common:DtoIconFont.BuildingColumns}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -135,7 +133,7 @@
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
                                 FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.Bank}"
+                                Glyph="{x:Static common:DtoIconFont.SackDollar}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -147,7 +145,6 @@
                         Command="{Binding GoToTipstersList}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
-                        HorizontalOptions="FillAndExpand"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -157,7 +154,7 @@
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
                                 FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.UserGroup}"
+                                Glyph="{x:Static common:DtoIconFont.Users}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -175,6 +172,7 @@
                         x:Name="Casinos"
                         AllowSwiping="True"
                         ItemsSource="{Binding BankrollsUser}"
+                        SelectionBackground="Transparent"
                         SelectionChangedCommand="{Binding SelectedCasinoChangedCommand}"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference Casinos}}"
                         SelectionGesture="Tap"
