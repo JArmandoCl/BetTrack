@@ -285,4 +285,91 @@
   <data name="LblBankrollsList" xml:space="preserve">
     <value>Mis bankrolls</value>
   </data>
+  <data name="TxtBetName" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="TxtBetDate" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="TxtBetAmount" xml:space="preserve">
+    <value>Importe</value>
+  </data>
+  <data name="TxtBetAmountCharged" xml:space="preserve">
+    <value>Importe cobrado</value>
+  </data>
+  <data name="TxtBetEarnings" xml:space="preserve">
+    <value>Ganancias</value>
+  </data>
+  <data name="TxtBetLiveBet" xml:space="preserve">
+    <value>Apuesta en vivo</value>
+  </data>
+  <data name="TxtBetFreeBet" xml:space="preserve">
+    <value>Apuesta gratuita</value>
+  </data>
+  <data name="TxtBetCashout" xml:space="preserve">
+    <value>Importe retirado</value>
+  </data>
+  <data name="TxtBetPaidBet" xml:space="preserve">
+    <value>Apuesta de pago</value>
+  </data>
+  <data name="TxtBetBetTitle" xml:space="preserve">
+    <value>Define tu apuesta</value>
+  </data>
+  <data name="TxtBetOdds" xml:space="preserve">
+    <value>Momio/Cuota</value>
+  </data>
+  <data name="TxtBetAP" xml:space="preserve">
+    <value>Pago anticipado</value>
+  </data>
+  <data name="TxtBetType" xml:space="preserve">
+    <value>Tipo de apuesta</value>
+  </data>
+  <data name="TxtBetTipsterName" xml:space="preserve">
+    <value>Selecciona un tipster</value>
+  </data>
+  <data name="TxtBetCategoryName" xml:space="preserve">
+    <value>Selecciona una categoría</value>
+  </data>
+  <data name="TxtBetSportName" xml:space="preserve">
+    <value>Selecciona un deporte</value>
+  </data>
+  <data name="TxtBetStatus" xml:space="preserve">
+    <value>Estatus de la apuesta</value>
+  </data>
+  <data name="LblCategories" xml:space="preserve">
+    <value>Categorías</value>
+  </data>
+  <data name="LblSelectBetType" xml:space="preserve">
+    <value>¿Que tipo de apuesta vas a registrar?</value>
+  </data>
+  <data name="LblBetType" xml:space="preserve">
+    <value>¿Qué tipo de apuesta quieres?</value>
+  </data>
+  <data name="LblSingleBet" xml:space="preserve">
+    <value>Derecha</value>
+  </data>
+  <data name="LblParleyBet" xml:space="preserve">
+    <value>Parley</value>
+  </data>
+  <data name="LblPercentOption" xml:space="preserve">
+    <value>Capturar en %</value>
+  </data>
+  <data name="LblNewEditCategory" xml:space="preserve">
+    <value>$action$ categoría</value>
+  </data>
+  <data name="LblCategoryName" xml:space="preserve">
+    <value>Nombre de la categoría</value>
+  </data>
+  <data name="LblCategoryNameRequired" xml:space="preserve">
+    <value>El nombre de la categoría es obligatorio</value>
+  </data>
+  <data name="LblDeleteCategory" xml:space="preserve">
+    <value>¿Estás seguro de eliminar la categoría $category$?</value>
+  </data>
+  <data name="LblNoCategories" xml:space="preserve">
+    <value>Aún no tienes registradas categorías</value>
+  </data>
+  <data name="LblNoCasinos" xml:space="preserve">
+    <value>No hay casinos registrados</value>
+  </data>
 </root>

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BetTrack.Dtos
@@ -20,6 +22,8 @@ namespace BetTrack.Dtos
     public class DtoDeporte
     {
         public long DeporteId { get; set; }
+        public string NombreEsp { get; set; } = "";
+        public string NombreIng { get; set; } = "";
         public string Nombre { get; set; } = "";
     }
     public class DtoTipoBankroll:BindableBase
@@ -211,33 +215,66 @@ namespace BetTrack.Dtos
         }
         #endregion
     }
-    public class DtoCategoriaUsuario
+    public class DtoCategoriaUsuario:BindableBase
     {
         public long CategoriaUsuarioId { get; set; }
         public long UsuarioId { get; set; }
-        public int EstatusCategoriaId { get; set; }
-        public string Nombre { get; set; } = "";
+        public int EstatusCategoriaId { get; set; } = 1;
+        private string nombre="";
+        public string Nombre
+        {
+            get { return nombre; }
+            set { SetProperty(ref nombre, value); }
+        }
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
     }
-    public class DtoApuestas
+    public class DtoApuesta:BindableBase
     {
         public long ApuestaId { get; set; }
         public long UsuarioBankrollId { get; set; }
         public int TipoApuestaId { get; set; }
-        public long UsuarioTipsterId { get; set; }
+        public long UsuarioTipsterId { get; set; }     
         public long CategoriaUsuarioId { get; set; }
         public DateTime Fecha { get; set; }
         public string Nombre { get; set; } = "";
         public decimal Importe { get; set; }
         public decimal MontoCobrado { get; set; }
         public decimal Ganancia { get; set; }
-        public bool ApuestaEnVivo { get; set; }
         public bool EsApuestaGratuita { get; set; }
         public bool EsApuestaPagada { get; set; }
         public decimal Cashout { get; set; }
+        #region Extras
+        [JsonIgnore]
+        private List<DtoUsuarioTipster> tipsters=new List<DtoUsuarioTipster>();
+        public List<DtoUsuarioTipster> Tipsters
+        {
+            get { return tipsters; }
+            set { SetProperty(ref tipsters, value); }
+        }
+        [JsonIgnore]
+        private List<DtoCategoriaUsuario> categorias=new List<DtoCategoriaUsuario>();
+        public List<DtoCategoriaUsuario> Categorias
+        {
+            get { return categorias; }
+            set { SetProperty(ref categorias, value); }
+        }
+        [JsonIgnore]
+        private List<DtoTipoApuesta> tiposApuesta=new List<DtoTipoApuesta>();
+        public List<DtoTipoApuesta> TiposApuesta
+        {
+            get { return tiposApuesta; }
+            set { SetProperty(ref tiposApuesta, value); }
+        }
+        private DtoDetalleApuesta detalleApuesta=new DtoDetalleApuesta();
+        public DtoDetalleApuesta DetalleApuesta
+        {
+            get { return detalleApuesta; }
+            set { SetProperty(ref detalleApuesta, value); }
+        }
+        #endregion
     }
-    public class DtoDetalleApuesta
+    public class DtoDetalleApuesta:BindableBase
     {
         public long DetalleApuestaId { get; set; }
         public long ApuestaId { get; set; }
@@ -245,6 +282,24 @@ namespace BetTrack.Dtos
         public int EstatusApuestaId { get; set; }
         public string Nombre { get; set; } = "";
         public decimal Cuota { get; set; }
+        public bool PagoAnticipado { get; set; }
+        public bool ApuestaEnVivo { get; set; }
+        #region Extras
+        [JsonIgnore]
+        private List<DtoDeporte> deportes=new List<DtoDeporte>();
+        public List<DtoDeporte> Deportes
+        {
+            get { return deportes; }
+            set { SetProperty(ref deportes, value); }
+        }
+        [JsonIgnore]
+        private List<DtoEstatusApuesta> estatusApuestas;
+        public List<DtoEstatusApuesta> EstatusApuesta
+        {
+            get { return estatusApuestas; }
+            set { SetProperty(ref estatusApuestas, value); }
+        }
+        #endregion
     }
     public class DtoDepositoRetiro
     {

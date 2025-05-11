@@ -52,19 +52,28 @@
                 SelectedItem="{Binding SelectedTipster}"
                 SelectionChangedCommand="{Binding PerformActionToTipsterCommand}"
                 SelectionMode="Single">
-                <!--<CollectionView.EmptyView>
+                <CollectionView.EmptyView>
                     <ContentView>
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="FillAndExpand">
+                        <Grid
+                            HorizontalOptions="Center"
+                            RowDefinitions="auto,auto"
+                            VerticalOptions="Center">
                             <Label
-                                Margin="10,25,10,10"
-                                FontAttributes="Bold"
-                                FontSize="18"
-                                HorizontalOptions="Fill"
+                                FontFamily="fa"
+                                FontSize="50"
+                                HorizontalOptions="Center"
+                                Text="{x:Static common:DtoIconFont.Users}"
+                                TextColor="LightGray"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Row="1"
+                                HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"
-                                Text="{x:Static local:AppResource.LblEmptyTipsterList}" />
-                        </StackLayout>
+                                Text="{x:Static local:AppResource.LblEmptyTipsterList}"
+                                TextColor="LightGray" />
+                        </Grid>
                     </ContentView>
-                </CollectionView.EmptyView>-->
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>

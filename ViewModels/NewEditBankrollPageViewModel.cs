@@ -87,9 +87,9 @@ namespace BetTrack.ViewModels
                     }
                     else
                     {
-                        Bankroll.Monedas = await Client.GetAsync<List<DtoMoneda>>(@"UsuarioBankroll/Monedas");
-                        Bankroll.FormatoCuotas = await Client.GetAsync<List<DtoFormatoCuota>>(@"UsuarioBankroll/FormatoCuota");
-                        Bankroll.TiposBankroll = await Client.GetAsync<List<DtoTipoBankroll>>(@"UsuarioBankroll/TipoBankroll");
+                        Bankroll.Monedas = await Client.GetAsync<List<DtoMoneda>>(@"Catalogo/Monedas");
+                        Bankroll.FormatoCuotas = await Client.GetAsync<List<DtoFormatoCuota>>(@"Catalogo/FormatoCuota");
+                        Bankroll.TiposBankroll = await Client.GetAsync<List<DtoTipoBankroll>>(@"Catalogo/TipoBankroll");
                     }              
                 }
             }

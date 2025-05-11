@@ -1,8 +1,6 @@
-﻿using Android.App.AppSearch;
-using BetTrack.Api;
+﻿using BetTrack.Api;
 using BetTrack.Dtos;
 using BetTrack.Resources.Languages;
-using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using System;
 using System.Collections.Generic;
@@ -11,30 +9,30 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace BetTrack.ViewModels
 {
-    public class TipstersListPageViewModel : ViewModelBase
+    public class CategoriesPageViewModel : ViewModelBase
     {
-        #region Object declarations 
-        private DtoUsuarioTipster selectedTipster;
-        public DtoUsuarioTipster SelectedTipster
+        #region Object declarations
+        private DtoCategoriaUsuario selectedCategory;
+        public DtoCategoriaUsuario SelectedCategory
         {
-            get { return selectedTipster; }
-            set { SetProperty(ref selectedTipster, value); }
+            get { return selectedCategory; }
+            set { SetProperty(ref selectedCategory, value); }
         }
-        private ObservableCollection<DtoUsuarioTipster> tipsters = new ObservableCollection<DtoUsuarioTipster>();
-        public ObservableCollection<DtoUsuarioTipster> Tipsters
+        private ObservableCollection<DtoCategoriaUsuario> categories = new ObservableCollection<DtoCategoriaUsuario>();
+        public ObservableCollection<DtoCategoriaUsuario> Categories
         {
-            get { return tipsters; }
-            set { SetProperty(ref tipsters, value); }
+            get { return categories; }
+            set { SetProperty(ref categories, value); }
         }
-        ObservableCollection<DtoUsuarioTipster> BackupTipsters;
-        public DelegateCommand GoToNewTipsterCommand { get; set; }
-        public DelegateCommand PerformActionToTipsterCommand => new DelegateCommand(PerformActionToTipster);
+        ObservableCollection<DtoCategoriaUsuario> BackupCategories;
+        public DelegateCommand GoToNewCategoryCommand { get; set; }
+        public DelegateCommand PerformActionToCategoryCommand => new DelegateCommand(PerformActionToCategory);
+        public DelegateCommand RefreshCommand => new DelegateCommand(Refresh);
+
         #region Search
         public DelegateCommand<string> PerformSearchCommand { get; set; }
         private string searchText;
@@ -45,30 +43,54 @@ namespace BetTrack.ViewModels
         }
         #endregion
         #endregion
-        public TipstersListPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public CategoriesPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
-            GoToNewTipsterCommand = new DelegateCommand(NewTipster);
+            GoToNewCategoryCommand = new DelegateCommand(NewCategory);
             PerformSearchCommand = new DelegateCommand<string>(PerformSearch);
         }
+        private async void Refresh()
+        {
+            try
+            {
+                Client = new ApiClient(CurrentUser.CurrentToken);
+                await LoadCategories();
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblSessionExpired, AppResource.BtnClose);
+                SecureStorage.RemoveAll();
+                Preferences.Default.Clear();
+                INavigationResult result = await NavigationService.NavigateAsync("//LoginPage");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblBadRequestServer, AppResource.BtnClose);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
 
-        private async Task DeleteTipster()
+        private async Task DeleteCategory()
         {
             try
             {
                 if (!IsBusy)
                 {
-                    if (SelectedTipster != null)
+                    if (SelectedCategory != null)
                     {
-                        string deleteLabel = AppResource.LblConfirmTipsterDelete;
-                        deleteLabel = deleteLabel.Trim().Replace("$tipster$", SelectedTipster.NombreTipster);
+                        string deleteLabel = AppResource.LblDeleteCategory;
+                        deleteLabel = deleteLabel.Trim().Replace("$category$", SelectedCategory.Nombre);
                         bool result = await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, deleteLabel, AppResource.BtnContinue, AppResource.BtnCancel);
                         if (result)
                         {
                             IsBusy = true;
                             Client = new ApiClient(CurrentUser.CurrentToken);
-                            bool updated = await Client.DeleteAsync($"UsuarioTipster/{SelectedTipster.UsuarioTipsterId}");
+                            bool updated = await Client.DeleteAsync($"CategoriaUsuario/{SelectedCategory.CategoriaUsuarioId}");
                             if (updated)
-                                await LoadTipsters();
+                                await LoadCategories();
                             else
                                 await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblBadRequestServer, AppResource.BtnClose);
                         }
@@ -92,34 +114,34 @@ namespace BetTrack.ViewModels
                 IsBusy = false;
             }
         }
-        private async Task EditTipster()
+        private async Task EditCategory()
         {
-            if (SelectedTipster != null)
+            if (SelectedCategory != null)
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
 
-                string newTipsterLabel = AppResource.LblNewTipster;
+                string newCategoryLabel = AppResource.LblNewEditCategory;
                 var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
                 if (currentCulture == "es")
                 {
-                    newTipsterLabel = newTipsterLabel.Replace("$action$", "Editar");
+                    newCategoryLabel = newCategoryLabel.Replace("$action$", "Editar");
                 }
                 else if (currentCulture == "en")
                 {
-                    newTipsterLabel = newTipsterLabel.Replace("$action$", "Edit");
+                    newCategoryLabel = newCategoryLabel.Replace("$action$", "Edit");
                 }
-                string newTipster = await PageDialogService.DisplayPromptAsync(newTipsterLabel, AppResource.LblTipsterName, AppResource.LblSave, AppResource.BtnCancel, initialValue: SelectedTipster.NombreTipster.Trim(), keyboardType: KeyboardType.Text);
-                if (newTipster != null && newTipster.Trim().Equals(""))
+                string newCategory = await PageDialogService.DisplayPromptAsync(newCategoryLabel, AppResource.LblCategoryName, AppResource.LblSave, AppResource.BtnCancel, initialValue: SelectedCategory.Nombre.Trim(), keyboardType: KeyboardType.Text);
+                if (newCategory != null && newCategory.Trim().Equals(""))
                 {
-                    await ShowToast(AppResource.LblTipsterNameRequired, ToastDuration.Short);
+                    await ShowToast(AppResource.LblCategoryNameRequired, ToastDuration.Short);
                 }
-                else if (!string.IsNullOrWhiteSpace(newTipster))
+                else if (!string.IsNullOrWhiteSpace(newCategory))
                 {
                     IsBusy = true;
-                    SelectedTipster.NombreTipster = newTipster.Trim();
+                    SelectedCategory.Nombre = newCategory.Trim();
                     Client = new ApiClient(CurrentUser.CurrentToken);
-                    await Client.PutAsync($"UsuarioTipster/{SelectedTipster.UsuarioTipsterId}", SelectedTipster);
-                    await LoadTipsters();
+                    await Client.PutAsync($"CategoriaUsuario/{SelectedCategory.CategoriaUsuarioId}", SelectedCategory);
+                    await LoadCategories();
                     await ShowToast(AppResource.LblSuccess, ToastDuration.Short);
                 }
             }
@@ -129,31 +151,31 @@ namespace BetTrack.ViewModels
         {
             if (string.IsNullOrWhiteSpace(query))
             {
-                Tipsters = BackupTipsters;
+                Categories = BackupCategories;
             }
             else
             {
-                Tipsters = new ObservableCollection<DtoUsuarioTipster>(BackupTipsters.Where(c => c.NombreTipster.Contains(query)));
+                Categories = new ObservableCollection<DtoCategoriaUsuario>(BackupCategories.Where(c => c.Nombre.Contains(query)));
             }
         }
 
-        public async void PerformActionToTipster()
+        public async void PerformActionToCategory()
         {
             try
             {
                 if (!IsBusy)
                 {
-                    if (SelectedTipster != null)
+                    if (SelectedCategory != null)
                     {
                         Application.Current.UserAppTheme = AppTheme.Dark;
                         string result = await PageDialogService.DisplayActionSheetAsync(AppResource.LblChooseAnAction, AppResource.BtnCancel, null, $"{AppResource.LblEdit}", $"{AppResource.LblDelete}");
                         if (result.Equals($"{AppResource.LblEdit}"))
                         {
-                            await EditTipster();
+                            await EditCategory();
                         }
                         else if (result.Equals($"{AppResource.LblDelete}"))
                         {
-                            await DeleteTipster();
+                            await DeleteCategory();
                         }
                     }
                 }
@@ -173,12 +195,12 @@ namespace BetTrack.ViewModels
             finally
             {
                 Application.Current.UserAppTheme = AppTheme.Light;
-                SelectedTipster = null;
+                SelectedCategory = null;
                 IsBusy = false;
             }
         }
 
-        private async void NewTipster()
+        private async void NewCategory()
         {
             try
             {
@@ -187,34 +209,35 @@ namespace BetTrack.ViewModels
                     Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
 
                     var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-                    string newTipsterLabel = AppResource.LblNewTipster;
+                    string newCategoryLabel = AppResource.LblNewEditCategory;
                     if (currentCulture == "es")
                     {
-                        newTipsterLabel = newTipsterLabel.Replace("$action$", "Nuevo");
+                        newCategoryLabel = newCategoryLabel.Replace("$action$", "Nueva");
                     }
                     else if (currentCulture == "en")
                     {
-                        newTipsterLabel = newTipsterLabel.Replace("$action$", "New");
+                        newCategoryLabel = newCategoryLabel.Replace("$action$", "New");
                     }
-                    string newTipster = await PageDialogService.DisplayPromptAsync(newTipsterLabel, AppResource.LblTipsterName, AppResource.LblSave, AppResource.BtnCancel, keyboardType: KeyboardType.Text);
-                    if (newTipster != null && newTipster.Trim().Equals(""))
+                    string newCategory = await PageDialogService.DisplayPromptAsync(newCategoryLabel, AppResource.LblCategoryName, AppResource.LblSave, AppResource.BtnCancel, keyboardType: KeyboardType.Text);
+                    if (newCategory != null && newCategory.Trim().Equals(""))
                     {
-                        await ShowToast(AppResource.LblTipsterNameRequired, ToastDuration.Short);
+                        await ShowToast(AppResource.LblCategoryNameRequired, ToastDuration.Short);
                     }
-                    else if (!string.IsNullOrWhiteSpace(newTipster))
+                    else if (!string.IsNullOrWhiteSpace(newCategory))
                     {
                         IsBusy = true;
-                        DtoUsuarioTipster tipster = new DtoUsuarioTipster
+                        DtoCategoriaUsuario category = new DtoCategoriaUsuario
                         {
-                            NombreTipster = newTipster.Trim(),
+                            Nombre = newCategory.Trim(),
                             UsuarioId = CurrentUser.UsuarioId,
-                            FechaRegistro = ApiClient.GetCurrentDateTime()
+                            FechaRegistro = ApiClient.GetCurrentDateTime(),
+                            FechaModificacion = ApiClient.GetCurrentDateTime()
                         };
                         Client = new ApiClient(CurrentUser.CurrentToken);
-                        tipster = await Client.PostAsync<DtoUsuarioTipster, DtoUsuarioTipster>("UsuarioTipster", tipster);
-                        if (tipster.UsuarioTipsterId > 0)
+                        category = await Client.PostAsync<DtoCategoriaUsuario, DtoCategoriaUsuario>("CategoriaUsuario", category);
+                        if (category.CategoriaUsuarioId > 0)
                         {
-                            Tipsters.Add(tipster);
+                            Categories.Add(category);
                             await ShowToast(AppResource.LblSuccess, ToastDuration.Short);
                         }
                         else
@@ -243,10 +266,10 @@ namespace BetTrack.ViewModels
             }
         }
 
-        public async Task LoadTipsters()
+        public async Task LoadCategories()
         {
-            Tipsters = await Client.GetAsync<ObservableCollection<DtoUsuarioTipster>>(@$"UsuarioTipster\ObtenerUsuarioTipsters\{CurrentUser.UsuarioId}");
-            BackupTipsters = Tipsters;
+            Categories = await Client.GetAsync<ObservableCollection<DtoCategoriaUsuario>>(@$"CategoriaUsuario\ObtenerCategoriasUsuarios\{CurrentUser.UsuarioId}");
+            BackupCategories = Categories;
         }
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
@@ -258,7 +281,7 @@ namespace BetTrack.ViewModels
                 {
                     IsBusy = true;
                     Client = new ApiClient(CurrentUser.CurrentToken);
-                    await LoadTipsters();
+                    await LoadCategories();
                 }
             }
             catch (UnauthorizedAccessException e)

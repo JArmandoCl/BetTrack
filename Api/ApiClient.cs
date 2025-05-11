@@ -52,7 +52,9 @@ namespace BetTrack.Api
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"Bad request: {response.StatusCode} - {response.ReasonPhrase}");
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var message = $"Request to '{endpoint}' failed with status code {(int)response.StatusCode} ({response.ReasonPhrase}). Response: {errorContent}";
+                throw new HttpRequestException(message,null,response.StatusCode);
             }
 
             return JsonSerializer.Deserialize<TResponse>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });

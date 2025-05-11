@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:BetTrack">
     <Application.Resources>
@@ -27,6 +28,11 @@
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="Lato" />
                 <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <!--  Combos's style  -->
+            <Style TargetType="editors:SfComboBox">
+                <Setter Property="HeightRequest" Value="45" />
             </Style>
 
             <!--  Input text's style  -->

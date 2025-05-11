@@ -24,6 +24,7 @@ namespace BetTrack.ViewModels
         public DelegateCommand GoToUserProfile { get { return new DelegateCommand(async () => { await NavigationService.NavigateAsync("ProfilePage"); }); } }
         public DelegateCommand GoToUserCasinosList { get { return new DelegateCommand(async () => { INavigationResult result = await NavigationService.NavigateAsync("UserCasinosPage"); Debug.WriteLine(result); }); } }
         public DelegateCommand GoToNewEditBankroll { get { return new DelegateCommand(async () => { INavigationResult result = await NavigationService.NavigateAsync("NewEditBankrollPage"); Debug.WriteLine(result); }); } }
+        public DelegateCommand GoToUserCategories { get { return new DelegateCommand(async () => { INavigationResult result = await NavigationService.NavigateAsync("CategoriesPage"); Debug.WriteLine(result); }); } }
         #endregion
         public HomePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {

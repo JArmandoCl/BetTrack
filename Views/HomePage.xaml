@@ -59,6 +59,20 @@
                         VerticalOptions="Center"
                         WidthRequest="75" />
                     <Label
+                        Grid.RowSpan="3"
+                        FontFamily="fa"
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Opacity="0.75"
+                        Text="{x:Static common:DtoIconFont.Pencil}"
+                        TextColor="White"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToUserProfile}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
                         Grid.Column="1"
                         Text="{Binding CurrentUser.Email}"
                         VerticalOptions="Center" />
@@ -81,19 +95,19 @@
                     RowSpacing="10">
                     <buttons:SfButton
                         Background="{x:StaticResource SecondaryDarkBlue}"
-                        Command="{Binding GoToUserProfile}"
+                        Command="{Binding GoToUserCategories}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
                         StrokeThickness="3"
-                        Text="{x:Static local:AppResource.LblUserProfile}"
+                        Text="{x:Static local:AppResource.LblCategories}"
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
                                 FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.User}"
+                                Glyph="{x:Static common:DtoIconFont.List}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>

@@ -285,4 +285,91 @@
   <data name="LblBankrollsList" xml:space="preserve">
     <value>My bankrolls</value>
   </data>
+  <data name="TxtBetName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="TxtBetDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TxtBetAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="TxtBetAmountCharged" xml:space="preserve">
+    <value>Amount charged</value>
+  </data>
+  <data name="TxtBetEarnings" xml:space="preserve">
+    <value>Earnings</value>
+  </data>
+  <data name="TxtBetLiveBet" xml:space="preserve">
+    <value>Live bet</value>
+  </data>
+  <data name="TxtBetFreeBet" xml:space="preserve">
+    <value>Free bet</value>
+  </data>
+  <data name="TxtBetCashout" xml:space="preserve">
+    <value>Cashout</value>
+  </data>
+  <data name="TxtBetPaidBet" xml:space="preserve">
+    <value>Paid bet</value>
+  </data>
+  <data name="TxtBetBetTitle" xml:space="preserve">
+    <value>Fill your bet</value>
+  </data>
+  <data name="TxtBetOdds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="TxtBetAP" xml:space="preserve">
+    <value>Advance payment</value>
+  </data>
+  <data name="TxtBetType" xml:space="preserve">
+    <value>Bet type</value>
+  </data>
+  <data name="TxtBetTipsterName" xml:space="preserve">
+    <value>Select a tipster</value>
+  </data>
+  <data name="TxtBetCategoryName" xml:space="preserve">
+    <value>Select a category</value>
+  </data>
+  <data name="TxtBetSportName" xml:space="preserve">
+    <value>Select a sport</value>
+  </data>
+  <data name="TxtBetStatus" xml:space="preserve">
+    <value>Bet status</value>
+  </data>
+  <data name="LblCategories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="LblSelectBetType" xml:space="preserve">
+    <value>What type of bet are you going to register?</value>
+  </data>
+  <data name="LblBetType" xml:space="preserve">
+    <value>What kind of bet do you want?</value>
+  </data>
+  <data name="LblSingleBet" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="LblParleyBet" xml:space="preserve">
+    <value>Parley</value>
+  </data>
+  <data name="LblPercentOption" xml:space="preserve">
+    <value>Capture by %</value>
+  </data>
+  <data name="LblNewEditCategory" xml:space="preserve">
+    <value>$action$ category</value>
+  </data>
+  <data name="LblCategoryName" xml:space="preserve">
+    <value>Category name</value>
+  </data>
+  <data name="LblCategoryNameRequired" xml:space="preserve">
+    <value>The category name is required</value>
+  </data>
+  <data name="LblDeleteCategory" xml:space="preserve">
+    <value>Are you sure to delete the category $category$?</value>
+  </data>
+  <data name="LblNoCategories" xml:space="preserve">
+    <value>You don't have any categories registered yet.</value>
+  </data>
+  <data name="LblNoCasinos" xml:space="preserve">
+    <value>There are no registered casinos</value>
+  </data>
 </root>

@@ -92,6 +92,7 @@ namespace BetTrack
             containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<NewEditBankrollPage, NewEditBankrollPageViewModel>();
             containerRegistry.RegisterForNavigation<NewBetPage, NewBetPageViewModel>();
+            containerRegistry.RegisterForNavigation<CategoriesPage, CategoriesPageViewModel>();
         }
     }
 }

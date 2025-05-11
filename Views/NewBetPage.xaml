@@ -3,18 +3,20 @@
     x:Class="BetTrack.Views.NewBetPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:common="clr-namespace:BetTrack.Dtos"
-    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:BetTrack.Resources.Languages"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    HideSoftInputOnTapped="True">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NuevaEvidenciaCommand}" IsEnabled="{Binding IsEnabled}">
+        <ToolbarItem Command="{Binding SaveBetCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.CirclePlus}"
+                    Glyph="{x:Static common:DtoIconFont.Check}"
                     Size="18"
                     Color="White" />
             </ToolbarItem.IconImageSource>
@@ -30,9 +32,153 @@
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             Aspect="AspectFill"
-            Opacity="0.125"
+            Opacity="0.05"
             Source="sports_pattern.png" />
+        <Grid
+            Margin="0,10,0,0"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto"
+            RowSpacing="-7">
+            <!--  Name  0  -->
+            <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetName}">
+                <Entry
+                    Keyboard="Text"
+                    Text="{Binding Apuesta.Nombre}"
+                    TextColor="White" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Amount  1  -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,auto">
+                <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetAmount}">
+                    <Grid ColumnDefinitions="auto, *" VerticalOptions="Center">
+                        <Label
+                            FontSize="16"
+                            Text="$"
+                            TextColor="White"
+                            VerticalTextAlignment="Center" />
+                        <Entry
+                            x:Name="BetAmount"
+                            Grid.Column="1"
+                            Margin="2,0"
+                            Focused="BetAmount_Focused"
+                            Keyboard="Numeric"
+                            Text="{Binding Apuesta.Importe}"
+                            TextColor="White" />
+                    </Grid>
+                </inputLayout:SfTextInputLayout>
+                <buttons:SfCheckBox
+                    Grid.Column="1"
+                    CheckedColor="{StaticResource Green}"
+                    ContentSpacing="5"
+                    IsChecked="{Binding Apuesta.DetalleApuesta.ApuestaEnVivo}"
+                    Text="{x:Static local:AppResource.LblPercentOption}"
+                    TextColor="White" />
+            </Grid>
+            <!--  Odds 2  -->
+            <inputLayout:SfTextInputLayout Grid.Row="2" Hint="{x:Static local:AppResource.TxtBetOdds}">
+                <Entry
+                    Keyboard="Numeric"
+                    Text="{Binding Apuesta.DetalleApuesta.Cuota}"
+                    TextColor="White" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Tipster  3  -->
+            <inputLayout:SfTextInputLayout Grid.Row="3" Hint="{x:Static local:AppResource.TxtBetTipsterName}">
+                <editors:SfComboBox
+                    BackgroundColor="Transparent"
+                    ClearButtonIconColor="White"
+                    DisplayMemberPath="NombreTipster"
+                    DropDownIconColor="White"
+                    IsFilteringEnabled="False"
+                    ItemsSource="{Binding Apuesta.Tipsters}"
+                    SelectedItem="{Binding TipsterSeleccionado}"
+                    TextColor="White"
+                    TextMemberPath="NombreTipster" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Category  4  -->
+            <inputLayout:SfTextInputLayout Grid.Row="4" Hint="{x:Static local:AppResource.TxtBetCategoryName}">
+                <editors:SfComboBox
+                    BackgroundColor="Transparent"
+                    ClearButtonIconColor="White"
+                    DisplayMemberPath="Nombre"
+                    DropDownIconColor="White"
+                    IsFilteringEnabled="False"
+                    ItemsSource="{Binding Apuesta.Categorias}"
+                    SelectedItem="{Binding CategoriaSeleccionada}"
+                    TextColor="White"
+                    TextMemberPath="Nombre" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Sport  5  -->
+            <inputLayout:SfTextInputLayout Grid.Row="5" Hint="{x:Static local:AppResource.TxtBetSportName}">
+                <editors:SfComboBox
+                    BackgroundColor="Transparent"
+                    ClearButtonIconColor="White"
+                    DisplayMemberPath="Nombre"
+                    DropDownIconColor="White"
+                    IsEditable="True"
+                    IsFilteringEnabled="True"
+                    ItemsSource="{Binding Apuesta.DetalleApuesta.Deportes}"
+                    SelectedValue="{Binding DeporteSeleccionado}"
+                    TextColor="White"
+                    TextMemberPath="Nombre"
+                    TextSearchMode="Contains" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Status  6  -->
+            <inputLayout:SfTextInputLayout Grid.Row="6" Hint="{x:Static local:AppResource.TxtBetStatus}">
+                <editors:SfComboBox
+                    BackgroundColor="Transparent"
+                    ClearButtonIconColor="White"
+                    DisplayMemberPath="Descripcion"
+                    DropDownIconColor="White"
+                    IsFilteringEnabled="False"
+                    ItemsSource="{Binding Apuesta.DetalleApuesta.EstatusApuesta}"
+                    SelectedItem="{Binding EstatusApuestaSeleccionado}"
+                    TextColor="White"
+                    TextMemberPath="Descripcion" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Extras 7  -->
+            <Border Grid.Row="7" Stroke="White">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="auto,auto" RowDefinitions="auto,auto">
+                    <buttons:SfCheckBox
+                        Grid.Column="0"
+                        CheckedColor="{StaticResource Green}"
+                        HorizontalOptions="Start"
+                        IsChecked="{Binding Apuesta.EsApuestaGratuita}"
+                        Text="{x:Static local:AppResource.TxtBetFreeBet}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <buttons:SfCheckBox
+                        Grid.Column="1"
+                        CheckedColor="{StaticResource Green}"
+                        HorizontalOptions="Start"
+                        IsChecked="{Binding Apuesta.EsApuestaPagada}"
+                        Text="{x:Static local:AppResource.TxtBetPaidBet}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <buttons:SfCheckBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        CheckedColor="{StaticResource Green}"
+                        HorizontalOptions="Start"
+                        IsChecked="{Binding Apuesta.DetalleApuesta.PagoAnticipado}"
+                        Text="{x:Static local:AppResource.TxtBetAP}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
 
+                    <buttons:SfCheckBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        CheckedColor="{StaticResource Green}"
+                        HorizontalOptions="Start"
+                        IsChecked="{Binding Apuesta.DetalleApuesta.ApuestaEnVivo}"
+                        Text="{x:Static local:AppResource.TxtBetLiveBet}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Border>
+        </Grid>
         <!--  Preloader  -->
         <inputLayout:SfBusyIndicator
             AbsoluteLayout.LayoutBounds="0,0,1,1"

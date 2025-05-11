@@ -52,6 +52,7 @@
                 DropDownIconColor="White"
                 ItemsSource="{Binding Bankroll.TiposBankroll, Mode=TwoWay}"
                 Placeholder="{x:Static lan:AppResource.LblSelectBankrollTypePlaceholder}"
+                SelectedValue="{Binding Bankroll.TipoBankrollId, Mode=TwoWay}"
                 SelectedValuePath="TipoBankrollId"
                 TextColor="White"
                 TextMemberPath="Nombre" />

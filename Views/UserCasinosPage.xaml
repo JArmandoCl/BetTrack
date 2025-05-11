@@ -60,6 +60,28 @@
                 SelectedItems="{Binding SelectedCasinos, Mode=TwoWay}"
                 SelectionChangedCommand="{Binding PerformActionToCasinoCommand}"
                 SelectionMode="Multiple">
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <Grid
+                            HorizontalOptions="Center"
+                            RowDefinitions="auto,auto"
+                            VerticalOptions="Center">
+                            <Label
+                                FontFamily="fa"
+                                FontSize="50"
+                                HorizontalOptions="Center"
+                                Text="{x:Static common:DtoIconFont.BuildingColumns}"
+                                TextColor="LightGray"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Row="1"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="{x:Static local:AppResource.LblNoCasinos}"
+                                TextColor="LightGray" />
+                        </Grid>
+                    </ContentView>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border Margin="0,5">

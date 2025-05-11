@@ -6,4 +6,9 @@ public partial class NewBetPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void BetAmount_Focused(object sender, FocusEventArgs e)
+    {
+		BetAmount.Text = "";
+    }
 }
