@@ -54,7 +54,6 @@ namespace BetTrack.ViewModels
 
         private async void Delete()
         {
-            Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
             bool confirmResult = await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblConfirmDeleteCasinos, AppResource.BtnContinue, AppResource.BtnCancel);
             if (confirmResult)
             {

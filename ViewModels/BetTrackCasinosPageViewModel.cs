@@ -52,7 +52,7 @@ namespace BetTrack.ViewModels
                 {
                     Client = new Api.ApiClient(CurrentUser.CurrentToken);
                     List<DtoUsuarioCasino> importedCasinos = new List<DtoUsuarioCasino>();
-                    foreach (DtoCasino usuarioCasinoActual in SelectedCasinos.Select(x=>(DtoCasino)x))
+                    foreach (DtoCasino usuarioCasinoActual in SelectedCasinos.Select(x => (DtoCasino)x))
                     {
                         DtoUsuarioCasino newUsuarioCasino = new DtoUsuarioCasino
                         {
@@ -61,9 +61,9 @@ namespace BetTrack.ViewModels
                             Nombre = usuarioCasinoActual.Nombre,
                             UsuarioId = CurrentUser.UsuarioId,
                             FechaRegistro = ApiClient.GetCurrentDateTime(),
-                            CasinoId=usuarioCasinoActual.CasinoId
+                            CasinoId = usuarioCasinoActual.CasinoId
                         };
-                        newUsuarioCasino = await Client.PostAsync<DtoUsuarioCasino,DtoUsuarioCasino>($"UsuarioCasino", newUsuarioCasino);
+                        newUsuarioCasino = await Client.PostAsync<DtoUsuarioCasino, DtoUsuarioCasino>($"UsuarioCasino", newUsuarioCasino);
                         importedCasinos.Add(newUsuarioCasino);
                     }
                     await NavigationService.GoBackAsync();

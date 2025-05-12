@@ -13,24 +13,25 @@ namespace BetTrack.ViewModels
     {
         #region Object declarations
         public DelegateCommand NewBetCommand { get => new DelegateCommand(NewBet); }
-
+        public long SelectedBankroll { get; set; }
         #endregion
         public BankrollDashboardPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
-        {        
+        {
         }
 
-        
+
         private async void NewBet()
         {
             try
             {
-                Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    string option = await PageDialogService.DisplayActionSheetAsync(AppResource.LblBetType,AppResource.BtnCancel,null,AppResource.LblSingleBet,AppResource.LblParleyBet);
-
-                    await NavigationService.NavigateAsync("NewBetPage", new NavigationParameters { { "BetType", option } });
+                    string option = await PageDialogService.DisplayActionSheetAsync(AppResource.LblBetType, AppResource.BtnCancel, null, AppResource.LblSingleBet, AppResource.LblParleyBet);
+                    if (option != null && option != AppResource.BtnCancel)
+                    {
+                        await NavigationService.NavigateAsync("NewBetPage", new NavigationParameters { { "BetType", option }, { "SelectedBankroll", SelectedBankroll } });
+                    }
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -49,6 +50,12 @@ namespace BetTrack.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            SelectedBankroll = (long)parameters["SelectedBankroll"];
         }
     }
 }

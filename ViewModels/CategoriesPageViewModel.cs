@@ -118,7 +118,6 @@ namespace BetTrack.ViewModels
         {
             if (SelectedCategory != null)
             {
-                Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
 
                 string newCategoryLabel = AppResource.LblNewEditCategory;
                 var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
@@ -167,7 +166,6 @@ namespace BetTrack.ViewModels
                 {
                     if (SelectedCategory != null)
                     {
-                        Application.Current.UserAppTheme = AppTheme.Dark;
                         string result = await PageDialogService.DisplayActionSheetAsync(AppResource.LblChooseAnAction, AppResource.BtnCancel, null, $"{AppResource.LblEdit}", $"{AppResource.LblDelete}");
                         if (result.Equals($"{AppResource.LblEdit}"))
                         {
@@ -194,7 +192,6 @@ namespace BetTrack.ViewModels
             }
             finally
             {
-                Application.Current.UserAppTheme = AppTheme.Light;
                 SelectedCategory = null;
                 IsBusy = false;
             }
@@ -206,7 +203,6 @@ namespace BetTrack.ViewModels
             {
                 if (!IsBusy)
                 {
-                    Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
 
                     var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
                     string newCategoryLabel = AppResource.LblNewEditCategory;
@@ -261,7 +257,6 @@ namespace BetTrack.ViewModels
             }
             finally
             {
-                Application.Current.UserAppTheme = AppTheme.Light;
                 IsBusy = false;
             }
         }

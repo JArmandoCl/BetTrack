@@ -178,11 +178,65 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fecha de la apuesta.
+        /// </summary>
+        internal static string LblBetDate {
+            get {
+                return ResourceManager.GetString("LblBetDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Qué tipo de apuesta quieres?.
         /// </summary>
         internal static string LblBetType {
             get {
                 return ResourceManager.GetString("LblBetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Día.
+        /// </summary>
+        internal static string LblCalendarDay {
+            get {
+                return ResourceManager.GetString("LblCalendarDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hora.
+        /// </summary>
+        internal static string LblCalendarHour {
+            get {
+                return ResourceManager.GetString("LblCalendarHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minuto.
+        /// </summary>
+        internal static string LblCalendarMinute {
+            get {
+                return ResourceManager.GetString("LblCalendarMinute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mes.
+        /// </summary>
+        internal static string LblCalendarMonth {
+            get {
+                return ResourceManager.GetString("LblCalendarMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Año.
+        /// </summary>
+        internal static string LblCalendarYear {
+            get {
+                return ResourceManager.GetString("LblCalendarYear", resourceCulture);
             }
         }
         
@@ -507,6 +561,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblSelectBetType {
             get {
                 return ResourceManager.GetString("LblSelectBetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona un casino.
+        /// </summary>
+        internal static string LblSelectCasino {
+            get {
+                return ResourceManager.GetString("LblSelectCasino", resourceCulture);
             }
         }
         

@@ -236,7 +236,8 @@ namespace BetTrack.Dtos
         public int TipoApuestaId { get; set; }
         public long UsuarioTipsterId { get; set; }     
         public long CategoriaUsuarioId { get; set; }
-        public DateTime Fecha { get; set; }
+        public long UsuarioCasinoId { get; set; }
+        public DateTime Fecha { get; set; }=DateTime.Now;
         public string Nombre { get; set; } = "";
         public decimal Importe { get; set; }
         public decimal MontoCobrado { get; set; }
@@ -245,22 +246,29 @@ namespace BetTrack.Dtos
         public bool EsApuestaPagada { get; set; }
         public decimal Cashout { get; set; }
         #region Extras
+        private List<DtoUsuarioCasino> userCasinos=new List<DtoUsuarioCasino>();
         [JsonIgnore]
-        private List<DtoUsuarioTipster> tipsters=new List<DtoUsuarioTipster>();
+        public List<DtoUsuarioCasino> UserCasinos
+        {
+            get { return userCasinos; }
+            set { SetProperty(ref userCasinos, value); }
+        }
+        private List<DtoUsuarioTipster> tipsters=new List<DtoUsuarioTipster>();        
+        [JsonIgnore]
         public List<DtoUsuarioTipster> Tipsters
         {
             get { return tipsters; }
             set { SetProperty(ref tipsters, value); }
         }
+        private List<DtoCategoriaUsuario> categorias=new List<DtoCategoriaUsuario>();       
         [JsonIgnore]
-        private List<DtoCategoriaUsuario> categorias=new List<DtoCategoriaUsuario>();
         public List<DtoCategoriaUsuario> Categorias
         {
             get { return categorias; }
             set { SetProperty(ref categorias, value); }
         }
+        private List<DtoTipoApuesta> tiposApuesta=new List<DtoTipoApuesta>();        
         [JsonIgnore]
-        private List<DtoTipoApuesta> tiposApuesta=new List<DtoTipoApuesta>();
         public List<DtoTipoApuesta> TiposApuesta
         {
             get { return tiposApuesta; }

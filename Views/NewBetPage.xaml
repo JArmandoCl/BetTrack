@@ -8,6 +8,7 @@
     xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:BetTrack.Resources.Languages"
+    xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="{Binding Title}"
     HideSoftInputOnTapped="True">
@@ -38,17 +39,91 @@
             Margin="0,10,0,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto"
+            RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto"
             RowSpacing="-7">
-            <!--  Name  0  -->
-            <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetName}">
+            <!--  Date  -->
+            <picker:SfDateTimePicker
+                x:Name="DateTimePicker"
+                Background="Transparent"
+                DateFormat="dd_MMM_yyyy"
+                Mode="Dialog"
+                OkButtonClicked="DateTimePicker_OkButtonClicked"
+                SelectedDate="{Binding Apuesta.Fecha, Mode=TwoWay}"
+                SelectionChanged="DateTimePicker_SelectionChanged"
+                TimeFormat="hh_mm_tt">
+                <picker:SfDateTimePicker.FooterView>
+                    <picker:PickerFooterView
+                        Height="40"
+                        CancelButtonText=""
+                        OkButtonText="{x:Static local:AppResource.BtnClose}" />
+                </picker:SfDateTimePicker.FooterView>
+                <picker:SfDateTimePicker.ColumnHeaderView>
+                    <picker:DateTimePickerColumnHeaderView
+                        DayHeaderText="{x:Static local:AppResource.LblCalendarDay}"
+                        HourHeaderText="{x:Static local:AppResource.LblCalendarHour}"
+                        MinuteHeaderText="{x:Static local:AppResource.LblCalendarMinute}"
+                        MonthHeaderText="{x:Static local:AppResource.LblCalendarMonth}"
+                        YearHeaderText="{x:Static local:AppResource.LblCalendarYear}" />
+                </picker:SfDateTimePicker.ColumnHeaderView>
+                <picker:SfDateTimePicker.SelectionView>
+                    <picker:PickerSelectionView Background="{x:StaticResource DarkBlue}" />
+                </picker:SfDateTimePicker.SelectionView>
+                <picker:SfDateTimePicker.SelectedTextStyle>
+                    <picker:PickerTextStyle TextColor="White" />
+                </picker:SfDateTimePicker.SelectedTextStyle>
+            </picker:SfDateTimePicker>
+            <Grid ColumnDefinitions="*,auto" ColumnSpacing="5">
+                <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.LblBetDate}">
+                    <Label
+                        x:Name="BetDate"
+                        HeightRequest="40"
+                        VerticalTextAlignment="Center" />
+                    <inputLayout:SfTextInputLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenBetDatePicker_Clicked" />
+                    </inputLayout:SfTextInputLayout.GestureRecognizers>
+                </inputLayout:SfTextInputLayout>
+                <Button
+                    x:Name="OpenBetDatePicker"
+                    Grid.Column="1"
+                    Margin="0,5"
+                    BackgroundColor="{x:StaticResource Gray100}"
+                    Clicked="OpenBetDatePicker_Clicked"
+                    HeightRequest="20"
+                    VerticalOptions="Start">
+                    <Button.ImageSource>
+                        <FontImageSource
+                            FontFamily="fa"
+                            Glyph="{x:Static common:DtoIconFont.CalendarCheck}"
+                            Size="25"
+                            Color="{x:StaticResource DarkBlue}" />
+                    </Button.ImageSource>
+                </Button>
+            </Grid>
+            <!--  Name  -->
+            <inputLayout:SfTextInputLayout
+                x:Name="picker"
+                Grid.Row="1"
+                Hint="{x:Static local:AppResource.TxtBetName}">
                 <Entry
                     Keyboard="Text"
                     Text="{Binding Apuesta.Nombre}"
                     TextColor="White" />
             </inputLayout:SfTextInputLayout>
-            <!--  Amount  1  -->
-            <Grid Grid.Row="1" ColumnDefinitions="*,auto">
+            <!--  Casino  -->
+            <inputLayout:SfTextInputLayout Grid.Row="2" Hint="{x:Static local:AppResource.LblSelectCasino}">
+                <editors:SfComboBox
+                    BackgroundColor="Transparent"
+                    ClearButtonIconColor="White"
+                    DisplayMemberPath="Nombre"
+                    DropDownIconColor="White"
+                    IsFilteringEnabled="False"
+                    ItemsSource="{Binding Apuesta.UserCasinos}"
+                    SelectedItem="{Binding SelectedCasino, Mode=TwoWay}"
+                    TextColor="White"
+                    TextMemberPath="Nombre" />
+            </inputLayout:SfTextInputLayout>
+            <!--  Amount  -->
+            <Grid Grid.Row="3" ColumnDefinitions="*,auto">
                 <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetAmount}">
                     <Grid ColumnDefinitions="auto, *" VerticalOptions="Center">
                         <Label
@@ -74,15 +149,56 @@
                     Text="{x:Static local:AppResource.LblPercentOption}"
                     TextColor="White" />
             </Grid>
-            <!--  Odds 2  -->
-            <inputLayout:SfTextInputLayout Grid.Row="2" Hint="{x:Static local:AppResource.TxtBetOdds}">
-                <Entry
-                    Keyboard="Numeric"
-                    Text="{Binding Apuesta.DetalleApuesta.Cuota}"
-                    TextColor="White" />
+            <Grid Grid.Row="4" ColumnDefinitions="*,*">
+                <!--  Odds  -->
+                <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetOdds}">
+                    <Entry
+                        x:Name="Odds"
+                        Focused="Odds_Focused"
+                        Keyboard="Numeric"
+                        Text="{Binding Apuesta.DetalleApuesta.Cuota}"
+                        TextColor="White" />
+                </inputLayout:SfTextInputLayout>
+                <!--  Status  -->
+                <inputLayout:SfTextInputLayout Grid.Column="1" Hint="{x:Static local:AppResource.TxtBetStatus}">
+                    <editors:SfComboBox
+                        x:Name="EstatusApuesta"
+                        BackgroundColor="Transparent"
+                        ClearButtonIconColor="White"
+                        DisplayMemberPath="Descripcion"
+                        DropDownIconColor="White"
+                        IsFilteringEnabled="False"
+                        ItemsSource="{Binding Apuesta.DetalleApuesta.EstatusApuesta}"
+                        SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
+                        SelectionChanged="EstatusApuesta_SelectionChanged"
+                        TextColor="White"
+                        TextMemberPath="Descripcion" />
+                </inputLayout:SfTextInputLayout>
+            </Grid>
+            <!--  Cashout  -->
+            <inputLayout:SfTextInputLayout
+                x:Name="InputCashout"
+                Grid.Row="5"
+                Hint="Cashout"
+                IsVisible="False">
+                <Grid ColumnDefinitions="auto, *" VerticalOptions="Center">
+                    <Label
+                        FontSize="16"
+                        Text="$"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                    <Entry
+                        x:Name="Cashout"
+                        Grid.Column="1"
+                        Margin="2,0"
+                        Focused="Cashout_Focused"
+                        Keyboard="Numeric"
+                        Text="{Binding Apuesta.Cashout}"
+                        TextColor="White" />
+                </Grid>
             </inputLayout:SfTextInputLayout>
-            <!--  Tipster  3  -->
-            <inputLayout:SfTextInputLayout Grid.Row="3" Hint="{x:Static local:AppResource.TxtBetTipsterName}">
+            <!--  Tipster  -->
+            <inputLayout:SfTextInputLayout Grid.Row="6" Hint="{x:Static local:AppResource.TxtBetTipsterName}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -90,12 +206,12 @@
                     DropDownIconColor="White"
                     IsFilteringEnabled="False"
                     ItemsSource="{Binding Apuesta.Tipsters}"
-                    SelectedItem="{Binding TipsterSeleccionado}"
+                    SelectedItem="{Binding SelectedTipster, Mode=TwoWay}"
                     TextColor="White"
                     TextMemberPath="NombreTipster" />
             </inputLayout:SfTextInputLayout>
-            <!--  Category  4  -->
-            <inputLayout:SfTextInputLayout Grid.Row="4" Hint="{x:Static local:AppResource.TxtBetCategoryName}">
+            <!--  Category  -->
+            <inputLayout:SfTextInputLayout Grid.Row="7" Hint="{x:Static local:AppResource.TxtBetCategoryName}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -103,12 +219,12 @@
                     DropDownIconColor="White"
                     IsFilteringEnabled="False"
                     ItemsSource="{Binding Apuesta.Categorias}"
-                    SelectedItem="{Binding CategoriaSeleccionada}"
+                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
                     TextColor="White"
                     TextMemberPath="Nombre" />
             </inputLayout:SfTextInputLayout>
-            <!--  Sport  5  -->
-            <inputLayout:SfTextInputLayout Grid.Row="5" Hint="{x:Static local:AppResource.TxtBetSportName}">
+            <!--  Sport  -->
+            <inputLayout:SfTextInputLayout Grid.Row="8" Hint="{x:Static local:AppResource.TxtBetSportName}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -117,43 +233,34 @@
                     IsEditable="True"
                     IsFilteringEnabled="True"
                     ItemsSource="{Binding Apuesta.DetalleApuesta.Deportes}"
-                    SelectedValue="{Binding DeporteSeleccionado}"
+                    SelectedItem="{Binding SelectedSport, Mode=TwoWay}"
                     TextColor="White"
                     TextMemberPath="Nombre"
                     TextSearchMode="Contains" />
             </inputLayout:SfTextInputLayout>
-            <!--  Status  6  -->
-            <inputLayout:SfTextInputLayout Grid.Row="6" Hint="{x:Static local:AppResource.TxtBetStatus}">
-                <editors:SfComboBox
-                    BackgroundColor="Transparent"
-                    ClearButtonIconColor="White"
-                    DisplayMemberPath="Descripcion"
-                    DropDownIconColor="White"
-                    IsFilteringEnabled="False"
-                    ItemsSource="{Binding Apuesta.DetalleApuesta.EstatusApuesta}"
-                    SelectedItem="{Binding EstatusApuestaSeleccionado}"
-                    TextColor="White"
-                    TextMemberPath="Descripcion" />
-            </inputLayout:SfTextInputLayout>
-            <!--  Extras 7  -->
-            <Border Grid.Row="7" Stroke="White">
+            <!--  Extras  -->
+            <Border Grid.Row="9" Stroke="White">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
                 </Border.StrokeShape>
                 <Grid ColumnDefinitions="auto,auto" RowDefinitions="auto,auto">
                     <buttons:SfCheckBox
+                        x:Name="EsApuestaGratuita"
                         Grid.Column="0"
                         CheckedColor="{StaticResource Green}"
                         HorizontalOptions="Start"
                         IsChecked="{Binding Apuesta.EsApuestaGratuita}"
+                        StateChanged="EsApuestaGratuita_StateChanged"
                         Text="{x:Static local:AppResource.TxtBetFreeBet}"
                         TextColor="White"
                         VerticalOptions="Center" />
                     <buttons:SfCheckBox
+                        x:Name="EsApuestaPagada"
                         Grid.Column="1"
                         CheckedColor="{StaticResource Green}"
                         HorizontalOptions="Start"
                         IsChecked="{Binding Apuesta.EsApuestaPagada}"
+                        StateChanged="EsApuestaPagada_StateChanged"
                         Text="{x:Static local:AppResource.TxtBetPaidBet}"
                         TextColor="White"
                         VerticalOptions="Center" />

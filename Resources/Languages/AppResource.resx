@@ -372,4 +372,25 @@
   <data name="LblNoCasinos" xml:space="preserve">
     <value>No hay casinos registrados</value>
   </data>
+  <data name="LblBetDate" xml:space="preserve">
+    <value>Fecha de la apuesta</value>
+  </data>
+  <data name="LblCalendarDay" xml:space="preserve">
+    <value>Día</value>
+  </data>
+  <data name="LblCalendarMonth" xml:space="preserve">
+    <value>Mes</value>
+  </data>
+  <data name="LblCalendarYear" xml:space="preserve">
+    <value>Año</value>
+  </data>
+  <data name="LblCalendarHour" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="LblCalendarMinute" xml:space="preserve">
+    <value>Minuto</value>
+  </data>
+  <data name="LblSelectCasino" xml:space="preserve">
+    <value>Selecciona un casino</value>
+  </data>
 </root>

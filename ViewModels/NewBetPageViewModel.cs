@@ -1,5 +1,7 @@
-﻿using BetTrack.Dtos;
+﻿using BetTrack.Api;
+using BetTrack.Dtos;
 using BetTrack.Resources.Languages;
+using CommunityToolkit.Maui.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,38 +20,97 @@ namespace BetTrack.ViewModels
         public string BetType { get; set; }
         public bool IsParley { get; set; }
         private DtoApuesta apuesta = new DtoApuesta();
+
         public DtoApuesta Apuesta
         {
             get { return apuesta; }
             set { SetProperty(ref apuesta, value); }
         }
         #region Objetos seleccionados
-        public DtoDeporte DeporteSeleccionado { get; set; }
-        public DtoUsuarioTipster TipsterSeleccionado { get; set; }
-        public DtoCategoriaUsuario CategoriaSeleccionada { get; set; }
-        public DtoEstatusApuesta EstatusApuestaSeleccionado { get; set; }
+        private DtoDeporte deporteSeleccionado = new DtoDeporte();
+        public DtoDeporte SelectedSport { get => deporteSeleccionado; set => SetProperty(ref deporteSeleccionado, value); }
+        private DtoUsuarioTipster tipsterSeleccionado = new DtoUsuarioTipster();
+        public DtoUsuarioTipster SelectedTipster { get => tipsterSeleccionado; set => SetProperty(ref tipsterSeleccionado, value); }
+        private DtoUsuarioCasino selectedCasino=new DtoUsuarioCasino();
+        public DtoUsuarioCasino SelectedCasino
+        {
+            get { return selectedCasino; }
+            set { SetProperty(ref selectedCasino, value); }
+        }
+        private DtoCategoriaUsuario categoriaSeleccionada = new DtoCategoriaUsuario();
+        public DtoCategoriaUsuario SelectedCategory { get => categoriaSeleccionada; set => SetProperty(ref categoriaSeleccionada, value); }
+        private DtoEstatusApuesta estatusApuestaSeleccionado = new DtoEstatusApuesta();
+        public DtoEstatusApuesta SelectedStatus { get => estatusApuestaSeleccionado; set => SetProperty(ref estatusApuestaSeleccionado, value); }
         #endregion
         #endregion
         public NewBetPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             SaveBetCommand = new DelegateCommand(SaveBet);
         }
-        public void SaveBet()
+        public async void SaveBet()
         {
-            
+            try
+            {
+                if (!IsBusy)
+                {
+                    IsBusy = true;
+                    //Main
+                    Apuesta.CategoriaUsuarioId = SelectedCategory.CategoriaUsuarioId;
+                    Apuesta.UsuarioTipsterId = SelectedTipster.UsuarioTipsterId;
+                    Apuesta.UsuarioCasinoId = SelectedCasino.UsuarioCasinoId;
+                    //Detail
+                    Apuesta.DetalleApuesta.DeporteId = SelectedSport.DeporteId;
+                    Apuesta.DetalleApuesta.EstatusApuestaId = SelectedStatus.EstatusApuestaId;                    
+                    Apuesta.DetalleApuesta.Nombre = Apuesta.Nombre;
+                    Client = new ApiClient(CurrentUser.CurrentToken);
+                    Apuesta = await Client.PostAsync<DtoApuesta, DtoApuesta>($"Apuesta", Apuesta);
+                    if (Apuesta.ApuestaId > 0)
+                    {
+                        await ShowToast(AppResource.LblSuccess, ToastDuration.Short);
+                        await NavigationService.GoBackAsync();
+                    }
+                    else
+                    {
+                        await ShowToast(AppResource.LblFailed, ToastDuration.Short);
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblSessionExpired, AppResource.BtnClose);
+                SecureStorage.RemoveAll();
+                Preferences.Default.Clear();
+                INavigationResult result = await NavigationService.NavigateAsync("//LoginPage");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblBadRequestServer, AppResource.BtnClose);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
         private async Task LoadCombos()
         {
             Apuesta.Tipsters = await Client.GetAsync<List<DtoUsuarioTipster>>(@$"UsuarioTipster\ObtenerUsuarioTipsters\{CurrentUser.UsuarioId}");
+            SelectedTipster = Apuesta.Tipsters.FirstOrDefault();
             Apuesta.Categorias = await Client.GetAsync<List<DtoCategoriaUsuario>>(@$"CategoriaUsuario\ObtenerCategoriasUsuarios\{CurrentUser.UsuarioId}");
-            Apuesta.TiposApuesta = await Client.GetAsync<List<DtoTipoApuesta>>(@$"Catalogo\TiposApuesta");
+            SelectedCategory = Apuesta.Categorias.FirstOrDefault();
             Apuesta.DetalleApuesta.EstatusApuesta = await Client.GetAsync<List<DtoEstatusApuesta>>(@$"Catalogo\EstatusApuesta");
+            SelectedStatus = Apuesta.DetalleApuesta.EstatusApuesta.FirstOrDefault(x => x.EstatusApuestaId == 5);
             Apuesta.DetalleApuesta.Deportes = await Client.GetAsync<List<DtoDeporte>>(@$"Catalogo\Deportes\{CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
+            SelectedSport = Apuesta.DetalleApuesta.Deportes.FirstOrDefault(x => x.DeporteId == 1);
+            Apuesta.TipoApuestaId = BetType.ToLower().Equals("derecha") || BetType.ToLower().Equals("derecha") ? 1 : 2;
+            Apuesta.UserCasinos = await Client.GetAsync<List<DtoUsuarioCasino>>(@$"UsuarioCasino\ObtenerUsuarioCasinos\{CurrentUser.UsuarioId}");
+            SelectedCasino = Apuesta.UserCasinos.FirstOrDefault();
         }
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
             BetType = parameters["BetType"] as string;
+            Apuesta.UsuarioBankrollId = (long)parameters["SelectedBankroll"];
             Title = $"{AppResource.TxtBetBetTitle}-{BetType}";
             IsParley = BetType == AppResource.LblParleyBet;
             try

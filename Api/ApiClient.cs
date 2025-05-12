@@ -53,7 +53,7 @@ namespace BetTrack.Api
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                var message = $"Request to '{endpoint}' failed with status code {(int)response.StatusCode} ({response.ReasonPhrase}). Response: {errorContent}";
+                var message = $"Request to '{endpoint}' failed with status code {(int)response.StatusCode} ({response.ReasonPhrase}). Response: {errorContent??"No response"}";
                 throw new HttpRequestException(message,null,response.StatusCode);
             }
 

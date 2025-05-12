@@ -96,7 +96,6 @@ namespace BetTrack.ViewModels
         {
             if (SelectedTipster != null)
             {
-                Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
 
                 string newTipsterLabel = AppResource.LblNewTipster;
                 var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
@@ -145,7 +144,6 @@ namespace BetTrack.ViewModels
                 {
                     if (SelectedTipster != null)
                     {
-                        Application.Current.UserAppTheme = AppTheme.Dark;
                         string result = await PageDialogService.DisplayActionSheetAsync(AppResource.LblChooseAnAction, AppResource.BtnCancel, null, $"{AppResource.LblEdit}", $"{AppResource.LblDelete}");
                         if (result.Equals($"{AppResource.LblEdit}"))
                         {
@@ -172,7 +170,6 @@ namespace BetTrack.ViewModels
             }
             finally
             {
-                Application.Current.UserAppTheme = AppTheme.Light;
                 SelectedTipster = null;
                 IsBusy = false;
             }
@@ -184,7 +181,6 @@ namespace BetTrack.ViewModels
             {
                 if (!IsBusy)
                 {
-                    Application.Current.UserAppTheme = AppTheme.Dark;//Light mode doesn´t show entry bottom line
 
                     var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
                     string newTipsterLabel = AppResource.LblNewTipster;
@@ -238,7 +234,6 @@ namespace BetTrack.ViewModels
             }
             finally
             {
-                Application.Current.UserAppTheme = AppTheme.Light;
                 IsBusy = false;
             }
         }
