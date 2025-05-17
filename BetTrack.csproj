@@ -117,7 +117,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Models\ModelValidator.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\fontawesome.ttf" />
+	  <None Remove="Resources\Fonts\FontIconMaterial.ttf" />
 	  <None Remove="Resources\Fonts\Kabisat Demo-ItalicTall.ttf" />
 	  <None Remove="Resources\Fonts\Lato-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Lato-Italic.ttf" />
@@ -133,6 +138,7 @@
 
 	<ItemGroup>
 	  <MauiFont Include="Resources\Fonts\fontawesome.ttf" />
+	  <MauiFont Include="Resources\Fonts\FontIconMaterial.ttf" />
 	  <MauiFont Include="Resources\Fonts\Kabisat Demo-ItalicTall.ttf" />
 	  <MauiFont Include="Resources\Fonts\Lato-Bold.ttf" />
 	  <MauiFont Include="Resources\Fonts\Lato-Italic.ttf" />

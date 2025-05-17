@@ -1,5 +1,6 @@
 ﻿using BetTrack.Api;
 using BetTrack.Dtos;
+using BetTrack.Models;
 using BetTrack.Resources.Languages;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,14 @@ namespace BetTrack.ViewModels
     public class LoginPageViewModel : ViewModelBase
     {
         #region Object declarations
+        #region Errors handle
+        private Dictionary<string, string> _errors = new();
+        public Dictionary<string, string> Errors
+        {
+            get => _errors;
+            set => SetProperty(ref _errors, value);
+        }
+        #endregion
         public DelegateCommand LoginCommand { get; set; }
         public DelegateCommand ShowForgotPassword { get; set; }
         public DelegateCommand ShowSignUpCommand { get; set; }
@@ -60,17 +69,31 @@ namespace BetTrack.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    Client = new ApiClient(await SecureStorage.GetAsync("UserToken") ?? "");
-                    DtoUsuario currentUser = await Client.PostAsync<DtoUsuario, DtoUsuario>($"Autorizacion", User);
-                    if (!string.IsNullOrWhiteSpace(currentUser.CurrentToken))
+                    Errors = Utilities.ValidateModel(User);
+                    if (Errors.Any())
                     {
-                        CurrentUser = currentUser;
-                        await SecureStorage.SetAsync("CurrentUser", JsonSerializer.Serialize(currentUser));
-                        Preferences.Default.Set("RememberMeEnabled", RememberMe);
+                        RaisePropertyChanged(nameof(Errors));
+                    }
+                    else
+                    {
 
-                        INavigationResult result = await NavigationService.NavigateAsync("//NavigationPage/HomePage");
+                        Client = new ApiClient(await SecureStorage.GetAsync("UserToken") ?? "");
+                        DtoUsuario currentUser = await Client.PostAsync<DtoUsuario, DtoUsuario>($"Autorizacion", User);
+                        if (!string.IsNullOrWhiteSpace(currentUser.CurrentToken))
+                        {
+                            CurrentUser = currentUser;
+                            await SecureStorage.SetAsync("CurrentUser", JsonSerializer.Serialize(currentUser));
+                            Preferences.Default.Set("RememberMeEnabled", RememberMe);
+
+                            INavigationResult result = await NavigationService.NavigateAsync("//NavigationPage/HomePage");
+                        }
                     }
                 }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Errors["LoginValidation"] = AppResource.LblLoginMessageValidation;
+                RaisePropertyChanged(nameof(Errors));
             }
             catch (Exception e)
             {

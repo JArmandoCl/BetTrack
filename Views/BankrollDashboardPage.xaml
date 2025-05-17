@@ -9,9 +9,9 @@
         <ToolbarItem Command="{Binding NewBetCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.CirclePlus}"
-                    Size="18"
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Add_circle}"
+                    Size="22"
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>

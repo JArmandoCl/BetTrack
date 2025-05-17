@@ -85,8 +85,8 @@
                 <Setter Property="ImageSource">
                     <Setter.Value>
                         <FontImageSource
-                            FontFamily="fa"
-                            Glyph="{x:Static common:DtoIconFont.FloppyDisk}"
+                            FontFamily="ma"
+                            Glyph="{x:Static common:DtoMaterialIconFont.Save}"
                             Size="Medium"
                             Color="White" />
                     </Setter.Value>

@@ -12,18 +12,18 @@
         <ToolbarItem Command="{Binding GoToImportCasinoCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.MagnifyingGlassPlus}"
-                    Size="18"
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Zoom_in}"
+                    Size="22"
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem Command="{Binding DeleteCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.Trash}"
-                    Size="18"
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Delete}"
+                    Size="22"
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
@@ -67,10 +67,10 @@
                             RowDefinitions="auto,auto"
                             VerticalOptions="Center">
                             <Label
-                                FontFamily="fa"
+                                FontFamily="ma"
                                 FontSize="50"
                                 HorizontalOptions="Center"
-                                Text="{x:Static common:DtoIconFont.BuildingColumns}"
+                                Text="{x:Static common:DtoMaterialIconFont.Account_balance}"
                                 TextColor="LightGray"
                                 VerticalOptions="Start" />
                             <Label

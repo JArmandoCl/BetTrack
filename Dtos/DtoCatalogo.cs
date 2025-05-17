@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BetTrack.Resources.Languages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using RangeAttribute = System.ComponentModel.DataAnnotations.RangeAttribute;
 
 namespace BetTrack.Dtos
 {
@@ -26,7 +28,7 @@ namespace BetTrack.Dtos
         public string NombreIng { get; set; } = "";
         public string Nombre { get; set; } = "";
     }
-    public class DtoTipoBankroll:BindableBase
+    public class DtoTipoBankroll : BindableBase
     {
         private int tipoBankrollId;
         public int TipoBankrollId
@@ -34,7 +36,7 @@ namespace BetTrack.Dtos
             get { return tipoBankrollId; }
             set { SetProperty(ref tipoBankrollId, value); }
         }
-        private string nombre="";
+        private string nombre = "";
         public string Nombre
         {
             get { return nombre; }
@@ -76,12 +78,17 @@ namespace BetTrack.Dtos
         public long UsuarioId { get; set; }
         public int EstatusUsuarioId { get; set; } = 1;//Active
         private string email = "";
+        [EmailAddress(ErrorMessageResourceType = typeof(AppResource),
+            ErrorMessageResourceName = nameof(AppResource.LblUserEmailRequired))]
         public string Email
         {
             get { return email; }
             set { SetProperty(ref email, value); }
         }
         private string contrasenia = "";
+        [Required(
+           ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblUserPasswordRequired))]
         public string Contrasenia
         {
             get { return contrasenia; }
@@ -177,13 +184,13 @@ namespace BetTrack.Dtos
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
         #region Extras
-        private List<DtoFormatoCuota> formatoCuotas=new List<DtoFormatoCuota>();
+        private List<DtoFormatoCuota> formatoCuotas = new List<DtoFormatoCuota>();
         public List<DtoFormatoCuota> FormatoCuotas
         {
             get { return formatoCuotas; }
             set { SetProperty(ref formatoCuotas, value); }
         }
-        private List<DtoTipoBankroll> tiposBankroll=new List<DtoTipoBankroll>();
+        private List<DtoTipoBankroll> tiposBankroll = new List<DtoTipoBankroll>();
         public List<DtoTipoBankroll> TiposBankroll
         {
             get { return tiposBankroll; }
@@ -195,7 +202,7 @@ namespace BetTrack.Dtos
             get { return monedas; }
             set { SetProperty(ref monedas, value); }
         }
-        private DtoMoneda moneda=new DtoMoneda();
+        private DtoMoneda moneda = new DtoMoneda();
         public DtoMoneda Moneda
         {
             get { return moneda; }
@@ -208,19 +215,19 @@ namespace BetTrack.Dtos
             set { SetProperty(ref formatoCuota, value); }
         }
         private DtoTipoBankroll tipoBankroll = new DtoTipoBankroll();
-        public DtoTipoBankroll  TipoBankroll
+        public DtoTipoBankroll TipoBankroll
         {
             get { return tipoBankroll; }
             set { SetProperty(ref tipoBankroll, value); }
         }
         #endregion
     }
-    public class DtoCategoriaUsuario:BindableBase
+    public class DtoCategoriaUsuario : BindableBase
     {
         public long CategoriaUsuarioId { get; set; }
         public long UsuarioId { get; set; }
         public int EstatusCategoriaId { get; set; } = 1;
-        private string nombre="";
+        private string nombre = "";
         public string Nombre
         {
             get { return nombre; }
@@ -229,16 +236,31 @@ namespace BetTrack.Dtos
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
     }
-    public class DtoApuesta:BindableBase
+    public class DtoApuesta : BindableBase
     {
         public long ApuestaId { get; set; }
         public long UsuarioBankrollId { get; set; }
         public int TipoApuestaId { get; set; }
-        public long UsuarioTipsterId { get; set; }     
+        [Range(1, long.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+            ErrorMessageResourceName = nameof(AppResource.LblTipsterRequired))]
+        public long UsuarioTipsterId { get; set; }
+        [Range(1, long.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblCategoryRequired))]
         public long CategoriaUsuarioId { get; set; }
+        [Range(1, long.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblCasinoRequired))]
         public long UsuarioCasinoId { get; set; }
-        public DateTime Fecha { get; set; }=DateTime.Now;
+        public DateTime Fecha { get; set; } = DateTime.Now;
+        [Required(
+           ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblBetNameRequired))]
         public string Nombre { get; set; } = "";
+        [Range(0.01, double.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblAmountBetRequired))]
         public decimal Importe { get; set; }
         public decimal MontoCobrado { get; set; }
         public decimal Ganancia { get; set; }
@@ -246,35 +268,35 @@ namespace BetTrack.Dtos
         public bool EsApuestaPagada { get; set; }
         public decimal Cashout { get; set; }
         #region Extras
-        private List<DtoUsuarioCasino> userCasinos=new List<DtoUsuarioCasino>();
+        private List<DtoUsuarioCasino> userCasinos = new List<DtoUsuarioCasino>();
         [JsonIgnore]
         public List<DtoUsuarioCasino> UserCasinos
         {
             get { return userCasinos; }
             set { SetProperty(ref userCasinos, value); }
         }
-        private List<DtoUsuarioTipster> tipsters=new List<DtoUsuarioTipster>();        
+        private List<DtoUsuarioTipster> tipsters = new List<DtoUsuarioTipster>();
         [JsonIgnore]
         public List<DtoUsuarioTipster> Tipsters
         {
             get { return tipsters; }
             set { SetProperty(ref tipsters, value); }
         }
-        private List<DtoCategoriaUsuario> categorias=new List<DtoCategoriaUsuario>();       
+        private List<DtoCategoriaUsuario> categorias = new List<DtoCategoriaUsuario>();
         [JsonIgnore]
         public List<DtoCategoriaUsuario> Categorias
         {
             get { return categorias; }
             set { SetProperty(ref categorias, value); }
         }
-        private List<DtoTipoApuesta> tiposApuesta=new List<DtoTipoApuesta>();        
+        private List<DtoTipoApuesta> tiposApuesta = new List<DtoTipoApuesta>();
         [JsonIgnore]
         public List<DtoTipoApuesta> TiposApuesta
         {
             get { return tiposApuesta; }
             set { SetProperty(ref tiposApuesta, value); }
         }
-        private DtoDetalleApuesta detalleApuesta=new DtoDetalleApuesta();
+        private DtoDetalleApuesta detalleApuesta = new DtoDetalleApuesta();
         public DtoDetalleApuesta DetalleApuesta
         {
             get { return detalleApuesta; }
@@ -282,19 +304,28 @@ namespace BetTrack.Dtos
         }
         #endregion
     }
-    public class DtoDetalleApuesta:BindableBase
+    public class DtoDetalleApuesta : BindableBase
     {
         public long DetalleApuestaId { get; set; }
         public long ApuestaId { get; set; }
+        [Range(1, long.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblSportRequired))]
         public long DeporteId { get; set; }
+        [Range(1, int.MaxValue,
+            ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblBetStatusRequired))]
         public int EstatusApuestaId { get; set; }
         public string Nombre { get; set; } = "";
+        [Range(0.01, double.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblOddRequired))]
         public decimal Cuota { get; set; }
         public bool PagoAnticipado { get; set; }
         public bool ApuestaEnVivo { get; set; }
         #region Extras
         [JsonIgnore]
-        private List<DtoDeporte> deportes=new List<DtoDeporte>();
+        private List<DtoDeporte> deportes = new List<DtoDeporte>();
         public List<DtoDeporte> Deportes
         {
             get { return deportes; }

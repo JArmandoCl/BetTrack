@@ -1,10 +1,12 @@
 ﻿using BetTrack.Api;
 using BetTrack.Dtos;
+using BetTrack.Models;
 using BetTrack.Resources.Languages;
 using CommunityToolkit.Maui.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -16,6 +18,14 @@ namespace BetTrack.ViewModels
     public class NewBetPageViewModel : ViewModelBase
     {
         #region Object declarations   
+        #region Errors handle
+        private Dictionary<string, string> _errors = new();
+        public Dictionary<string, string> Errors
+        {
+            get => _errors;
+            set => SetProperty(ref _errors, value);
+        }
+        #endregion
         public DelegateCommand SaveBetCommand { get; set; }
         public string BetType { get; set; }
         public bool IsParley { get; set; }
@@ -31,7 +41,7 @@ namespace BetTrack.ViewModels
         public DtoDeporte SelectedSport { get => deporteSeleccionado; set => SetProperty(ref deporteSeleccionado, value); }
         private DtoUsuarioTipster tipsterSeleccionado = new DtoUsuarioTipster();
         public DtoUsuarioTipster SelectedTipster { get => tipsterSeleccionado; set => SetProperty(ref tipsterSeleccionado, value); }
-        private DtoUsuarioCasino selectedCasino=new DtoUsuarioCasino();
+        private DtoUsuarioCasino selectedCasino = new DtoUsuarioCasino();
         public DtoUsuarioCasino SelectedCasino
         {
             get { return selectedCasino; }
@@ -55,24 +65,35 @@ namespace BetTrack.ViewModels
                 {
                     IsBusy = true;
                     //Main
-                    Apuesta.CategoriaUsuarioId = SelectedCategory.CategoriaUsuarioId;
-                    Apuesta.UsuarioTipsterId = SelectedTipster.UsuarioTipsterId;
-                    Apuesta.UsuarioCasinoId = SelectedCasino.UsuarioCasinoId;
+                    Apuesta.CategoriaUsuarioId = SelectedCategory?.CategoriaUsuarioId ?? 0;
+                    Apuesta.UsuarioTipsterId = SelectedTipster?.UsuarioTipsterId ?? 0;
+                    Apuesta.UsuarioCasinoId = SelectedCasino?.UsuarioCasinoId ?? 0;
                     //Detail
-                    Apuesta.DetalleApuesta.DeporteId = SelectedSport.DeporteId;
-                    Apuesta.DetalleApuesta.EstatusApuestaId = SelectedStatus.EstatusApuestaId;                    
+                    Apuesta.DetalleApuesta.DeporteId = SelectedSport?.DeporteId ?? 0;
+                    Apuesta.DetalleApuesta.EstatusApuestaId = SelectedStatus?.EstatusApuestaId ?? 0;
                     Apuesta.DetalleApuesta.Nombre = Apuesta.Nombre;
-                    Client = new ApiClient(CurrentUser.CurrentToken);
-                    Apuesta = await Client.PostAsync<DtoApuesta, DtoApuesta>($"Apuesta", Apuesta);
-                    if (Apuesta.ApuestaId > 0)
+
+                    Errors = Utilities.ValidateModel(Apuesta);
+
+                    if (Errors.Any())
                     {
-                        await ShowToast(AppResource.LblSuccess, ToastDuration.Short);
-                        await NavigationService.GoBackAsync();
+                        RaisePropertyChanged(nameof(Errors));
                     }
                     else
                     {
-                        await ShowToast(AppResource.LblFailed, ToastDuration.Short);
+                        Client = new ApiClient(CurrentUser.CurrentToken);
+                        Apuesta = await Client.PostAsync<DtoApuesta, DtoApuesta>($"Apuesta", Apuesta);
+                        if (Apuesta.ApuestaId > 0)
+                        {
+                            await ShowToast(AppResource.LblSuccess, ToastDuration.Short);
+                            await NavigationService.GoBackAsync();
+                        }
+                        else
+                        {
+                            await ShowToast(AppResource.LblFailed, ToastDuration.Short);
+                        }
                     }
+
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -92,6 +113,7 @@ namespace BetTrack.ViewModels
                 IsBusy = false;
             }
         }
+
         private async Task LoadCombos()
         {
             Apuesta.Tipsters = await Client.GetAsync<List<DtoUsuarioTipster>>(@$"UsuarioTipster\ObtenerUsuarioTipsters\{CurrentUser.UsuarioId}");

@@ -59,7 +59,8 @@ namespace BetTrack
                            fonts.AddFont("Lato-Bold.ttf", "Bold");
                            fonts.AddFont("Lato-Italic.ttf", "Italic");
                            fonts.AddFont("Lato-Regular.ttf", "Lato");
-                           fonts.AddFont("fontawesome.ttf", "fa");
+                           //fonts.AddFont("fontawesome.ttf", "fa");
+                           fonts.AddFont("FontIconMaterial.ttf", "ma");
                        });
 
 #if DEBUG

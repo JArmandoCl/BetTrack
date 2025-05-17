@@ -393,4 +393,37 @@
   <data name="LblSelectCasino" xml:space="preserve">
     <value>Selecciona un casino</value>
   </data>
+  <data name="LblTipsterRequired" xml:space="preserve">
+    <value>Selecciona un tipster para continuar.</value>
+  </data>
+  <data name="LblCategoryRequired" xml:space="preserve">
+    <value>Selecciona una categoría para continuar.</value>
+  </data>
+  <data name="LblCasinoRequired" xml:space="preserve">
+    <value>Selecciona un casino para continuar.</value>
+  </data>
+  <data name="LblBetNameRequired" xml:space="preserve">
+    <value>El nombre de la apuesta es obligatorio.</value>
+  </data>
+  <data name="LblAmountBetRequired" xml:space="preserve">
+    <value>El importe de la apuesta es obligatorio.</value>
+  </data>
+  <data name="LblSportRequired" xml:space="preserve">
+    <value>Selecciona un deporte para continuar.</value>
+  </data>
+  <data name="LblBetStatusRequired" xml:space="preserve">
+    <value>El estatus de la apuesta es obligatorio.</value>
+  </data>
+  <data name="LblOddRequired" xml:space="preserve">
+    <value>El momio es obligatorio.</value>
+  </data>
+  <data name="LblUserEmailRequired" xml:space="preserve">
+    <value>El correo es un campo obligatorio.</value>
+  </data>
+  <data name="LblUserPasswordRequired" xml:space="preserve">
+    <value>La contraseña es un campo obligatorio.</value>
+  </data>
+  <data name="LblLoginMessageValidation" xml:space="preserve">
+    <value>Usuario o contraseña incorrectos.</value>
+  </data>
 </root>

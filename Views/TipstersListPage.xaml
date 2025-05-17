@@ -18,9 +18,9 @@
         <ToolbarItem Command="{Binding GoToNewTipsterCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.UserPlus}"
-                    Size="18"
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Person_add}"
+                    Size="22"
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
@@ -59,10 +59,10 @@
                             RowDefinitions="auto,auto"
                             VerticalOptions="Center">
                             <Label
-                                FontFamily="fa"
+                                FontFamily="ma"
                                 FontSize="50"
                                 HorizontalOptions="Center"
-                                Text="{x:Static common:DtoIconFont.Users}"
+                                Text="{x:Static common:DtoMaterialIconFont.Groups}"
                                 TextColor="LightGray"
                                 VerticalOptions="Start" />
                             <Label

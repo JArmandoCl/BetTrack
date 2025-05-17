@@ -31,18 +31,36 @@
                         FontFamily="Logo"
                         FontSize="Title"
                         Text="BetTrack" />
-                    <inputLayout:SfTextInputLayout Hint="{x:Static lan:AppResource.TxtEmail}">
+                    <inputLayout:SfTextInputLayout
+                        ErrorText="{Binding Errors[Email], Mode=TwoWay}"
+                        HasError="True"
+                        Hint="{x:Static lan:AppResource.TxtEmail}">
                         <Entry
                             Keyboard="Email"
                             Text="{Binding User.Email}"
                             TextColor="White" />
+                        <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                            <inputLayout:LabelStyle TextColor="Red" />
+                        </inputLayout:SfTextInputLayout.ErrorLabelStyle>
                     </inputLayout:SfTextInputLayout>
-                    <inputLayout:SfTextInputLayout EnablePasswordVisibilityToggle="True" Hint="{x:Static lan:AppResource.TxtPassword}">
+                    <inputLayout:SfTextInputLayout
+                        EnablePasswordVisibilityToggle="True"
+                        ErrorText="{Binding Errors[Contrasenia], Mode=TwoWay}"
+                        HasError="True"
+                        Hint="{x:Static lan:AppResource.TxtPassword}">
                         <Entry
                             Keyboard="Text"
                             Text="{Binding User.Contrasenia}"
                             TextColor="White" />
+                        <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                            <inputLayout:LabelStyle TextColor="Red" />
+                        </inputLayout:SfTextInputLayout.ErrorLabelStyle>
                     </inputLayout:SfTextInputLayout>
+                    <Label
+                        FontSize="Micro"
+                        HorizontalOptions="Center"
+                        Text="{Binding Errors[LoginValidation], Mode=TwoWay}"
+                        TextColor="Red" />
                     <Grid Margin="0,0,0,15" ColumnDefinitions="*,*">
                         <buttons:SfCheckBox
                             Grid.Column="0"

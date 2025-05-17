@@ -25,9 +25,16 @@ namespace BetTrack.ViewModels
         public DelegateCommand GoToUserCasinosList { get { return new DelegateCommand(async () => { INavigationResult result = await NavigationService.NavigateAsync("UserCasinosPage"); Debug.WriteLine(result); }); } }
         public DelegateCommand GoToNewEditBankroll { get { return new DelegateCommand(async () => { INavigationResult result = await NavigationService.NavigateAsync("NewEditBankrollPage"); Debug.WriteLine(result); }); } }
         public DelegateCommand GoToUserCategories { get { return new DelegateCommand(async () => { INavigationResult result = await NavigationService.NavigateAsync("CategoriesPage"); Debug.WriteLine(result); }); } }
+        public DelegateCommand GoToLogoutCommand { get; set; }
         #endregion
         public HomePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
+            GoToLogoutCommand = new DelegateCommand(async () =>
+            {
+                INavigationResult result = await NavigationService.NavigateAsync("//LoginPage");
+                SecureStorage.RemoveAll();
+                Preferences.Default.Clear();
+            });
         }
 
         public async void SelectedCasinoChanged(DtoUsuarioBankroll selectedCasino, bool isEditing = false)

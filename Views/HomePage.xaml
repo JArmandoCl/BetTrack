@@ -26,9 +26,18 @@
         <ToolbarItem Command="{Binding GoToSettingsCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.Gear}"
-                    Size="18"
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Settings}"
+                    Size="22"
+                    Color="White" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Command="{Binding GoToLogoutCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Logout}"
+                    Size="22"
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
@@ -60,12 +69,12 @@
                         WidthRequest="75" />
                     <Label
                         Grid.RowSpan="3"
-                        FontFamily="fa"
+                        FontFamily="ma"
                         FontSize="25"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         Opacity="0.75"
-                        Text="{x:Static common:DtoIconFont.Pencil}"
+                        Text="{x:Static common:DtoMaterialIconFont.Edit}"
                         TextColor="White"
                         VerticalOptions="Center">
                         <Label.GestureRecognizers>
@@ -106,9 +115,9 @@
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
-                                FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.List}"
-                                Size="Default"
+                                FontFamily="ma"
+                                Glyph="{x:Static common:DtoMaterialIconFont.New_label}"
+                                Size="22"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
                     </buttons:SfButton>
@@ -126,8 +135,8 @@
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
-                                FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.BuildingColumns}"
+                                FontFamily="ma"
+                                Glyph="{x:Static common:DtoMaterialIconFont.Account_balance}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -146,8 +155,8 @@
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
-                                FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.SackDollar}"
+                                FontFamily="ma"
+                                Glyph="{x:Static common:DtoMaterialIconFont.Money_bag}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -167,8 +176,8 @@
                         TextColor="White">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
-                                FontFamily="fa"
-                                Glyph="{x:Static common:DtoIconFont.Users}"
+                                FontFamily="ma"
+                                Glyph="{x:Static common:DtoMaterialIconFont.Groups}"
                                 Size="Default"
                                 Color="White" />
                         </buttons:SfButton.ImageSource>
@@ -205,9 +214,9 @@
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 BackgroundColor="Transparent"
-                                                FontFamily="fa"
+                                                FontFamily="ma"
                                                 FontSize="20"
-                                                Text="{x:Static common:DtoIconFont.Pencil}"
+                                                Text="{x:Static common:DtoMaterialIconFont.Edit}"
                                                 VerticalTextAlignment="Center" />
                                         </Grid>
                                     </Grid>

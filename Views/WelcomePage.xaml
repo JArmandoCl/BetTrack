@@ -44,8 +44,8 @@
                             Text="{x:Static lan:AppResource.LblSkipWelcome}"
                             TextColor="{StaticResource BetTrackGreen}" />
                         <Span
-                            FontFamily="fa"
-                            Text="{x:Static common:DtoIconFont.ChevronRight}"
+                            FontFamily="ma"
+                            Text="{x:Static common:DtoMaterialIconFont.Keyboard_arrow_right}"
                             TextColor="{StaticResource BetTrackGreen}" />
                     </FormattedString>
                 </Label.FormattedText>
@@ -72,11 +72,11 @@
                 x:Name="LabelPreviousPage"
                 AbsoluteLayout.LayoutBounds="0.020,0.5"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                FontFamily="fa"
+                FontFamily="ma"
                 FontSize="Title"
                 HorizontalTextAlignment="Center"
                 IsVisible="False"
-                Text="{x:Static common:DtoIconFont.ChevronLeft}"
+                Text="{x:Static common:DtoMaterialIconFont.Keyboard_arrow_left}"
                 TextColor="Black"
                 VerticalOptions="Center">
                 <Label.GestureRecognizers>
@@ -100,10 +100,10 @@
                 x:Name="LabelNextPage"
                 AbsoluteLayout.LayoutBounds="0.98,0.5"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                FontFamily="fa"
+                FontFamily="ma"
                 FontSize="Title"
                 HorizontalTextAlignment="Center"
-                Text="{x:Static common:DtoIconFont.ChevronRight}"
+                Text="{x:Static common:DtoMaterialIconFont.Keyboard_arrow_right}"
                 TextColor="Black"
                 VerticalOptions="Center">
                 <Label.GestureRecognizers>

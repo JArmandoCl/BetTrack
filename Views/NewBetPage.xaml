@@ -16,9 +16,9 @@
         <ToolbarItem Command="{Binding SaveBetCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    FontFamily="fa"
-                    Glyph="{x:Static common:DtoIconFont.Check}"
-                    Size="18"
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Check}"
+                    Size="22"
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
@@ -39,8 +39,7 @@
             Margin="0,10,0,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto"
-            RowSpacing="-7">
+            RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
             <!--  Date  -->
             <picker:SfDateTimePicker
                 x:Name="DateTimePicker"
@@ -92,8 +91,8 @@
                     VerticalOptions="Start">
                     <Button.ImageSource>
                         <FontImageSource
-                            FontFamily="fa"
-                            Glyph="{x:Static common:DtoIconFont.CalendarCheck}"
+                            FontFamily="ma"
+                            Glyph="{x:Static common:DtoMaterialIconFont.Edit_calendar}"
                             Size="25"
                             Color="{x:StaticResource DarkBlue}" />
                     </Button.ImageSource>
@@ -103,14 +102,23 @@
             <inputLayout:SfTextInputLayout
                 x:Name="picker"
                 Grid.Row="1"
+                ErrorText="{Binding Errors[Nombre], Mode=TwoWay}"
+                HasError="True"
                 Hint="{x:Static local:AppResource.TxtBetName}">
                 <Entry
                     Keyboard="Text"
                     Text="{Binding Apuesta.Nombre}"
                     TextColor="White" />
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <!--  Casino  -->
-            <inputLayout:SfTextInputLayout Grid.Row="2" Hint="{x:Static local:AppResource.LblSelectCasino}">
+            <inputLayout:SfTextInputLayout
+                Grid.Row="2"
+                ErrorText="{Binding Errors[UsuarioCasinoId], Mode=TwoWay}"
+                HasError="True"
+                Hint="{x:Static local:AppResource.LblSelectCasino}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -121,10 +129,16 @@
                     SelectedItem="{Binding SelectedCasino, Mode=TwoWay}"
                     TextColor="White"
                     TextMemberPath="Nombre" />
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <!--  Amount  -->
             <Grid Grid.Row="3" ColumnDefinitions="*,auto">
-                <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetAmount}">
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding Errors[Importe], Mode=TwoWay}"
+                    HasError="True"
+                    Hint="{x:Static local:AppResource.TxtBetAmount}">
                     <Grid ColumnDefinitions="auto, *" VerticalOptions="Center">
                         <Label
                             FontSize="16"
@@ -140,6 +154,9 @@
                             Text="{Binding Apuesta.Importe}"
                             TextColor="White" />
                     </Grid>
+                    <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                        <inputLayout:LabelStyle TextColor="Red" />
+                    </inputLayout:SfTextInputLayout.ErrorLabelStyle>
                 </inputLayout:SfTextInputLayout>
                 <buttons:SfCheckBox
                     Grid.Column="1"
@@ -151,16 +168,26 @@
             </Grid>
             <Grid Grid.Row="4" ColumnDefinitions="*,*">
                 <!--  Odds  -->
-                <inputLayout:SfTextInputLayout Hint="{x:Static local:AppResource.TxtBetOdds}">
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding Errors[DetalleApuestaCuota], Mode=TwoWay}"
+                    HasError="True"
+                    Hint="{x:Static local:AppResource.TxtBetOdds}">
                     <Entry
                         x:Name="Odds"
                         Focused="Odds_Focused"
                         Keyboard="Numeric"
                         Text="{Binding Apuesta.DetalleApuesta.Cuota}"
                         TextColor="White" />
+                    <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                        <inputLayout:LabelStyle TextColor="Red" />
+                    </inputLayout:SfTextInputLayout.ErrorLabelStyle>
                 </inputLayout:SfTextInputLayout>
                 <!--  Status  -->
-                <inputLayout:SfTextInputLayout Grid.Column="1" Hint="{x:Static local:AppResource.TxtBetStatus}">
+                <inputLayout:SfTextInputLayout
+                    Grid.Column="1"
+                    ErrorText="{Binding Errors[DetalleApuestaEstatusApuestaId], Mode=TwoWay}"
+                    HasError="True"
+                    Hint="{x:Static local:AppResource.TxtBetStatus}">
                     <editors:SfComboBox
                         x:Name="EstatusApuesta"
                         BackgroundColor="Transparent"
@@ -173,6 +200,9 @@
                         SelectionChanged="EstatusApuesta_SelectionChanged"
                         TextColor="White"
                         TextMemberPath="Descripcion" />
+                    <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                        <inputLayout:LabelStyle TextColor="Red" />
+                    </inputLayout:SfTextInputLayout.ErrorLabelStyle>
                 </inputLayout:SfTextInputLayout>
             </Grid>
             <!--  Cashout  -->
@@ -198,7 +228,11 @@
                 </Grid>
             </inputLayout:SfTextInputLayout>
             <!--  Tipster  -->
-            <inputLayout:SfTextInputLayout Grid.Row="6" Hint="{x:Static local:AppResource.TxtBetTipsterName}">
+            <inputLayout:SfTextInputLayout
+                Grid.Row="6"
+                ErrorText="{Binding Errors[UsuarioTipsterId], Mode=TwoWay}"
+                HasError="True"
+                Hint="{x:Static local:AppResource.TxtBetTipsterName}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -209,9 +243,17 @@
                     SelectedItem="{Binding SelectedTipster, Mode=TwoWay}"
                     TextColor="White"
                     TextMemberPath="NombreTipster" />
+
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <!--  Category  -->
-            <inputLayout:SfTextInputLayout Grid.Row="7" Hint="{x:Static local:AppResource.TxtBetCategoryName}">
+            <inputLayout:SfTextInputLayout
+                Grid.Row="7"
+                ErrorText="{Binding Errors[CategoriaUsuarioId], Mode=TwoWay}"
+                HasError="True"
+                Hint="{x:Static local:AppResource.TxtBetCategoryName}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -222,9 +264,17 @@
                     SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
                     TextColor="White"
                     TextMemberPath="Nombre" />
+
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <!--  Sport  -->
-            <inputLayout:SfTextInputLayout Grid.Row="8" Hint="{x:Static local:AppResource.TxtBetSportName}">
+            <inputLayout:SfTextInputLayout
+                Grid.Row="8"
+                ErrorText="{Binding Errors[DeporteId], Mode=TwoWay}"
+                HasError="True"
+                Hint="{x:Static local:AppResource.TxtBetSportName}">
                 <editors:SfComboBox
                     BackgroundColor="Transparent"
                     ClearButtonIconColor="White"
@@ -237,6 +287,10 @@
                     TextColor="White"
                     TextMemberPath="Nombre"
                     TextSearchMode="Contains" />
+
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <!--  Extras  -->
             <Border Grid.Row="9" Stroke="White">

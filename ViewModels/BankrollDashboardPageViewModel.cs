@@ -30,7 +30,7 @@ namespace BetTrack.ViewModels
                     string option = await PageDialogService.DisplayActionSheetAsync(AppResource.LblBetType, AppResource.BtnCancel, null, AppResource.LblSingleBet, AppResource.LblParleyBet);
                     if (option != null && option != AppResource.BtnCancel)
                     {
-                        await NavigationService.NavigateAsync("NewBetPage", new NavigationParameters { { "BetType", option }, { "SelectedBankroll", SelectedBankroll } });
+                        INavigationResult navigationResult = await NavigationService.NavigateAsync("NewBetPage", new NavigationParameters { { "BetType", option }, { "SelectedBankroll", SelectedBankroll } });
                     }
                 }
             }
