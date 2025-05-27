@@ -50,17 +50,34 @@
                     Text="{Binding User.Nombre}"
                     TextColor="White" />
             </inputLayout:SfTextInputLayout>
-            <inputLayout:SfTextInputLayout Grid.Row="2" Hint="{x:Static local:AppResource.TxtEmail}">
+            <inputLayout:SfTextInputLayout
+                Grid.Row="2"
+                ErrorText="{Binding Errors[Email], Mode=TwoWay}"
+                HasError="True"
+                Hint="{x:Static local:AppResource.TxtEmail}">
                 <Entry
                     Keyboard="Email"
                     Text="{Binding User.Email}"
                     TextColor="White" />
+
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
-            <inputLayout:SfTextInputLayout Grid.Row="3" Hint="{x:Static local:AppResource.TxtNickname}">
+            <inputLayout:SfTextInputLayout
+                Grid.Row="3"
+                ErrorText="{Binding Errors[Nickname], Mode=TwoWay}"
+                HasError="True"
+                Hint="{x:Static local:AppResource.TxtNickname}">
                 <Entry
                     Keyboard="Text"
                     Text="{Binding User.Nickname}"
                     TextColor="White" />
+
+
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <!--<inputLayout:SfTextInputLayout Grid.Row="4" Hint="{x:Static local:AppResource.TxtPassword}">
                 <Entry

@@ -1,5 +1,6 @@
 ﻿using BetTrack.Api;
 using BetTrack.Dtos;
+using BetTrack.Models;
 using BetTrack.Resources.Languages;
 using Prism.Common;
 using System;
@@ -17,14 +18,30 @@ namespace BetTrack.ViewModels
     public class NewEditBankrollPageViewModel : ViewModelBase
     {
         #region Object declarations   
+
+        #region Errors handle
+        private Dictionary<string, string> _errors = new();
+        public Dictionary<string, string> Errors
+        {
+            get => _errors;
+            set => SetProperty(ref _errors, value);
+        }
+        #endregion
         public DelegateCommand CancelCommand { get { return new DelegateCommand(async () => { await NavigationService.GoBackAsync(); }); } }
         public DelegateCommand CreateEditBankrollCommand { get { return new DelegateCommand(CreateEditBankroll); } }
         private DtoUsuarioBankroll bankroll = new DtoUsuarioBankroll();
+        private DtoMoneda selectedCurrency = new();
+        private DtoFormatoCuota selectedOdd = new();
+        private DtoTipoBankroll selectedBankrollType = new();
+
         public DtoUsuarioBankroll Bankroll
         {
             get { return bankroll; }
             set { SetProperty(ref bankroll, value); }
         }
+        public DtoMoneda SelectedCurrency { get => selectedCurrency; set => SetProperty(ref selectedCurrency, value); }
+        public DtoFormatoCuota SelectedOdd { get => selectedOdd; set => SetProperty(ref selectedOdd, value); }
+        public DtoTipoBankroll SelectedBankrollType { get => selectedBankrollType; set => SetProperty(ref selectedBankrollType, value); }
         #endregion
         public NewEditBankrollPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
@@ -36,22 +53,33 @@ namespace BetTrack.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    if (Bankroll.UsuarioBankrollId > 0)
+                    Bankroll.MonedaId = SelectedCurrency?.MonedaId ?? 0;
+                    Bankroll.TipoBankrollId = SelectedBankrollType?.TipoBankrollId ?? 0;
+                    Bankroll.FormatoCuotaId = SelectedOdd?.FormatoCuotaId ?? 0;
+                    Errors = Utilities.ValidateModel(Bankroll);
+                    if (Errors.Any())
                     {
-                        //Edit
-                        Bankroll.FechaModificacion = ApiClient.GetCurrentDateTime();
-                        await Client.PutAsync($@"UsuarioBankroll/{Bankroll.UsuarioBankrollId}",Bankroll);
+                        RaisePropertyChanged(nameof(Errors));
                     }
                     else
                     {
-                        //New
-                        Bankroll.FechaRegistro = ApiClient.GetCurrentDateTime();
-                        Bankroll.FechaModificacion = ApiClient.GetCurrentDateTime();
-                        Bankroll.UsuarioId = CurrentUser.UsuarioId;
-                        Bankroll = await Client.PostAsync<DtoUsuarioBankroll, DtoUsuarioBankroll>(@"UsuarioBankroll", Bankroll);
+                        if (Bankroll.UsuarioBankrollId > 0)
+                        {
+                            //Edit
+                            Bankroll.FechaModificacion = ApiClient.GetCurrentDateTime();
+                            await Client.PutAsync($@"UsuarioBankroll/{Bankroll.UsuarioBankrollId}", Bankroll);
+                        }
+                        else
+                        {
+                            //New
+                            Bankroll.FechaRegistro = ApiClient.GetCurrentDateTime();
+                            Bankroll.FechaModificacion = ApiClient.GetCurrentDateTime();
+                            Bankroll.UsuarioId = CurrentUser.UsuarioId;
+                            Bankroll = await Client.PostAsync<DtoUsuarioBankroll, DtoUsuarioBankroll>(@"UsuarioBankroll", Bankroll);
+                        }
+                        await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblSuccess, AppResource.BtnClose);
+                        await NavigationService.GoBackAsync();
                     }
-                    await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblSuccess, AppResource.BtnClose);
-                    await NavigationService.GoBackAsync();
                 }
             }
             catch (UnauthorizedAccessException e)
@@ -88,9 +116,12 @@ namespace BetTrack.ViewModels
                     else
                     {
                         Bankroll.Monedas = await Client.GetAsync<List<DtoMoneda>>(@"Catalogo/Monedas");
+                        SelectedCurrency = Bankroll.Monedas.FirstOrDefault(x => x.MonedaId == 16);
                         Bankroll.FormatoCuotas = await Client.GetAsync<List<DtoFormatoCuota>>(@"Catalogo/FormatoCuota");
+                        SelectedOdd = Bankroll.FormatoCuotas.FirstOrDefault(x => x.FormatoCuotaId == 1);
                         Bankroll.TiposBankroll = await Client.GetAsync<List<DtoTipoBankroll>>(@"Catalogo/TipoBankroll");
-                    }              
+                        SelectedBankrollType = Bankroll.TiposBankroll.FirstOrDefault(x => x.TipoBankrollId == 1);
+                    }
                 }
             }
             catch (UnauthorizedAccessException e)

@@ -169,6 +169,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El nombre del bankroll es un campo obligatorio..
+        /// </summary>
+        internal static string LblBankrollNameRequired {
+            get {
+                return ResourceManager.GetString("LblBankrollNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mis bankrolls.
         /// </summary>
         internal static string LblBankrollsList {
@@ -430,6 +439,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selecciona un formato de cuota para el bankroll..
+        /// </summary>
+        internal static string LblFormatoCuotaRequired {
+            get {
+                return ResourceManager.GetString("LblFormatoCuotaRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Galería.
         /// </summary>
         internal static string LblGallery {
@@ -466,6 +484,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El capital inicial es un campo obligatorio..
+        /// </summary>
+        internal static string LblInitialCapitalRequired {
+            get {
+                return ResourceManager.GetString("LblInitialCapitalRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Captura el email asociado a tu cuenta y te enviaremos un email con las instrucciones para recuperar tu contraseña..
         /// </summary>
         internal static string LblInstructionsForgotPassword {
@@ -480,6 +507,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblLoginMessageValidation {
             get {
                 return ResourceManager.GetString("LblLoginMessageValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona una moneda..
+        /// </summary>
+        internal static string LblMonedaRequired {
+            get {
+                return ResourceManager.GetString("LblMonedaRequired", resourceCulture);
             }
         }
         
@@ -516,6 +552,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblNewTipster {
             get {
                 return ResourceManager.GetString("LblNewTipster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El nick es un campo obligatorio..
+        /// </summary>
+        internal static string LblNicknameRequired {
+            get {
+                return ResourceManager.GetString("LblNicknameRequired", resourceCulture);
             }
         }
         
@@ -723,6 +768,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblSuccess {
             get {
                 return ResourceManager.GetString("LblSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona el tipo de bankroll..
+        /// </summary>
+        internal static string LblTipoBankrollRequired {
+            get {
+                return ResourceManager.GetString("LblTipoBankrollRequired", resourceCulture);
             }
         }
         

@@ -70,7 +70,7 @@
                     <Label
                         Grid.RowSpan="3"
                         FontFamily="ma"
-                        FontSize="25"
+                        FontSize="40"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         Opacity="0.75"
@@ -107,6 +107,7 @@
                         Command="{Binding GoToUserCategories}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
+                        HorizontalTextAlignment="Start"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -127,6 +128,7 @@
                         Command="{Binding GoToUserCasinosList}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
+                        HorizontalTextAlignment="Start"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -147,6 +149,7 @@
                         Command="{Binding GoToNewEditBankroll}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
+                        HorizontalTextAlignment="Start"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -168,6 +171,7 @@
                         Command="{Binding GoToTipstersList}"
                         CornerRadius="10"
                         EnableRippleEffect="True"
+                        HorizontalTextAlignment="Start"
                         ImageAlignment="Left"
                         ShowIcon="True"
                         Stroke="{x:StaticResource Green}"
@@ -194,6 +198,7 @@
                     <syncfusion:SfListView
                         x:Name="Casinos"
                         AllowSwiping="True"
+                        AutoFitMode="DynamicHeight"
                         ItemsSource="{Binding BankrollsUser}"
                         SelectionBackground="Transparent"
                         SelectionChangedCommand="{Binding SelectedCasinoChangedCommand}"
@@ -225,7 +230,7 @@
                         </syncfusion:SfListView.StartSwipeTemplate>
                         <syncfusion:SfListView.HeaderTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <VerticalStackLayout HorizontalOptions="Center">
                                     <Label
                                         FontAttributes="Bold"
                                         FontSize="Title"
@@ -233,29 +238,30 @@
                                         LineBreakMode="NoWrap"
                                         Text="{x:Static local:AppResource.LblBankrollsList}"
                                         TextColor="White"
-                                        VerticalOptions="Start" />
-                                </Grid>
+                                        VerticalOptions="Center" />
+                                </VerticalStackLayout>
                             </DataTemplate>
                         </syncfusion:SfListView.HeaderTemplate>
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <VerticalStackLayout>
-                                    <Label
-                                        Margin="10,0,0,0"
-                                        FontAttributes="Bold"
-                                        FontSize="Subtitle"
-                                        Text="{Binding NombreBankroll}"
-                                        TextColor="{x:StaticResource White}" />
-                                    <Label
-                                        Margin="0,0,10,0"
-                                        HorizontalTextAlignment="End"
-                                        Text="{Binding CapitalInicial, StringFormat='Capital inicial {0:C2}'}"
-                                        TextColor="{x:StaticResource White}" />
-                                    <BoxView
-                                        BackgroundColor="White"
-                                        HeightRequest="1"
-                                        VerticalOptions="End" />
-                                </VerticalStackLayout>
+                                <Border Margin="5" Stroke="{x:StaticResource Green}">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10" />
+                                    </Border.StrokeShape>
+                                    <VerticalStackLayout Padding="10">
+                                        <Label
+                                            Margin="10,0,0,0"
+                                            FontAttributes="Bold"
+                                            FontSize="Subtitle"
+                                            Text="{Binding NombreBankroll}"
+                                            TextColor="{x:StaticResource White}" />
+                                        <Label
+                                            Margin="0,0,10,0"
+                                            HorizontalTextAlignment="End"
+                                            Text="{Binding CapitalInicial, StringFormat='Capital inicial {0:C2}'}"
+                                            TextColor="{x:StaticResource White}" />
+                                    </VerticalStackLayout>
+                                </Border>
                             </DataTemplate>
                         </syncfusion:SfListView.ItemTemplate>
                     </syncfusion:SfListView>

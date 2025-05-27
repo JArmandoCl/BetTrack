@@ -82,6 +82,11 @@ namespace BetTrack.ViewModels
                     else
                     {
                         Client = new ApiClient(CurrentUser.CurrentToken);
+                        if (Apuesta.DetalleApuesta.EstatusApuestaId != 5)//Pendiente-Pending
+                        {
+                            Apuesta.MontoCobrado = Apuesta.DetalleApuesta.EstatusApuestaId == 4 ? Apuesta.Cashout : Utilities.CalculateTotalPayout(Apuesta.Importe, Apuesta.DetalleApuesta.Cuota, Apuesta.DetalleApuesta.EstatusApuestaId);
+                            Apuesta.Ganancia = Apuesta.DetalleApuesta.EstatusApuestaId == 4 ? Apuesta.Cashout - Apuesta.Importe : Utilities.CalculateNetProfit(Apuesta.Importe, Apuesta.DetalleApuesta.Cuota, Apuesta.DetalleApuesta.EstatusApuestaId);
+                        }
                         Apuesta = await Client.PostAsync<DtoApuesta, DtoApuesta>($"Apuesta", Apuesta);
                         if (Apuesta.ApuestaId > 0)
                         {

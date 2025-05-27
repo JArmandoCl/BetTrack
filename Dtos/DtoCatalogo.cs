@@ -21,6 +21,7 @@ namespace BetTrack.Dtos
         public int TipoApuestaId { get; set; }
         public string Nombre { get; set; } = "";
     }
+
     public class DtoDeporte
     {
         public long DeporteId { get; set; }
@@ -95,6 +96,10 @@ namespace BetTrack.Dtos
             set { SetProperty(ref contrasenia, value); }
         }
         private string nickname = "";
+
+        [Required(
+           ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblNicknameRequired))]
         public string Nickname
         {
             get { return nickname; }
@@ -160,22 +165,39 @@ namespace BetTrack.Dtos
     {
         public long UsuarioBankrollId { get; set; }
         public long UsuarioId { get; set; }
+
+        [Required(
+           ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblBankrollNameRequired))]
         public string NombreBankroll { get; set; } = "";
-        public decimal? CapitalInicial { get; set; } = null;
+
+        [Range(0.01, double.MaxValue,
+             ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblInitialCapitalRequired))]
+        public decimal CapitalInicial { get; set; }
         public int EstatusBankrollId { get; set; } = 1;
         private int formatoCuotaId = 1;
+        [Range(1, long.MaxValue,
+            ErrorMessageResourceType = typeof(AppResource),
+          ErrorMessageResourceName = nameof(AppResource.LblFormatoCuotaRequired))]
         public int FormatoCuotaId
         {
             get { return formatoCuotaId; }
             set { SetProperty(ref formatoCuotaId, value); }
         }
         private int tipoBankrollId = 1;
+        [Range(1, long.MaxValue,
+            ErrorMessageResourceType = typeof(AppResource),
+          ErrorMessageResourceName = nameof(AppResource.LblTipoBankrollRequired))]
         public int TipoBankrollId
         {
             get { return tipoBankrollId; }
             set { SetProperty(ref tipoBankrollId, value); }
         }
-        private int monedaId = 1;
+        private int monedaId = 16;
+        [Range(1, long.MaxValue,
+            ErrorMessageResourceType = typeof(AppResource),
+          ErrorMessageResourceName = nameof(AppResource.LblMonedaRequired))]
         public int MonedaId
         {
             get { return monedaId; }
@@ -356,9 +378,18 @@ namespace BetTrack.Dtos
         public DateTime Fecha { get; set; }
     }
     #region Extras
-    public class DtoReestablecerContrasenia
+    public class DtoReestablecerContrasenia:BindableBase
     {
-        public string Email { get; set; } = "";
+        private string email = "";
+
+        [EmailAddress(
+           ErrorMessageResourceType = typeof(AppResource),
+           ErrorMessageResourceName = nameof(AppResource.LblUserEmailRequired))]
+        public string Email
+        {
+            get { return email; }
+            set { SetProperty(ref email, value); }
+        }
         public string Token { get; set; } = "";
         public string NewPassword { get; set; } = "-";
         public string NewConfirmedPassword { get; set; } = "-";

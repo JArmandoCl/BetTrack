@@ -21,8 +21,7 @@
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-            RowDefinitions="auto,auto,auto,auto,*"
-            RowSpacing="20">
+            RowDefinitions="auto,auto,auto,auto,*">
             <Image
                 Grid.RowSpan="5"
                 Aspect="AspectFill"
@@ -30,34 +29,49 @@
                 Source="sports_pattern_2.png" />
             <Label
                 Grid.Row="0"
-                Padding="0,50,0,0"
+                Padding="0,50,0,20"
                 FontAttributes="Bold"
                 FontSize="Title"
                 Text="{x:Static lan:AppResource.LblCreateNewAccount}" />
             <inputLayout:SfTextInputLayout
                 Grid.Row="1"
+                ErrorText="{Binding Errors[Nickname], Mode=TwoWay}"
+                HasError="True"
                 HelperText="{x:Static lan:AppResource.LblRequired}"
                 Hint="{x:Static lan:AppResource.TxtUser}">
                 <Entry
                     Keyboard="Text"
-                    Text="{Binding Usuario.Nickname, Mode=TwoWay}"
+                    Text="{Binding User.Nickname, Mode=TwoWay}"
                     TextColor="White" />
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout
                 Grid.Row="2"
+                ErrorText="{Binding Errors[Email], Mode=TwoWay}"
+                HasError="True"
                 HelperText="{x:Static lan:AppResource.LblRequired}"
                 Hint="{x:Static lan:AppResource.TxtEmail}">
                 <Entry
                     Keyboard="Email"
-                    Text="{Binding Usuario.Email, Mode=TwoWay}"
+                    Text="{Binding User.Email, Mode=TwoWay}"
                     TextColor="White" />
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout
                 Grid.Row="3"
                 EnablePasswordVisibilityToggle="True"
+                ErrorText="{Binding Errors[Contrasenia], Mode=TwoWay}"
+                HasError="True"
                 HelperText="{x:Static lan:AppResource.LblRequired}"
                 Hint="{x:Static lan:AppResource.TxtPassword}">
-                <Entry Text="{Binding Usuario.Contrasenia, Mode=TwoWay}" TextColor="White" />
+                <Entry Text="{Binding User.Contrasenia, Mode=TwoWay}" TextColor="White" />
+                <inputLayout:SfTextInputLayout.ErrorLabelStyle>
+                    <inputLayout:LabelStyle TextColor="Red" />
+                </inputLayout:SfTextInputLayout.ErrorLabelStyle>
             </inputLayout:SfTextInputLayout>
             <VerticalStackLayout Grid.Row="4" VerticalOptions="End">
                 <buttons:SfButton

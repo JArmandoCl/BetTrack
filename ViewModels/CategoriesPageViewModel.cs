@@ -39,7 +39,12 @@ namespace BetTrack.ViewModels
         public string SearchText
         {
             get { return searchText; }
-            set { SetProperty(ref searchText, value); PerformSearch(searchText); }
+            set
+            {
+                SetProperty(ref searchText, value);
+                if (string.IsNullOrEmpty(searchText))
+                    PerformSearch(searchText);
+            }
         }
         #endregion
         #endregion

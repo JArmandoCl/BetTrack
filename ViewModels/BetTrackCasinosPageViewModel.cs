@@ -21,7 +21,14 @@ namespace BetTrack.ViewModels
         public string SearchText
         {
             get { return searchText; }
-            set { SetProperty(ref searchText, value); }
+            set
+            {
+                SetProperty(ref searchText, value);
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    PerformSearch(searchText);
+                }
+            }
         }
         #endregion
         private ObservableCollection<DtoCasino> casinos;

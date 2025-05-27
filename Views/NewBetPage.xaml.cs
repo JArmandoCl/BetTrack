@@ -7,22 +7,22 @@ public partial class NewBetPage : ContentPage
     public NewBetPage()
     {
         InitializeComponent();
-        BetDate.Text=DateTime.Now.ToString("dd-MM-yyyy hh:mm tt");
+        BetDate.Text = DateTime.Now.ToString("dd-MM-yyyy hh:mm tt");
     }
 
     private void BetAmount_Focused(object sender, FocusEventArgs e)
     {
-        if (BetAmount.Text.Equals("0"))
+        if (BetAmount.Value == 0)
         {
-            BetAmount.Text = "";
+            BetAmount.Value = 0;
         }
     }
 
     private void Odds_Focused(object sender, FocusEventArgs e)
     {
-        if (Odds.Text.Equals("0"))
+        if (Odds.Value == 0)
         {
-            Odds.Text = "";
+            Odds.Value = 0;
         }
     }
 
@@ -43,7 +43,7 @@ public partial class NewBetPage : ContentPage
 
     private void EsApuestaGratuita_StateChanged(object sender, Syncfusion.Maui.Buttons.StateChangedEventArgs e)
     {
-        if (EsApuestaPagada.IsChecked==true && e.IsChecked==true)
+        if (EsApuestaPagada.IsChecked == true && e.IsChecked == true)
         {
             EsApuestaPagada.IsChecked = false;
         }
@@ -59,23 +59,23 @@ public partial class NewBetPage : ContentPage
 
     private void EstatusApuesta_SelectionChanged(object sender, Syncfusion.Maui.Inputs.SelectionChangedEventArgs e)
     {
-        DtoEstatusApuesta estatusApuesta =(DtoEstatusApuesta) e.AddedItems.FirstOrDefault();
-        if (estatusApuesta!=null && estatusApuesta.EstatusApuestaId==4)
+        DtoEstatusApuesta estatusApuesta = (DtoEstatusApuesta)e.AddedItems.FirstOrDefault();
+        if (estatusApuesta != null && estatusApuesta.EstatusApuestaId == 4)
         {
             InputCashout.IsVisible = true;
         }
         else
         {
             InputCashout.IsVisible = false;
-            Cashout.Text = "0";
+            Cashout.Value = 0;
         }
     }
 
     private void Cashout_Focused(object sender, FocusEventArgs e)
     {
-        if (Cashout.Text.Equals("0"))
+        if (Cashout.Value == 0)
         {
-            Cashout.Text = "";
+            Cashout.Value = 0;
         }
     }
 }

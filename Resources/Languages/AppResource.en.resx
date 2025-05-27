@@ -426,4 +426,22 @@
   <data name="LblLoginMessageValidation" xml:space="preserve">
     <value>User or password are incorrect.</value>
   </data>
+  <data name="LblNicknameRequired" xml:space="preserve">
+    <value>Nickname is required.</value>
+  </data>
+  <data name="LblBankrollNameRequired" xml:space="preserve">
+    <value>The bankroll name is required.</value>
+  </data>
+  <data name="LblInitialCapitalRequired" xml:space="preserve">
+    <value>The initial capital es required.</value>
+  </data>
+  <data name="LblFormatoCuotaRequired" xml:space="preserve">
+    <value>Select a cuota format to continue.</value>
+  </data>
+  <data name="LblTipoBankrollRequired" xml:space="preserve">
+    <value>Select a bankroll type to continue.</value>
+  </data>
+  <data name="LblMonedaRequired" xml:space="preserve">
+    <value>Select a currency to continue.</value>
+  </data>
 </root>

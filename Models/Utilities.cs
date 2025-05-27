@@ -148,5 +148,62 @@ namespace BetTrack.Models
 
             return errors;
         }
+        #region Single bet
+        // Calculates total payout (including stake) using decimal odds
+        public static decimal CalculateTotalPayout(decimal stake, decimal decimalOdds, long betStatus)
+        {
+            decimal payout = 0;
+            switch (betStatus)
+            {
+                case 1://Ganada-Winner
+                    payout = stake * decimalOdds;
+                    break;
+                case 2://Perdida-Lose
+                    payout = 0;
+                    break;
+                case 3://Reembolsada-Push
+                    payout = stake;
+                    break;
+            }
+            return payout;
+        }
+
+        // Calculates net profit (excluding stake)
+        public static decimal CalculateNetProfit(decimal stake, decimal decimalOdds, long betStatus)
+        {
+            decimal payout = 0;
+            switch (betStatus)
+            {
+                case 1://Ganada-Winner
+                    payout = (stake * decimalOdds) - stake;
+                    break;
+                case 2://Perdida-Lose
+                    payout = 0 - stake;
+                    break;
+                case 3://Reembolsada-Push
+                    payout = 0;
+                    break;
+            }
+            return payout;
+        }
+
+        // Converts American odds to decimal odds
+        public static decimal ConvertAmericanToDecimalOdds(int americanOdds)
+        {
+            if (americanOdds > 0)
+            {
+                return (americanOdds / 100m) + 1;
+            }
+            else if (americanOdds < 0)
+            {
+                return (100m / Math.Abs(americanOdds)) + 1;
+            }
+            else
+            {
+                throw new ArgumentException("American odds cannot be zero.");
+            }
+        }
+
+        #endregion
     }
 }

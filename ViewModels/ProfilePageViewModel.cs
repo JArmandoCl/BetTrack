@@ -14,6 +14,15 @@ namespace BetTrack.ViewModels
     public class ProfilePageViewModel : ViewModelBase
     {
         #region Object declarations   
+
+        #region Errors handle
+        private Dictionary<string, string> _errors = new();
+        public Dictionary<string, string> Errors
+        {
+            get => _errors;
+            set => SetProperty(ref _errors, value);
+        }
+        #endregion
         private DtoUsuario user;
         public DtoUsuario User
         {
@@ -34,7 +43,16 @@ namespace BetTrack.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    await SaveProfile();
+                    Errors = Utilities.ValidateModel(User);
+                    if (Errors.Any())
+                    {
+                        RaisePropertyChanged(nameof(Errors));
+                    }
+                    else
+                    {
+
+                        await SaveProfile(); 
+                    }
                 }
             }
             catch (UnauthorizedAccessException e)

@@ -70,6 +70,8 @@ namespace BetTrack.ViewModels
                 {
                     IsBusy = true;
                     Errors = Utilities.ValidateModel(User);
+                    if (Errors.ContainsKey("Nickname"))
+                        Errors.Remove("Nickname");
                     if (Errors.Any())
                     {
                         RaisePropertyChanged(nameof(Errors));
