@@ -4,8 +4,14 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:common="clr-namespace:BetTrack.Dtos"
-    Title="{Binding Title}">
-    <ContentPage.ToolbarItems>
+    xmlns:expander="clr-namespace:Syncfusion.Maui.Toolkit.Expander;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:lan="clr-namespace:BetTrack.Resources.Languages"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:tabView="clr-namespace:Syncfusion.Maui.Toolkit.TabView;assembly=Syncfusion.Maui.Toolkit"
+    Title="{Binding Title}"
+    Visual="Material">
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding NewBetCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
@@ -15,12 +21,360 @@
                     Color="White" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-    </ContentPage.ToolbarItems>
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Title}"
-            TextColor="#F9B949"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    </ContentPage.ToolbarItems>-->
+    <AbsoluteLayout>
+        <tabView:SfTabView
+            x:Name="tabView"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            IndicatorWidthMode="Fit"
+            SelectionChanging="tabView_SelectionChanging"
+            TabBarBackground="{x:StaticResource SecondaryDarkBlue}"
+            TabBarHeight="60"
+            TabBarPlacement="Top">
+            <!--  Center button settings  -->
+            <!--<tabView:SfTabView.CenterButtonSettings>
+            <tabView:CenterButtonSettings
+                Width="70"
+                Height="70"
+                Background="{x:StaticResource SecondaryDarkBlue}"
+                CornerRadius="50"
+                DisplayMode="Image"
+                ImageSize="50">
+                <tabView:CenterButtonSettings.ImageSource>
+                    <FontImageSource
+                        FontFamily="ma"
+                        Glyph="{x:Static common:DtoMaterialIconFont.Add_circle}"
+                        Size="50"
+                        Color="White" />
+                </tabView:CenterButtonSettings.ImageSource>
+            </tabView:CenterButtonSettings>
+        </tabView:SfTabView.CenterButtonSettings>-->
+            <tabView:SfTabView.Items>
+                <!--  First tab item  -->
+                <!--
+            <tabView:SfTabItem
+                FontFamily="Lato"
+                Header="General"
+                ImageTextSpacing="0"
+                TextColor="White">
+                <tabView:SfTabItem.ImageSource>
+                    <FontImageSource
+                        FontFamily="ma"
+                        Glyph="{x:Static common:DtoMaterialIconFont.Info}"
+                        Size="25"
+                        Color="White" />
+                </tabView:SfTabItem.ImageSource>
+                <tabView:SfTabItem.Content>
+                    <AbsoluteLayout>
+                        <Image
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            Aspect="AspectFill"
+                            Opacity="0.125"
+                            Source="sports_pattern_2.png" />
+                        <VerticalStackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                            <Border
+                                Margin="0,10"
+                                Padding="20"
+                                Stroke="LightGray"
+                                StrokeShape="RoundRectangle 16"
+                                StrokeThickness="1">
+
+                                <VerticalStackLayout Spacing="10">
+
+                -->
+                <!--  Título  -->
+                <!--
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="20"
+                                        Text="{Binding Bankroll.NombreBankroll, Mode=TwoWay}"
+                                        TextColor="White" />
+
+                -->
+                <!--  Capital inicial y moneda  -->
+                <!--
+                                    <HorizontalStackLayout Spacing="15">
+                                        <Label
+                                            FontSize="16"
+                                            Text="{Binding Bankroll.CapitalInicial, StringFormat='Capital: {0:C}'}"
+                                            TextColor="{StaticResource Green}" />
+                                        <Label
+                                            FontSize="16"
+                                            Text="{Binding Bankroll.Moneda.Descripcion}"
+                                            TextColor="{StaticResource InfoColor}" />
+                                    </HorizontalStackLayout>
+
+                -->
+                <!--  Tipo y formato  -->
+                <!--
+                                    <HorizontalStackLayout Spacing="15">
+                                        <Label
+                                            FontSize="14"
+                                            Text="{Binding Bankroll.TipoBankroll.Nombre}"
+                                            TextColor="LightGray" />
+                                        <Label
+                                            FontSize="14"
+                                            Text="{Binding Bankroll.FormatoCuota.Nombre}"
+                                            TextColor="LightGray" />
+                                    </HorizontalStackLayout>
+
+                -->
+                <!--  Fechas  -->
+                <!--
+                                    <Grid ColumnSpacing="20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label
+                                            Grid.Column="0"
+                                            FontSize="13"
+                                            Text="{Binding Bankroll.FechaRegistro, StringFormat='Registrado: {0:dd MMM yyyy}'}"
+                                            TextColor="#AAAAAA" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="13"
+                                            HorizontalOptions="End"
+                                            Text="{Binding Bankroll.FechaModificacion, StringFormat='Modificado: {0:dd MMM yyyy}'}"
+                                            TextColor="#AAAAAA" />
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </VerticalStackLayout>
+                    </AbsoluteLayout>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>-->
+                <!--  Second tab item  -->
+                <tabView:SfTabItem
+                    FontFamily="Lato"
+                    Header="{x:Static lan:AppResource.LblBets}"
+                    ImageTextSpacing="0"
+                    TextColor="White">
+                    <tabView:SfTabItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="ma"
+                            Glyph="{x:Static common:DtoMaterialIconFont.View_list}"
+                            Size="25"
+                            Color="White" />
+                    </tabView:SfTabItem.ImageSource>
+                    <tabView:SfTabItem.Content>
+                        <syncfusion:SfListView
+                            x:Name="Bets"
+                            Margin="0,10"
+                            AllowSwiping="True"
+                            AutoFitMode="DynamicHeight"
+                            ItemsSource="{Binding Bets}"
+                            SelectionBackground="Transparent"
+                            SelectionChangedCommand="{Binding SelectedBetChangedCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference Bets}}"
+                            SelectionGesture="Tap"
+                            SelectionMode="Single">
+                            <syncfusion:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Margin="{OnPlatform Default='8,0,8,8',
+                                                            WinUI='8,0,6,8',
+                                                            MacCatalyst='8,0,6,8'}"
+                                        Stroke="{x:StaticResource Green}"
+                                        StrokeShape="RoundRectangle 8,8,8,8"
+                                        StrokeThickness="{OnPlatform MacCatalyst=2,
+                                                                     Default=1}"
+                                        WidthRequest="{OnPlatform MacCatalyst=460,
+                                                                  WinUI=340}">
+                                        <expander:SfExpander x:Name="expander1">
+                                            <expander:SfExpander.Header>
+                                                <Grid
+                                                    Padding="10,0"
+                                                    ColumnDefinitions="auto,*"
+                                                    ColumnSpacing="10"
+                                                    RowDefinitions="48">
+                                                    <Label
+                                                        FontSize="Small"
+                                                        Text="{Binding Importe, StringFormat='{0:C2}'}"
+                                                        VerticalTextAlignment="Center" />
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        FontSize="Default"
+                                                        Text="{Binding Nombre}"
+                                                        TextColor="{Binding Path=HeaderIconColor, Source={x:Reference expander1}}"
+                                                        VerticalTextAlignment="Center" />
+                                                </Grid>
+                                            </expander:SfExpander.Header>
+                                            <expander:SfExpander.Content>
+                                                <Grid
+                                                    Padding="18,8,18,18"
+                                                    ColumnDefinitions="*,auto"
+                                                    RowDefinitions="auto,auto,auto">
+                                                    <Label FontSize="Small" Text="{Binding Importe, StringFormat='Importe {0:C2}'}" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        FontSize="Small"
+                                                        Text="{Binding Ganancia, StringFormat='Ganancia {0:C2}'}" />
+                                                    <Label
+                                                        Grid.Row="2"
+                                                        FontSize="Micro"
+                                                        Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy hh:mm tt}'}" />
+                                                    <Grid
+                                                        Grid.RowSpan="3"
+                                                        Grid.Column="1"
+                                                        ColumnDefinitions="auto,auto"
+                                                        RowDefinitions="auto,auto">
+                                                        <Label
+                                                            Margin="14,0"
+                                                            FontFamily="ma"
+                                                            FontSize="Large"
+                                                            HorizontalTextAlignment="End"
+                                                            Text="{x:Static common:DtoMaterialIconFont.Delete}"
+                                                            TextColor="Red"
+                                                            VerticalOptions="Center"
+                                                            VerticalTextAlignment="Center" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Margin="14,0"
+                                                            FontFamily="ma"
+                                                            FontSize="Large"
+                                                            HorizontalTextAlignment="End"
+                                                            Text="{x:Static common:DtoMaterialIconFont.Edit}"
+                                                            TextColor="{x:StaticResource Green}"
+                                                            VerticalOptions="Center"
+                                                            VerticalTextAlignment="Center" />
+                                                        <Image
+                                                            Grid.Row="1"
+                                                            HeightRequest="20"
+                                                            Source="https://static.gmlinteractive.com/casinov3/eb2a6318/img/betano-logo-lg.DJ-2layv.svg" />
+                                                    </Grid>
+                                                </Grid>
+                                            </expander:SfExpander.Content>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroupList>
+                                                    <VisualStateGroup>
+                                                        <VisualState Name="Expanded">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="HeaderBackground" Value="{x:StaticResource SecondaryDarkBlue}" />
+                                                                <Setter Property="HeaderIconColor" Value="White" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState Name="Collapsed">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="HeaderBackground" Value="{x:StaticResource SecondaryDarkBlue}" />
+                                                                <Setter Property="HeaderIconColor" Value="White" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState Name="PointerOver">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="HeaderBackground" Value="Red" />
+                                                                <Setter Property="HeaderIconColor" Value="White" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState Name="Normal">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="HeaderBackground" Value="{x:StaticResource SecondaryDarkBlue}" />
+                                                                <Setter Property="HeaderIconColor" Value="White" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateGroupList>
+                                            </VisualStateManager.VisualStateGroups>
+                                        </expander:SfExpander>
+                                    </Border>
+                                </DataTemplate>
+                            </syncfusion:SfListView.ItemTemplate>
+                        </syncfusion:SfListView>
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <!--  Third tab item  -->
+                <tabView:SfTabItem
+                    Margin="0,10"
+                    FontFamily="Lato"
+                    Header="{x:Static lan:AppResource.LblCharts}"
+                    ImageTextSpacing="0"
+                    TextColor="White">
+                    <tabView:SfTabItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="ma"
+                            Glyph="{x:Static common:DtoMaterialIconFont.Monitoring}"
+                            Size="25"
+                            Color="White" />
+                    </tabView:SfTabItem.ImageSource>
+                    <tabView:SfTabItem.Content>
+                        <Label
+                            BackgroundColor="Blue"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Text="Contacts Tab Content"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <!--  Fourth tab item  -->
+                <tabView:SfTabItem
+                    Margin="0,10"
+                    FontFamily="Lato"
+                    Header="{x:Static lan:AppResource.LblMoreOptions}"
+                    ImageTextSpacing="0"
+                    TextColor="White">
+                    <tabView:SfTabItem.ImageSource>
+                        <FontImageSource
+                            FontFamily="ma"
+                            Glyph="{x:Static common:DtoMaterialIconFont.More_vert}"
+                            Size="25"
+                            Color="White" />
+                    </tabView:SfTabItem.ImageSource>
+                    <tabView:SfTabItem.Content>
+                        <Label
+                            BackgroundColor="Blue"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Text="Contacts Tab Content"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+            </tabView:SfTabView.Items>
+        </tabView:SfTabView>
+        <Button
+            AbsoluteLayout.LayoutBounds="0.95,0.97"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            BackgroundColor="{x:StaticResource Green}"
+            Command="{Binding NewBetCommand}"
+            CornerRadius="30"
+            FontSize="24"
+            HeightRequest="60"
+            TextColor="White"
+            WidthRequest="60">
+            <Button.Shadow>
+                <Shadow
+                    Brush="Black"
+                    Radius="5"
+                    Offset="3,3" />
+            </Button.Shadow>
+            <Button.ImageSource>
+                <FontImageSource
+                    FontFamily="ma"
+                    Glyph="{x:Static common:DtoMaterialIconFont.Add}"
+                    Size="30"
+                    Color="White" />
+            </Button.ImageSource>
+        </Button>
+        <!--  Overlay de espera  -->
+        <ContentView
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="LightGray"
+            IsVisible="{Binding IsBusy}"
+            Opacity="0.2" />
+        <inputLayout:SfBusyIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AnimationType="CircularMaterial"
+            HeightRequest="100"
+            IndicatorColor="White"
+            IsRunning="{Binding IsBusy}"
+            VerticalOptions="Center"
+            WidthRequest="100" />
+    </AbsoluteLayout>
 </ContentPage>

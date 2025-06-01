@@ -15,7 +15,6 @@
                 AbsoluteLayout.LayoutFlags="All"
                 ItemsSource="{Binding WelcomeImages}"
                 Loop="False"
-                Position="{Binding CurrentPosition}"
                 PositionChanged="CarouselView_PositionChanged">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>

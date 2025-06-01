@@ -142,6 +142,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Archivar.
+        /// </summary>
+        internal static string LblArchive {
+            get {
+                return ResourceManager.GetString("LblArchive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Algo falló enviando la información, lamentamos las molestias..
         /// </summary>
         internal static string LblBadRequestServer {
@@ -210,6 +219,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblBetNameRequired {
             get {
                 return ResourceManager.GetString("LblBetNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apuestas.
+        /// </summary>
+        internal static string LblBets {
+            get {
+                return ResourceManager.GetString("LblBets", resourceCulture);
             }
         }
         
@@ -286,7 +304,7 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selecciona un casino para continuar..
+        ///   Looks up a localized string similar to Selecciona una casa de apuestas para continuar..
         /// </summary>
         internal static string LblCasinoRequired {
             get {
@@ -331,6 +349,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gráficos.
+        /// </summary>
+        internal static string LblCharts {
+            get {
+                return ResourceManager.GetString("LblCharts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Que deseas realizar?.
         /// </summary>
         internal static string LblChooseAnAction {
@@ -345,6 +372,24 @@ namespace BetTrack.Resources.Languages {
         internal static string LblChooseAnOption {
             get {
                 return ResourceManager.GetString("LblChooseAnOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Al archivar el bankroll dejarás de verlo en la lista principal, pero puedes activarlo de nuevo desde las configuraciones. ¿Continuar?.
+        /// </summary>
+        internal static string LblConfirmArchiveBankroll {
+            get {
+                return ResourceManager.GetString("LblConfirmArchiveBankroll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿Estás seguro de eliminar el bankroll? Está acción es irreversible.
+        /// </summary>
+        internal static string LblConfirmDeleteBankroll {
+            get {
+                return ResourceManager.GetString("LblConfirmDeleteBankroll", resourceCulture);
             }
         }
         
@@ -381,6 +426,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblDelete {
             get {
                 return ResourceManager.GetString("LblDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eliminar el bankroll.
+        /// </summary>
+        internal static string LblDeleteBankroll {
+            get {
+                return ResourceManager.GetString("LblDeleteBankroll", resourceCulture);
             }
         }
         
@@ -457,7 +511,7 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importa tus casinos.
+        ///   Looks up a localized string similar to Importa tus casas de apuestas.
         /// </summary>
         internal static string LblImportCasino {
             get {
@@ -520,6 +574,15 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Más.
+        /// </summary>
+        internal static string LblMoreOptions {
+            get {
+                return ResourceManager.GetString("LblMoreOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Aún no tienes una cuenta?.
         /// </summary>
         internal static string LblNewAccount {
@@ -565,7 +628,16 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No hay casinos registrados.
+        ///   Looks up a localized string similar to No hay apuestas para mostrar.
+        /// </summary>
+        internal static string LblNoBetsToShow {
+            get {
+                return ResourceManager.GetString("LblNoBetsToShow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No hay casas de apuestas registradas.
         /// </summary>
         internal static string LblNoCasinos {
             get {
@@ -673,7 +745,7 @@ namespace BetTrack.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selecciona un casino.
+        ///   Looks up a localized string similar to Selecciona una casa de apuestas.
         /// </summary>
         internal static string LblSelectCasino {
             get {
@@ -714,6 +786,15 @@ namespace BetTrack.Resources.Languages {
         internal static string LblSessionExpired {
             get {
                 return ResourceManager.GetString("LblSessionExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuraciones.
+        /// </summary>
+        internal static string LblSettings {
+            get {
+                return ResourceManager.GetString("LblSettings", resourceCulture);
             }
         }
         
@@ -831,6 +912,24 @@ namespace BetTrack.Resources.Languages {
         internal static string LblUserProfile {
             get {
                 return ResourceManager.GetString("LblUserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archivar el bankroll.
+        /// </summary>
+        internal static string TitleArchiveBankroll {
+            get {
+                return ResourceManager.GetString("TitleArchiveBankroll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eliminar bankroll.
+        /// </summary>
+        internal static string TitleDeleteBankroll {
+            get {
+                return ResourceManager.GetString("TitleDeleteBankroll", resourceCulture);
             }
         }
         

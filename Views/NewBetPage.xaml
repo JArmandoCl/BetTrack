@@ -36,7 +36,7 @@
             Opacity="0.05"
             Source="sports_pattern.png" />
         <ScrollView
-            Margin="0,10,0,0"
+            Margin="5,10,5,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All">
             <Grid RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
@@ -81,22 +81,24 @@
                             <TapGestureRecognizer Tapped="OpenBetDatePicker_Clicked" />
                         </inputLayout:SfTextInputLayout.GestureRecognizers>
                     </inputLayout:SfTextInputLayout>
-                    <Button
+                    <ImageButton
                         x:Name="OpenBetDatePicker"
                         Grid.Column="1"
                         Margin="0,5"
                         BackgroundColor="{x:StaticResource Gray100}"
                         Clicked="OpenBetDatePicker_Clicked"
+                        CornerRadius="10"
                         HeightRequest="20"
+                        HorizontalOptions="Center"
                         VerticalOptions="Start">
-                        <Button.ImageSource>
+                        <ImageButton.Source>
                             <FontImageSource
                                 FontFamily="ma"
                                 Glyph="{x:Static common:DtoMaterialIconFont.Edit_calendar}"
                                 Size="25"
                                 Color="{x:StaticResource DarkBlue}" />
-                        </Button.ImageSource>
-                    </Button>
+                        </ImageButton.Source>
+                    </ImageButton>
                 </Grid>
                 <!--  Name  -->
                 <inputLayout:SfTextInputLayout
@@ -143,6 +145,7 @@
                             x:Name="BetAmount"
                             Margin="2,0"
                             BackgroundColor="Transparent"
+                            ClearButtonColor="White"
                             CustomFormat="C2"
                             Focused="BetAmount_Focused"
                             HeightRequest="45"
@@ -173,6 +176,7 @@
                             x:Name="Odds"
                             Margin="2,0"
                             BackgroundColor="Transparent"
+                            ClearButtonColor="White"
                             CustomFormat="N3"
                             Focused="Odds_Focused"
                             HeightRequest="45"
@@ -342,13 +346,20 @@
             </Grid>
         </ScrollView>
         <!--  Preloader  -->
-        <inputLayout:SfBusyIndicator
+        <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            AnimationType="LinearMaterial"
-            HeightRequest="10"
+            BackgroundColor="LightGray"
+            IsVisible="{Binding IsBusy}"
+            Opacity="0.2" />
+        <inputLayout:SfBusyIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AnimationType="CircularMaterial"
+            HeightRequest="100"
             IndicatorColor="White"
             IsRunning="{Binding IsBusy}"
-            VerticalOptions="Start" />
+            VerticalOptions="Center"
+            WidthRequest="100" />
     </AbsoluteLayout>
 </ContentPage>

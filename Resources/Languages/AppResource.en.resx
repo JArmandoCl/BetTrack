@@ -226,7 +226,7 @@
     <value>Delete</value>
   </data>
   <data name="LblImportCasino" xml:space="preserve">
-    <value>Import your casinos</value>
+    <value>Import your book</value>
   </data>
   <data name="LblConfirmDeleteCasinos" xml:space="preserve">
     <value>Are you sure you want to continue with the deletion?</value>
@@ -370,7 +370,7 @@
     <value>You don't have any categories registered yet.</value>
   </data>
   <data name="LblNoCasinos" xml:space="preserve">
-    <value>There are no registered casinos</value>
+    <value>There are no registered books</value>
   </data>
   <data name="LblBetDate" xml:space="preserve">
     <value>Bet date</value>
@@ -391,7 +391,7 @@
     <value>Minute</value>
   </data>
   <data name="LblSelectCasino" xml:space="preserve">
-    <value>Select a casino</value>
+    <value>Select a book</value>
   </data>
   <data name="LblTipsterRequired" xml:space="preserve">
     <value>Select a tipster to continue.</value>
@@ -400,7 +400,7 @@
     <value>Select a category to continue.</value>
   </data>
   <data name="LblCasinoRequired" xml:space="preserve">
-    <value>Select a casino to continue.</value>
+    <value>Select a book to continue.</value>
   </data>
   <data name="LblBetNameRequired" xml:space="preserve">
     <value>The bet name is required.</value>
@@ -443,5 +443,38 @@
   </data>
   <data name="LblMonedaRequired" xml:space="preserve">
     <value>Select a currency to continue.</value>
+  </data>
+  <data name="LblBets" xml:space="preserve">
+    <value>Bets</value>
+  </data>
+  <data name="LblCharts" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="LblSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="LblNoBetsToShow" xml:space="preserve">
+    <value>No bets to show</value>
+  </data>
+  <data name="LblMoreOptions" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="LblDeleteBankroll" xml:space="preserve">
+    <value>Delete bankroll</value>
+  </data>
+  <data name="LblArchive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="LblConfirmDeleteBankroll" xml:space="preserve">
+    <value>Are you sure you want to delete your bankroll? This action is irreversible.</value>
+  </data>
+  <data name="TitleDeleteBankroll" xml:space="preserve">
+    <value>Delete bankroll</value>
+  </data>
+  <data name="TitleArchiveBankroll" xml:space="preserve">
+    <value>Archive bankroll</value>
+  </data>
+  <data name="LblConfirmArchiveBankroll" xml:space="preserve">
+    <value>Archiving your bankroll will no longer show it in the main list, but you can reactivate it from your settings. Continue?</value>
   </data>
 </root>

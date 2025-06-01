@@ -5,10 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:common="clr-namespace:BetTrack.Dtos"
+    xmlns:expander="clr-namespace:Syncfusion.Maui.Toolkit.Expander;assembly=Syncfusion.Maui.Toolkit"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:local="clr-namespace:BetTrack.Resources.Languages"
     xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    Title="BetTrack">
+    Title="Home">
     <NavigationPage.TitleView>
         <Label
             FontFamily="Logo"
@@ -232,6 +233,7 @@
                             <DataTemplate>
                                 <VerticalStackLayout HorizontalOptions="Center">
                                     <Label
+                                        Padding="10"
                                         FontAttributes="Bold"
                                         FontSize="Title"
                                         HorizontalOptions="Center"
@@ -244,37 +246,105 @@
                         </syncfusion:SfListView.HeaderTemplate>
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="5" Stroke="{x:StaticResource Green}">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="10" />
-                                    </Border.StrokeShape>
-                                    <VerticalStackLayout Padding="10">
-                                        <Label
-                                            Margin="10,0,0,0"
-                                            FontAttributes="Bold"
-                                            FontSize="Subtitle"
-                                            Text="{Binding NombreBankroll}"
-                                            TextColor="{x:StaticResource White}" />
-                                        <Label
-                                            Margin="0,0,10,0"
-                                            HorizontalTextAlignment="End"
-                                            Text="{Binding CapitalInicial, StringFormat='Capital inicial {0:C2}'}"
-                                            TextColor="{x:StaticResource White}" />
-                                    </VerticalStackLayout>
+                                <Border
+                                    Margin="{OnPlatform Default='8,0,8,8',
+                                                        WinUI='8,0,6,8',
+                                                        MacCatalyst='8,0,6,8'}"
+                                    Stroke="{x:StaticResource Green}"
+                                    StrokeShape="RoundRectangle 8,8,8,8"
+                                    StrokeThickness="{OnPlatform MacCatalyst=2,
+                                                                 Default=1}"
+                                    WidthRequest="{OnPlatform MacCatalyst=460,
+                                                              WinUI=340}">
+                                    <expander:SfExpander x:Name="expander1">
+                                        <expander:SfExpander.Header>
+                                            <Grid
+                                                ColumnDefinitions="auto,*"
+                                                ColumnSpacing="10"
+                                                RowDefinitions="48">
+                                                <Label
+                                                    Margin="14,0"
+                                                    FontFamily="ma"
+                                                    FontSize="Large"
+                                                    Text="{x:Static common:DtoMaterialIconFont.Finance_chip}"
+                                                    TextColor="{Binding Path=HeaderIconColor, Source={x:Reference expander1}}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+                                                <Label
+                                                    Grid.Column="1"
+                                                    FontSize="Default"
+                                                    Text="{Binding NombreBankroll}"
+                                                    TextColor="{Binding Path=HeaderIconColor, Source={x:Reference expander1}}"
+                                                    VerticalTextAlignment="Center" />
+                                            </Grid>
+                                        </expander:SfExpander.Header>
+                                        <expander:SfExpander.Content>
+                                            <Grid Padding="18,8,0,18" ColumnDefinitions="*,auto">
+                                                <Label FontSize="Small" Text="{Binding CapitalInicial, StringFormat='Capital inicial {0:C2}'}" />
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="14,0"
+                                                    FontFamily="ma"
+                                                    FontSize="Large"
+                                                    Text="{x:Static common:DtoMaterialIconFont.Chevron_right}"
+                                                    TextColor="{Binding Path=HeaderIconColor, Source={x:Reference expander1}}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+                                            </Grid>
+                                        </expander:SfExpander.Content>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroupList>
+                                                <VisualStateGroup>
+                                                    <VisualState Name="Expanded">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="HeaderBackground" Value="{x:StaticResource SecondaryDarkBlue}" />
+                                                            <Setter Property="HeaderIconColor" Value="White" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState Name="Collapsed">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="HeaderBackground" Value="{x:StaticResource SecondaryDarkBlue}" />
+                                                            <Setter Property="HeaderIconColor" Value="White" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState Name="PointerOver">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="HeaderBackground" Value="Red" />
+                                                            <Setter Property="HeaderIconColor" Value="White" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="HeaderBackground" Value="{x:StaticResource SecondaryDarkBlue}" />
+                                                            <Setter Property="HeaderIconColor" Value="White" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateGroupList>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </expander:SfExpander>
                                 </Border>
                             </DataTemplate>
                         </syncfusion:SfListView.ItemTemplate>
                     </syncfusion:SfListView>
                 </Border>
             </Grid>
-            <inputLayout:SfBusyIndicator
+            <!--  Preloader  -->
+            <ContentView
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
-                AnimationType="LinearMaterial"
-                HeightRequest="10"
+                BackgroundColor="LightGray"
+                IsVisible="{Binding IsBusy}"
+                Opacity="0.2" />
+            <inputLayout:SfBusyIndicator
+                AbsoluteLayout.LayoutBounds=".5,.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AnimationType="CircularMaterial"
+                HeightRequest="100"
                 IndicatorColor="White"
                 IsRunning="{Binding IsBusy}"
-                VerticalOptions="Start" />
+                VerticalOptions="Center"
+                WidthRequest="100" />
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

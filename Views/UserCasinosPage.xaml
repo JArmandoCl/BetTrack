@@ -35,11 +35,12 @@
     </ContentPage.Resources>
     <AbsoluteLayout>
         <Grid
-            Margin="0,10,0,0"
+            Margin="5,10,5,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-            RowDefinitions="auto,*">
+            RowDefinitions="auto,*"
+            RowSpacing="5">
             <Border Stroke="{x:StaticResource Green}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="40" />
@@ -60,6 +61,9 @@
                 SelectedItems="{Binding SelectedCasinos, Mode=TwoWay}"
                 SelectionChangedCommand="{Binding PerformActionToCasinoCommand}"
                 SelectionMode="Multiple">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.EmptyView>
                     <ContentView>
                         <Grid
@@ -119,13 +123,21 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-        <inputLayout:SfBusyIndicator
+        <!--  Preloader  -->
+        <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            AnimationType="LinearMaterial"
-            HeightRequest="10"
+            BackgroundColor="LightGray"
+            IsVisible="{Binding IsBusy}"
+            Opacity="0.2" />
+        <inputLayout:SfBusyIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AnimationType="CircularMaterial"
+            HeightRequest="100"
             IndicatorColor="White"
             IsRunning="{Binding IsBusy}"
-            VerticalOptions="Start" />
+            VerticalOptions="Center"
+            WidthRequest="100" />
     </AbsoluteLayout>
 </ContentPage>

@@ -7,7 +7,8 @@
     xmlns:common="clr-namespace:BetTrack.Dtos"
     xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
     xmlns:lan="clr-namespace:BetTrack.Resources.Languages"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
@@ -103,14 +104,22 @@
                 </HorizontalStackLayout>
             </Grid>
 
-            <inputLayout:SfBusyIndicator
+            <!--  Preloader  -->
+            <ContentView
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
-                AnimationType="LinearMaterial"
-                HeightRequest="10"
+                BackgroundColor="LightGray"
+                IsVisible="{Binding IsBusy}"
+                Opacity="0.2" />
+            <inputLayout:SfBusyIndicator
+                AbsoluteLayout.LayoutBounds=".5,.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AnimationType="CircularMaterial"
+                HeightRequest="100"
                 IndicatorColor="White"
                 IsRunning="{Binding IsBusy}"
-                VerticalOptions="Start" />
+                VerticalOptions="Center"
+                WidthRequest="100" />
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

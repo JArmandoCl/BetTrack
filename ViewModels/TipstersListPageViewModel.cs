@@ -1,5 +1,4 @@
-﻿using Android.App.AppSearch;
-using BetTrack.Api;
+﻿using BetTrack.Api;
 using BetTrack.Dtos;
 using BetTrack.Resources.Languages;
 using CommunityToolkit.Maui.Alerts;
@@ -66,16 +65,14 @@ namespace BetTrack.ViewModels
                     {
                         string deleteLabel = AppResource.LblConfirmTipsterDelete;
                         deleteLabel = deleteLabel.Trim().Replace("$tipster$", SelectedTipster.NombreTipster);
+                        SelectedTipster.Estatus = false;
                         bool result = await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, deleteLabel, AppResource.BtnContinue, AppResource.BtnCancel);
                         if (result)
                         {
                             IsBusy = true;
                             Client = new ApiClient(CurrentUser.CurrentToken);
-                            bool updated = await Client.DeleteAsync($"UsuarioTipster/{SelectedTipster.UsuarioTipsterId}");
-                            if (updated)
-                                await LoadTipsters();
-                            else
-                                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblBadRequestServer, AppResource.BtnClose);
+                            await Client.PutAsync($"UsuarioTipster/{SelectedTipster.UsuarioTipsterId}", SelectedTipster);
+                            await LoadTipsters();
                         }
                     }
                 }

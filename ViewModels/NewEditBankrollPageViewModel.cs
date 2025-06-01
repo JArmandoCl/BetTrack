@@ -27,7 +27,9 @@ namespace BetTrack.ViewModels
             set => SetProperty(ref _errors, value);
         }
         #endregion
-        public DelegateCommand CancelCommand { get { return new DelegateCommand(async () => { await NavigationService.GoBackAsync(); }); } }
+        public DelegateCommand DeleteBankrollCommand { get { return new DelegateCommand(()=>UpdateBankroll("Delete")); } }
+        public DelegateCommand ArchiveBankrollCommand { get { return new DelegateCommand(()=>UpdateBankroll("Archive")); } }
+
         public DelegateCommand CreateEditBankrollCommand { get { return new DelegateCommand(CreateEditBankroll); } }
         private DtoUsuarioBankroll bankroll = new DtoUsuarioBankroll();
         private DtoMoneda selectedCurrency = new();
@@ -45,6 +47,61 @@ namespace BetTrack.ViewModels
         #endregion
         public NewEditBankrollPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
+        }
+        private async void UpdateBankroll(string action)
+        {
+            try
+            {
+                if (!IsBusy)
+                {
+                    IsBusy = true;
+                    switch (action)
+                    {
+                        case "Delete":
+                            if (Bankroll.UsuarioBankrollId > 0)
+                            {
+                                bool confirm = await PageDialogService.DisplayAlertAsync(AppResource.TitleDeleteBankroll, AppResource.LblConfirmDeleteBankroll, AppResource.BtnYes, AppResource.BtnCancel);
+                                if (confirm)
+                                {
+                                    Bankroll.EstatusBankrollId = 3;
+                                }
+                            }
+                            break;
+                        case "Archive":
+                            if (Bankroll.UsuarioBankrollId > 0)
+                            {
+                                bool confirm = await PageDialogService.DisplayAlertAsync(AppResource.TitleArchiveBankroll, AppResource.LblConfirmArchiveBankroll, AppResource.BtnYes, AppResource.BtnCancel);
+                                if (confirm)
+                                {
+                                    Bankroll.EstatusBankrollId = 2;
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                    await Client.PutAsync($@"UsuarioBankroll/{Bankroll.UsuarioBankrollId}", Bankroll);
+                    await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblSuccess, AppResource.BtnClose);
+                    await NavigationService.GoBackAsync();
+                }
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblSessionExpired, AppResource.BtnClose);
+                SecureStorage.RemoveAll();
+                Preferences.Default.Clear();
+                INavigationResult result = await NavigationService.NavigateAsync("//LoginPage");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                await PageDialogService.DisplayAlertAsync(AppResource.LblDialogTitle, AppResource.LblBadRequestServer, AppResource.BtnClose);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
         private async void CreateEditBankroll()
         {
@@ -112,15 +169,13 @@ namespace BetTrack.ViewModels
                     {
                         long bankrollId = parameters.GetValue<long>("SelectedBankroll");
                         Bankroll = await Client.GetAsync<DtoUsuarioBankroll>($"UsuarioBankroll/{bankrollId}");
-                    }
-                    else
-                    {
+
                         Bankroll.Monedas = await Client.GetAsync<List<DtoMoneda>>(@"Catalogo/Monedas");
-                        SelectedCurrency = Bankroll.Monedas.FirstOrDefault(x => x.MonedaId == 16);
+                        SelectedCurrency = Bankroll.Monedas.FirstOrDefault(x => x.MonedaId == (Bankroll.UsuarioBankrollId == 0 ? 16 : Bankroll.MonedaId));
                         Bankroll.FormatoCuotas = await Client.GetAsync<List<DtoFormatoCuota>>(@"Catalogo/FormatoCuota");
-                        SelectedOdd = Bankroll.FormatoCuotas.FirstOrDefault(x => x.FormatoCuotaId == 1);
+                        SelectedOdd = Bankroll.FormatoCuotas.FirstOrDefault(x => x.FormatoCuotaId == (Bankroll.FormatoCuotaId == 0 ? 1 : Bankroll.FormatoCuotaId));
                         Bankroll.TiposBankroll = await Client.GetAsync<List<DtoTipoBankroll>>(@"Catalogo/TipoBankroll");
-                        SelectedBankrollType = Bankroll.TiposBankroll.FirstOrDefault(x => x.TipoBankrollId == 1);
+                        SelectedBankrollType = Bankroll.TiposBankroll.FirstOrDefault(x => x.TipoBankrollId == (Bankroll.TipoBankrollId == 0 ? 1 : Bankroll.TipoBankrollId));
                     }
                 }
             }

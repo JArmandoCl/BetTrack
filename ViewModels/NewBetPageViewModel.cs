@@ -91,7 +91,7 @@ namespace BetTrack.ViewModels
                         if (Apuesta.ApuestaId > 0)
                         {
                             await ShowToast(AppResource.LblSuccess, ToastDuration.Short);
-                            await NavigationService.GoBackAsync();
+                            await NavigationService.GoBackAsync(new NavigationParameters { { "NewBet",Apuesta} });
                         }
                         else
                         {

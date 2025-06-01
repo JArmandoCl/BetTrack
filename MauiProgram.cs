@@ -31,20 +31,22 @@ namespace BetTrack
 
                                if (VersionTracking.Default.IsFirstLaunchEver)
                                {
-                                   navigationResult = await navigationService.NavigateAsync("NavigationPage/WelcomePage");
+                                   navigationResult = await navigationService.NavigateAsync("/WelcomePage");
                                }
                                else if (!rememberMeEnabled)
                                {
-                                   navigationResult = await navigationService.NavigateAsync("LoginPage");
+                                   navigationResult = await navigationService.NavigateAsync("/LoginPage");
                                }
                                else
                                {
-                                   navigationResult = await navigationService.NavigateAsync("//NavigationPage/HomePage");
+                                   navigationResult = await navigationService.NavigateAsync("/NavigationPage/HomePage");
                                }
                                if (navigationResult?.Success == false)
                                {
-                                   Debug.WriteLine(navigationResult.Exception?.GetRootException());
+                                   Debug.WriteLine(navigationResult.Exception?.GetRootException()); 
+                                   Debug.WriteLine(navigationResult.Exception?.GetBaseException().Message);
                                }
+
                            });
                        })
                        .ConfigureSyncfusionCore()
@@ -80,7 +82,7 @@ namespace BetTrack
         private static void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Registrar páginas y ViewModels para la navegación
-            containerRegistry.RegisterForNavigation<NavigationPage>();
+            //containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<BankrollDashboardPage, BankrollDashboardPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();

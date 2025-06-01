@@ -150,6 +150,7 @@ namespace BetTrack.Dtos
         public long UsuarioId { get; set; }
         public string NombreTipster { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
+        public bool Estatus { get; set; }
     }
     public class DtoUsuarioCasino
     {
@@ -324,6 +325,7 @@ namespace BetTrack.Dtos
             get { return detalleApuesta; }
             set { SetProperty(ref detalleApuesta, value); }
         }
+        public DtoUsuarioCasino UsuarioCasino { get; set; }
         #endregion
     }
     public class DtoDetalleApuesta : BindableBase

@@ -87,7 +87,7 @@ namespace BetTrack.ViewModels
                             await SecureStorage.SetAsync("CurrentUser", JsonSerializer.Serialize(currentUser));
                             Preferences.Default.Set("RememberMeEnabled", RememberMe);
 
-                            INavigationResult result = await NavigationService.NavigateAsync("//NavigationPage/HomePage");
+                            INavigationResult result = await NavigationService.NavigateAsync("/NavigationPage/HomePage");
                         }
                     }
                 }

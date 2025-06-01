@@ -32,7 +32,7 @@ namespace BetTrack.ViewModels
 
         private async void ShowLogin()
         {
-            await NavigationService.NavigateAsync("//LoginPage");
+            await NavigationService.NavigateAsync("/LoginPage");
         }
     }
 

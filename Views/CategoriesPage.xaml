@@ -107,13 +107,21 @@
                 </CollectionView>
             </RefreshView>
         </Grid>
-        <inputLayout:SfBusyIndicator
+        <!--  Preloader  -->
+        <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            AnimationType="LinearMaterial"
-            HeightRequest="10"
+            BackgroundColor="LightGray"
+            IsVisible="{Binding IsBusy}"
+            Opacity="0.2" />
+        <inputLayout:SfBusyIndicator
+            AbsoluteLayout.LayoutBounds=".5,.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AnimationType="CircularMaterial"
+            HeightRequest="100"
             IndicatorColor="White"
             IsRunning="{Binding IsBusy}"
-            VerticalOptions="Start" />
+            VerticalOptions="Center"
+            WidthRequest="100" />
     </AbsoluteLayout>
 </ContentPage>
